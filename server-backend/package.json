@@ -1,0 +1,30 @@
+{
+  "name": "server-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "server": "nodemon index"
+  },
+  "author": "Sajib",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "google-auth-library": "^7.0.2",
+    "jsonwebtoken": "^8.5.1",
+    "mailjet-sendemail": "^1.1.4",
+    "mongoose": "^5.11.17",
+    "node-fetch": "^3.0.0-beta.9",
+    "node-mailjet": "^3.3.1"
+  },
+  "devDependencies": {
+    "concurrently": "^6.0.0",
+    "nodemon": "^2.0.7"
+  }
+}

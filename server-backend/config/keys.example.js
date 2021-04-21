@@ -1,0 +1,4 @@
+const MJ_APIKEY_PUBLIC = ''
+const MJ_APIKEY_PRIVATE = '';
+
+module.exports = { MJ_APIKEY_PRIVATE, MJ_APIKEY_PUBLIC}

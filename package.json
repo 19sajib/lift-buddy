@@ -1,0 +1,16 @@
+{
+  "name": "journey-mate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon server-backend/index.js",
+    "client": "npm run start --prefix client-frontend",
+    "dev": "concurrently \"cd server-backend && npm run server\" \"cd client-frontend && npm start\""
+  },
+  "author": "Sajib",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^6.0.0"
+  }
+}
