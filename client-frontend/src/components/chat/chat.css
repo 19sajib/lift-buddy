@@ -8,8 +8,8 @@
   }
   
   .chatroomSection {
-    width: 40vw;
-    height: 80vh;
+    width: 60vw;
+    height: 70vh;
     margin: auto;
     border: 1px solid #eee;
     position: relative;
@@ -22,7 +22,9 @@
     right: 0;
     bottom: 3.5rem;
     padding: 0.5rem;
-    overflow: auto;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
   }
   
   .chatroomActions {
@@ -34,11 +36,13 @@
     display: grid;
     grid-template-columns: 1fr 72px;
     grid-gap: 1rem;
-    border-top: 1px solid #eee;
+    border-top: 2px solid #eee;
   }
   
   .chatroomActions button {
+    padding: auto;
     height: 100%;
+    width: 100%;
   }
   
   .message {
@@ -122,6 +126,33 @@
   }
   
   .backgroundLight {
-    background: #b8b8b8;
+    background: #38c2b6;
+  }
+
+  .form {
+    display: flex;
+    border-top: 2px solid #D3D3D3;
+  }
+  
+  .input {
+    border: none;
+    border-radius: 0;
+    width: 70%;
+    font-size: 1.2em;
+  }
+  
+  input:focus, textarea:focus, select:focus{
+    outline: none;
+  }
+  
+  .sendButton {
+    color: #fff !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: #2979FF;
+    padding: 4px;
+    display: inline-block;
+    border: none;
+    width: 20%;
   }
   

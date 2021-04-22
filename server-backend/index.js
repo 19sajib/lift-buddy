@@ -71,6 +71,7 @@ const io = require("socket.io")(server)
 
 const Message = require("./models/Message");
 const User = require("./models/user");
+const ChatRoom = require("./models/Chatroom")
 
 // Socket.io core setting
 
@@ -91,8 +92,21 @@ io.on("connection", (socket) => {
     console.log("Disconnected: " + socket.userId);
   });
 
-  socket.on("joinRoom", ({ chatroomId }) => {
+  socket.on("joinRoom", async ({ chatroomId, user }) => {
     socket.join(chatroomId);
+    const chatroom = await ChatRoom.findOne({_id: chatroomId});
+    const index = chatroom.user.findIndex((id) => id === String(user._id));
+    if (index === -1) {
+      chatroom.user.push(user._id)
+      chatroom.userName.push(user.name)
+      chatroom.userAvatar.push(user.avatar)
+    }
+    const updatedChatroom = await ChatRoom.findByIdAndUpdate(chatroomId, chatroom, { new: true})
+    console.log(chatroom);
+    console.log(updatedChatroom);
+    // if(!chatroom) {
+    //   const updateChatRoom = await ChatRoom.find({user: user._id});
+    // }
     console.log("A user joined chatroom: " + chatroomId);
   });
 
@@ -102,7 +116,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("chatroomMessage", async ({ chatroomId, message }) => {
-    if (message.trim().length > 0) {
+    if (message?.trim().length > 0) {
       const user = await User.findOne({ _id: socket.userId });
       const newMessage = new Message({
         chatroom: chatroomId,

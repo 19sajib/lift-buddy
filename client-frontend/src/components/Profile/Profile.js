@@ -14,8 +14,8 @@ import { updateProfile } from '../../actions/auth'
 const useStyles = makeStyles(() => ({
   root: {},
   avatar: {
-    height: 100,
-    width: 100
+    height: 220,
+    width: 220
   }
 }));
 

@@ -4,19 +4,21 @@ import { withRouter } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import moment from 'moment'
 import ReactEmoji from 'react-emoji';
-import {Box,  Button,  Card,  CardContent,  CardHeader,
-    Divider, Grid, Input ,makeStyles } from '@material-ui/core';
-import SendIcon from '@material-ui/icons/Send';
+import { Button,  Card,  CardContent,  CardHeader,
+    Divider, Grid, Container , Typography } from '@material-ui/core';
+import TelegramIcon from '@material-ui/icons/Telegram';
 import { isAuthenticated } from '../../auth/auth'
 
 import './chat.css'
 
-const ChatRoomMessage = ({ match, socket }) => {
-  const { token } = isAuthenticated()
+const ChatRoom = ({ match, socket }) => {
+  const { token, user } = isAuthenticated()
   const chatroomId = match.params.id;
+  const [chatRoomData, setChatRoomData] = React.useState();
   const [messages, setMessages] = React.useState([]);
-  const messageRef = React.useRef();
   const [userId, setUserId] = React.useState("");
+  const messageRef = React.useRef();
+  const messagesEndRef = React.useRef();
 
   const sendMessage = () => {
     if (socket) {
@@ -51,7 +53,7 @@ const ChatRoomMessage = ({ match, socket }) => {
   React.useEffect(() => {
     if (socket) {
       socket.emit("joinRoom", {
-        chatroomId,
+        chatroomId, user
       });
     }
     
@@ -65,24 +67,74 @@ const ChatRoomMessage = ({ match, socket }) => {
     };
     //eslint-disable-next-line
   }, []);
+
+  //Scrolling to bottom
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  }
+
+  React.useEffect(() => {
+    scrollToBottom()
+  }, [messages]); 
   
   console.log(messages);
 
+  // Chatroom info
+  const getChatrooms = () => {
+    Axios
+      .post(`http://localhost:8080/chatroom/${chatroomId}`, {
+      })
+      .then((response) => {
+        setChatRoomData(response.data[0]);
+        console.log(response.data);
+      })
+      .catch((err) => {
+        setTimeout(getChatrooms, 3000);
+      });
+  };
+  React.useEffect(() => {
+    getChatrooms()
+  }, []);
+  console.log(chatRoomData);
+
   return (
-      <Card>
-      <CardHeader
-          subheader="The information of chatbox"
-          title="Chatbox"
+      <Container maxWidth="lg">
+          <Grid
+          container
+          spacing={3}
+        >
+          <Grid
+            item
+            lg={4}
+            md={6}
+            xs={12} >
+          <Card>
+          <CardHeader
+          subheader="Leaving At:"
+          title={chatRoomData?.name}
         />
+        
         <Divider />
-      <div className="chatroomSection">
-        <div className="chatroomContent">
+          <CardContent>
+        <Typography variant="h6" >This Chat Room Members:</Typography>
+        {chatRoomData?.userName.map((username) => 
+        <Typography variant="body1">{username}</Typography>
+        )}
+        </CardContent>
+      </Card>
+      </Grid>
+      <Grid
+            item
+            lg={8}
+            md={6}
+            xs={12} className="chatroomSection">
+        <div className="chatroomContent" >
           {messages.map((message, i) => (
               userId === message.user ? (
                 <div key={i} className="messageContainer justifyEnd">
                 <p className="sentText pr-10">{message.name}</p>
                 <div className="messageBox backgroundBlue">
-                  <p className="messageText colorWhite">{ReactEmoji.emojify(message.message)}</p>
+                  <p className="messageText colorDark">{ReactEmoji.emojify(message.message)}</p>
                   <p >{moment(message.createdAt).format('YYYY-MM-DD hh:mm A')}</p>
                 </div>
               </div> ) : (
@@ -95,25 +147,29 @@ const ChatRoomMessage = ({ match, socket }) => {
               </div>
             )
           ))}
+          <div ref={messagesEndRef} />
         </div>
         <div className="chatroomActions">
           <div>
             <input
+              className="input"
               type="text"
               name="message"
-              placeholder="Say something!"
+              placeholder="Type your message here...."
               ref={messageRef}
+              required
             />
           </div>
           <div>
-            <Button variant="contained" endIcon={<SendIcon />} color="primary" className="join" onClick={sendMessage}>
+            <Button variant="contained" endIcon={<TelegramIcon />} color="primary" className="join" onClick={sendMessage}>
               Send
             </Button>
           </div>
         </div>
-      </div>
-      </Card>
+      </Grid>
+      </Grid>
+      </Container>
   );
 };
 
-export default withRouter(ChatRoomMessage);
+export default withRouter(ChatRoom);

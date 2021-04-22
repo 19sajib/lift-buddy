@@ -13,7 +13,7 @@ exports.createChatroom = async (req, res) => {
   if (chatroomExists) throw "Chatroom with that name already exists!";
 
   const chatroom = new Chatroom({
-    name, user, createdAt: new Date()
+    name,user: user._id, userName: user.name, userAvatar: user.avatar, createdAt: new Date()
   });
 
   await chatroom.save();
@@ -27,4 +27,12 @@ exports.getAllChatrooms = async (req, res) => {
   const chatrooms = await Chatroom.find({});
 
   res.json(chatrooms);
+};
+exports.getSingleChatrooms = async (req, res) => {
+  const {id} = req.params
+  console.log(req.params);
+  console.log('here');
+  const chatroom = await Chatroom.find({_id: id});
+
+  res.json(chatroom);
 };

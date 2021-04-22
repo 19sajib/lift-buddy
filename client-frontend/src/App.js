@@ -13,7 +13,7 @@ import AccountActivation from './components/Auth/ActiveAccount'
 import ForgetPassword from './components/Auth/ForgetPassword'
 import ResetPassword from './components/Auth/ResetPassword'
 import ChatDashboard from './components/chat/ChatDashboard'
-import ChatRoom from './components/chat/ChatRoomMessage'
+import ChatRoom from './components/chat/ChatRoom'
 
 import { isAuthenticated } from './auth/auth'
 
