@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 
 const PostMessage = require('../models/postMessage.js')
 const User = require('../models/user.js')
-
+const ChatRoom = require('../models/Chatroom')
 
 const getPosts = async (req, res) => {
     try {
@@ -25,16 +25,27 @@ const createPost = async (req, res) => {
     console.log(hideTime);
     const hideAfter = Date.now() + (hideTime * 1000 * 60 * 60);
     console.log(hideAfter);
-
-
-    const newPost = new PostMessage({...post, hideAfter, createdAt: new Date().toISOString() })
-    try {
-        await newPost.save();
+    
+    // Creating chatroom
+    const user = await User.findById(post.creator);
+    console.log(user);
+    const name = `${post.source} to ${post.destination} with ${post.name}`;
+    if (user) {
+        const chatroom = new ChatRoom({
+            name,user: user._id, userName: user.name, userAvatar: user.avatar, leavingAt: post.leavingTime, createdAt: new Date()
+          });
         
-        res.status(201).json(newPost)
-    } catch (error) {
-        res.status(409).json({ message: error}) 
-    }
+          await chatroom.save();
+          console.log(chatroom);
+          const newPost = new PostMessage({...post,chatroomId: chatroom._id, hideAfter, createdAt: new Date().toISOString() })
+          try {
+              await newPost.save();
+              console.log(newPost);
+              res.status(201).json(newPost)
+            } catch (error) {
+                res.status(409).json({ message: error}) 
+            }
+        }
 };
 
 const updatePost = async (req, res) => {
@@ -67,6 +78,7 @@ const likePost = async (req, res) =>{
     if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send("No post with that id");
 
     const post = await PostMessage.findById(id);
+    const chat = await ChatRoom.findById(post.chatroomId)
     const user = await User.findById(userId);
 //console.log(user);
     const index = post.likes.findIndex((id) => id === String(userId));
@@ -75,17 +87,24 @@ const likePost = async (req, res) =>{
         // like the post
         post.likes.push(userId)
         user.meAsGuest.push(postId)
-        console.log(user.meAsGuest);
+        chat.user.push(user._id)
+        chat.userName.push(user.name)
+        chat.userAvatar.push(user.avatar)
+        chat.showOrNot = true
     } else {
         // dislike post
         post.likes = post.likes.filter((id) => id !== String(userId));
         user.meAsGuest = user.meAsGuest.filter((id) => id !== String(postId));
-        console.log(user.meAsGuest);
+        chat.user = chat.user.filter((id)=> id !== String(user._id));
+        chat.userName = chat.userName.filter((name)=> name !== String(user.name));
+        chat.userAvatar = chat.userAvatar.filter((avatar)=> avatar !== String(user.avatar));
+        //console.log(user.meAsGuest);
     }
 
     const updatedPost = await PostMessage.findByIdAndUpdate(id, post, { new: true})
-    const updateUser = await User.findOneAndUpdate({ _id: userId }, { $set: user.meAsGuest }, { new: true })
-console.log(user);
+    const updateUser = await User.findOneAndUpdate({ _id: userId }, user, { new: true })
+    const updateChat = await ChatRoom.findOneAndUpdate({ _id: post.chatroomId}, chat, { new: true })
+    //console.log(user);
     res.json(updatedPost)
 }
 

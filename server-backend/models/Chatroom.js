@@ -5,6 +5,10 @@ const chatroomSchema = new mongoose.Schema({
     type: String,
     required: "Name is required!",
   },
+  showOrNot: {
+    type: Boolean,
+    default: false,
+  },
   user: {
         type: [String],
         default: [],

@@ -94,19 +94,6 @@ io.on("connection", (socket) => {
 
   socket.on("joinRoom", async ({ chatroomId, user }) => {
     socket.join(chatroomId);
-    const chatroom = await ChatRoom.findOne({_id: chatroomId});
-    const index = chatroom.user.findIndex((id) => id === String(user._id));
-    if (index === -1) {
-      chatroom.user.push(user._id)
-      chatroom.userName.push(user.name)
-      chatroom.userAvatar.push(user.avatar)
-    }
-    const updatedChatroom = await ChatRoom.findByIdAndUpdate(chatroomId, chatroom, { new: true})
-    console.log(chatroom);
-    console.log(updatedChatroom);
-    // if(!chatroom) {
-    //   const updateChatRoom = await ChatRoom.find({user: user._id});
-    // }
     console.log("A user joined chatroom: " + chatroomId);
   });
 

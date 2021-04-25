@@ -24,7 +24,9 @@ exports.createChatroom = async (req, res) => {
 };
 
 exports.getAllChatrooms = async (req, res) => {
-  const chatrooms = await Chatroom.find({});
+  const {userId} = req.body;
+  console.log(userId);
+  const chatrooms = await Chatroom.find({showOrNot: true, user: userId});
 
   res.json(chatrooms);
 };

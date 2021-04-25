@@ -94,7 +94,7 @@ const ChatRoom = ({ match, socket }) => {
   };
   React.useEffect(() => {
     getChatrooms()
-  }, []);
+  }, [messages]);
   console.log(chatRoomData);
 
   return (
@@ -109,16 +109,16 @@ const ChatRoom = ({ match, socket }) => {
             md={6}
             xs={12} >
           <Card>
-          <CardHeader
-          subheader="Leaving At:"
-          title={chatRoomData?.name}
-        />
-        
-        <Divider />
           <CardContent>
-        <Typography variant="h6" >This Chat Room Members:</Typography>
-        {chatRoomData?.userName.map((username) => 
-        <Typography variant="body1">{username}</Typography>
+        <Typography variant="h5" >{chatRoomData?.name}</Typography>
+        <Divider />
+        <Typography variant="body2" >Leaving At: {moment(chatRoomData?.leavingAt).format('LLLL')}</Typography>
+        <br />
+        <br />
+        <Typography variant="h6" >Members Of This Chat Room:</Typography>
+        <Divider />
+        {chatRoomData?.userName.map((username, u) => 
+        <Typography key={u} variant="body1">{username}</Typography>
         )}
         </CardContent>
       </Card>

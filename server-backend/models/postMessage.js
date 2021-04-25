@@ -10,6 +10,7 @@ const postSchema = mongoose.Schema({
     destination: String,
     source: String,
     guest: Number,
+    chatroomId: String,
     guests: {
         type: [String],
         default: []
