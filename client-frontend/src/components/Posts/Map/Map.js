@@ -5,15 +5,15 @@ import {
     DirectionsRenderer
 } from "react-google-maps";
 
-function Map({props})  {
+function Map({ origin, destination })  {
     const [directions, setDirections] = useState(null)
 
    useEffect(() => {
     const google = window.google
     const directionsService = new google.maps.DirectionsService();
 
-    const origin = { lat: 23.6238, lng: 90.5000};
-    const destination = { lat: 23.8103, lng:  90.4125 }
+   // const origin = { lat: 23.6238, lng: 90.5000};
+    //const destination = { lat: 23.8103, lng:  90.4125 }
 
     directionsService.route(
         {
@@ -37,6 +37,12 @@ function Map({props})  {
         <GoogleMap
             defaultCenter={{ lat: 23.8103, lng:  90.4125 }}
             defaultZoom={17}
+            defaultOptions={{
+                streetViewControl: true, 
+                fullscreenControl: true, 
+                mapTypeControl: false,
+                zoomControl: true,           
+         }}
         >
             <DirectionsRenderer
                 directions={directions}

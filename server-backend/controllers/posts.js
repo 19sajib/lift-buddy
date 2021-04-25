@@ -8,8 +8,8 @@ const ChatRoom = require('../models/Chatroom')
 
 const getPosts = async (req, res) => {
     try {
-        const postMessage = await PostMessage.find({hideAfter: { $gt:Date.now()}})
-
+        const postMessage = await PostMessage.find({hideAfter: { $gt:Date.now()}}).sort({hideAfter: 1})
+        //console.log(postMessage);
         res.status(200).json(postMessage)
     } catch (error) {
        res.status(400).json({ message: error.message}) 

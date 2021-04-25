@@ -12,6 +12,8 @@ const Directions = ({ origin, destination }) => {
   <MapLoader
       googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDt9br636Un8x819x8DyqF-eIS1pgO-xMs"
       loadingElement={<div style={{ height: `100%` }} />}
+      origin={origin}
+      destination={destination}
   />
 </div>
   );
