@@ -15,6 +15,10 @@ export default makeStyles((theme) => ({
   image: {
     marginLeft: '15px',
   },
+  paginator: {
+    justifyContent: "center",
+    padding: "10px"
+  },
   [theme.breakpoints.down('sm')]: {
     mainContainer: {
       flexDirection: "column-reverse"

@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Grid, Grow} from '@material-ui/core'
+import { Container, Grid, Grow, Box, Divider } from '@material-ui/core'
 import { useDispatch } from 'react-redux'
-
+import Pagination from '@material-ui/lab/Pagination';
+import { useSelector } from 'react-redux'
 
 import {getPosts} from '../../actions/posts'
 import Posts from '../Posts/Posts'
 import Form from '../Form/Form'
 import useStyles from '../../styles'
 
+
 const Home = () => {
+    const posts = useSelector((state) => state.posts)
+    console.log(posts);
     const [currentId, setCurrentId] = useState(null);
     const classes = useStyles();
     const dispatch = useDispatch(getPosts());
@@ -17,12 +21,24 @@ const Home = () => {
         dispatch(getPosts())
     }, [currentId, dispatch])
 
+    const postsPerPage = 2;
+    const [page, setPage] = React.useState(1);
+    const [noOfPages] = React.useState(
+    Math.ceil(posts?.length / postsPerPage)
+    );
+
+    const handleChange = (event, value) => {
+        setPage(value);
+      };
+
+
     return (
+        <div>
         <Grow in>
                 <Container>
                 <Grid className={classes.mainContainer} container justify="space-between" alignItems="stretch" spacing={3}>
                     <Grid item xs={12} sm={7}>
-                       <Posts setCurrentId={setCurrentId} />
+                       <Posts page={page} postsPerPage={postsPerPage} setCurrentId={setCurrentId} />
                     </Grid>
                     <Grid item xs={12} sm={4}>
                         <Form currentId={currentId} setCurrentId={setCurrentId} />
@@ -30,6 +46,21 @@ const Home = () => {
                 </Grid>
                 </Container>  
             </Grow>
+                <Divider />
+                <Box component="span">
+                    <Pagination
+                    count={noOfPages}
+                    page={page}
+                    onChange={handleChange}
+                    defaultPage={1}
+                    color="primary"
+                    size="large"
+                    showFirstButton
+                    showLastButton
+                    classes={{ ul: classes.paginator }}
+                    />
+                </Box>
+                </div>
     )
 }
 
