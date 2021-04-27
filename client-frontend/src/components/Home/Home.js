@@ -48,7 +48,7 @@ const Home = () => {
             </Grow>
                 <Divider />
                 <Box component="span">
-                    <Pagination
+                    {/* <Pagination
                     count={noOfPages}
                     page={page}
                     onChange={handleChange}
@@ -58,7 +58,17 @@ const Home = () => {
                     showFirstButton
                     showLastButton
                     classes={{ ul: classes.paginator }}
-                    />
+                    /> */}
+                    <Pagination 
+                    count={posts.length%postsPerPage===0 ? posts.length/postsPerPage : posts.length/postsPerPage +1} 
+                    page={page} 
+                    onChange={(event,val)=> setPage(val)} 
+                    color="secondary"
+                    size="large"
+                    showFirstButton
+                    showLastButton
+                    classes={{ ul: classes.paginator }}
+                     />
                 </Box>
                 </div>
     )
