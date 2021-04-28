@@ -11,4 +11,8 @@ export default makeStyles((theme) => ({
   actionDiv: {
     textAlign: 'center',
   },
+  formControl: {
+    margin: theme.spacing(2),
+    minWidth: 210,
+  },
 }));

@@ -8,11 +8,16 @@ import {getPosts} from '../../actions/posts'
 import Posts from '../Posts/Posts'
 import Form from '../Form/Form'
 import useStyles from '../../styles'
+import HomeHelper from './HomeHelper'
 
 
 const Home = () => {
     const posts = useSelector((state) => state.posts)
     console.log(posts);
+    const filterData = posts.filter(obj => {
+        return obj.destination === "Sajek"
+      })
+    console.log(filterData);
     const [currentId, setCurrentId] = useState(null);
     const classes = useStyles();
     const dispatch = useDispatch(getPosts());
@@ -21,15 +26,15 @@ const Home = () => {
         dispatch(getPosts())
     }, [currentId, dispatch])
 
-    const postsPerPage = 2;
+    const postsPerPage = 6;
     const [page, setPage] = React.useState(1);
-    const [noOfPages] = React.useState(
-    Math.ceil(posts?.length / postsPerPage)
-    );
+    // const [noOfPages] = React.useState(
+    // Math.ceil(posts?.length / postsPerPage)
+    // );
 
-    const handleChange = (event, value) => {
-        setPage(value);
-      };
+    // const handleChange = (event, value) => {
+    //     setPage(value);
+    //   };
 
 
     return (
@@ -37,8 +42,9 @@ const Home = () => {
         <Grow in>
                 <Container>
                 <Grid className={classes.mainContainer} container justify="space-between" alignItems="stretch" spacing={3}>
+                {/* <HomeHelper page={page} postsPerPage={postsPerPage} setCurrentId={setCurrentId} /> */}
                     <Grid item xs={12} sm={7}>
-                       <Posts page={page} postsPerPage={postsPerPage} setCurrentId={setCurrentId} />
+                    <Posts page={page} postsPerPage={postsPerPage} setCurrentId={setCurrentId} />
                     </Grid>
                     <Grid item xs={12} sm={4}>
                         <Form currentId={currentId} setCurrentId={setCurrentId} />
@@ -60,7 +66,7 @@ const Home = () => {
                     classes={{ ul: classes.paginator }}
                     /> */}
                     <Pagination 
-                    count={posts.length%postsPerPage===0 ? posts.length/postsPerPage : posts.length/postsPerPage +1} 
+                    count={Math.ceil(posts.length%postsPerPage)===0 ? Math.ceil(posts.length/postsPerPage) : Math.ceil(posts.length/postsPerPage +1)} 
                     page={page} 
                     onChange={(event,val)=> setPage(val)} 
                     color="secondary"

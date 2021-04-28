@@ -4,6 +4,7 @@ import * as api from '../api';
 
 // Action Creation here
 
+
 export const getPosts= () => async (dispatch) => {
     try {
         const { data } = await api.fetchPosts();

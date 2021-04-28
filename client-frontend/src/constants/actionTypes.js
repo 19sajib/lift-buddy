@@ -24,3 +24,11 @@ export const DELETE = 'DELETE';
 export const FETCH_ALL = 'FETCH_ALL';
 export const LIKE = 'LIKE';
 
+// Post Sorting
+
+export const DESTINATION = 'DESTINATION'
+export const SOURCE = 'SOURCE'
+export const DSESTSOURCE = 'DESTSOURCE'
+export const NONESOURCE = 'NONESOURCE'
+export const NONEDEST = 'NONEDEST'
+export const NONENONE = 'NONENONE'

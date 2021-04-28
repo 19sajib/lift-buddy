@@ -12,7 +12,7 @@ export default ( posts = [], action) => {
             return action.payload;
         case CREATE:
             return [...posts, action.payload];
-        default:
+            default:
             return posts;
     }
 }
