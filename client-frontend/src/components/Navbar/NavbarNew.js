@@ -75,11 +75,10 @@ export default function MenuAppBar() {
       <AppBar className={classes.appBar} position="static" color="inherit">
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
+          <Link to="/">
+                <img className={classes.image} src={logo} alt="logo" height="60" />
+           </Link>
           </IconButton>
-          <Typography component={Link} to="/" variant="h6" className={classes.title}>
-            LastSpot
-          </Typography>
           { user ? (
                        <div className={classes.profile}>
                          <Avatar component={Link} to="/profile" className={classes.purple} alt={user.name} src={user.avatar}>{user.name.charAt(0)}</Avatar>

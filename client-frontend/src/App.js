@@ -3,8 +3,8 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import { Container } from '@material-ui/core'
 import io from 'socket.io-client'
 
-import Navbar from './components/Navbar/Navbar'
-import NavbarNew from './components/Navbar/NavbarNew'
+// import Navbar from './components/Navbar/Navbar'
+// import NavbarNew from './components/Navbar/NavbarNew'
 import Auth from './components/Auth/Auth'
 import Home from './components/Home/Home'
 import proHome from './components/Home/proPostHome/Home'
@@ -16,6 +16,7 @@ import ChatDashboard from './components/chat/ChatDashboard'
 import ChatRoom from './components/chat/ChatRoom'
 
 import { isAuthenticated } from './auth/auth'
+import NewNavbar from './components/Navbar/NewNavBar'
 
 function App () {
 
@@ -54,7 +55,9 @@ function App () {
    return (
   <BrowserRouter>
       <Container maxidth="lg">
-          <Navbar />
+          {/* <Navbar />
+          <NavbarNew /> */}
+          <NewNavbar />
           <Switch>
               <Route path="/" exact component={Home}/>
               <Route path="/proHome" exact component={proHome}/>

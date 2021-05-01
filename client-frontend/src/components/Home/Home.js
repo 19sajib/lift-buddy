@@ -8,7 +8,6 @@ import {getPosts} from '../../actions/posts'
 import Posts from '../Posts/Posts'
 import Form from '../Form/Form'
 import useStyles from '../../styles'
-import HomeHelper from './HomeHelper'
 
 
 const Home = () => {

@@ -28,7 +28,7 @@ const Posts = ({ setCurrentId , page, postsPerPage }) => {
       })
      setRenderPost(filterData)}
       }
-      const search2 = async origin => {
+    const search2 = async origin => {
         if(renderPost.length) {
           const filterData = renderPost.filter(obj => {
             return obj.source === origin
@@ -41,11 +41,8 @@ const Posts = ({ setCurrentId , page, postsPerPage }) => {
        setRenderPost(filterData)
       }
         }
-    console.log(renderPost);
+  console.log(renderPost);
 
-      React.useEffect(() => {
-        search()
-      }, [])
     
 
 
