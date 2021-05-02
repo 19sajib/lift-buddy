@@ -53,9 +53,10 @@ const Form = ({ currentId, setCurrentId }) => {
 
     return (
         <Paper className={classes.paper}>
-               <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
+               <form autoComplete="off" className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
                      <Typography variant="h6">{currentId ? "Editing" : "Hosting"} a Ride</Typography>
                      <TextField 
+                     required="true"
                      name="title" 
                      variant="outlined" 
                      label="Title" 
@@ -64,6 +65,7 @@ const Form = ({ currentId, setCurrentId }) => {
                      onChange={(e) => setPostData({...postData, title: e.target.value })}
                      />
                      <TextField 
+                     required="true"
                      name="message" 
                      variant="outlined" 
                      label="Message" 
@@ -72,6 +74,7 @@ const Form = ({ currentId, setCurrentId }) => {
                      onChange={(e) => setPostData({...postData, message: e.target.value })}
                      />
                      <TextField 
+                     required="true"
                      name="destination" 
                      variant="outlined" 
                      label="Destination" 
@@ -80,6 +83,7 @@ const Form = ({ currentId, setCurrentId }) => {
                      onChange={(e) => setPostData({...postData, destination: e.target.value })}
                      />
                      <TextField 
+                     required="true"
                      name="source" 
                      variant="outlined" 
                      label="Leaving From" 
@@ -87,7 +91,7 @@ const Form = ({ currentId, setCurrentId }) => {
                      value={postData.source}
                      onChange={(e) => setPostData({...postData, source: e.target.value })}
                      />
-                     <FormControl variant="outlined" className={classes.formControl}>
+                     <FormControl required={true} variant="outlined" className={classes.formControl}>
                         <InputLabel htmlFor="outlined-age-native-simple">Guest</InputLabel>
                         <Select
                         native
@@ -107,6 +111,7 @@ const Form = ({ currentId, setCurrentId }) => {
                         <FormHelperText>Number Of Guest Expecting</FormHelperText>
                     </FormControl>
                      <TextField 
+                     required="true"
                      name="tags" 
                      variant="outlined" 
                      label="Tags" 
@@ -115,6 +120,7 @@ const Form = ({ currentId, setCurrentId }) => {
                      onChange={(e) => setPostData({...postData, tags: e.target.value.split(',') })}
                      />
                      <TextField
+                        required="true"
                         id="datetime-local"
                         label="Leaving Time"
                         type="datetime-local"
@@ -127,7 +133,7 @@ const Form = ({ currentId, setCurrentId }) => {
                         onChange={(e) => setPostData({...postData, leavingTime: e.target.value })}
                     />
                      
-                                    <div className={classes.fileInput}>
+                    <div className={classes.fileInput}>
                        <FileBase 
                        type="file"
                        multiple={false}

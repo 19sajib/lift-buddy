@@ -27,14 +27,15 @@ const Auth = () => {
 
     const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword )
 
+
     const handleSubmit =  (e) => {
       e.preventDefault()
-     
+
       if (isSignup) {
           dispatch(signup(formData, history))
       } else {      
           dispatch(signin(formData, history))
-      }
+    }
     }
 
     const handleChange = (e) => {
@@ -90,14 +91,18 @@ const Auth = () => {
                               {
                                   isSignup && (
                                       <>
-                                      <Input name="firstName" label="First name" handleChange={handleChange} autoFocas half />
-                                      <Input name="lastName" label="Last name" handleChange={handleChange} half />
+                                      <Input autoFocus={true} required="true" name="firstName" label="First name" handleChange={handleChange} half />
+                                      <Input required="true" name="lastName" label="Last name" handleChange={handleChange} half />
                                       </>
                                   )
                               }
-                              <Input name="email" label="Email Address" handleChange={handleChange} type="email" />
-                              <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword} />
-                              { isSignup && <Input name="confirmPassword" label="Repeat Password" handleChange={handleChange} type="password" />}
+                              <Input autoFocus={true} required="true" name="email" label="Email Address" handleChange={handleChange} type="email" />
+                              <Input required="true" name="password" label="Password" 
+                                     handleChange={handleChange} 
+                                     type={showPassword ? "text" : "password"} 
+                                     handleShowPassword={handleShowPassword}
+                                     />
+                              { isSignup && <Input required="true" name="confirmPassword" label="Repeat Password" handleChange={handleChange} type="password" />}
                           </Grid>
                           {!isSignup && (<Button component={Link} to="/forget-password" >Forgot your password?</Button>)}
                           <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit} >
