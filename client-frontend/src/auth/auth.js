@@ -23,6 +23,5 @@ export const isAuthenticated = () => {
 export const logout = () => {
     deleteCookie('token');
     deleteLocalStorage('user');
-
     
 };

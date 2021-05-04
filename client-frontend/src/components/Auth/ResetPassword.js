@@ -2,6 +2,7 @@ import React,{ useState } from 'react'
 import { Button, Container, Paper } from '@material-ui/core'
 import { useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
 import { resetpass } from '../../actions/auth'
 import Input from './Input'
@@ -17,14 +18,14 @@ const ResetPassword = () => {
     const dispatch = useDispatch()
     const {token} = useParams()
     //console.log(token);
-   // const history = useHistory()
+    const history = useHistory()
 
     const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword )
     
     const newpass = async (e) => {
         e.preventDefault()
 
-        dispatch(resetpass( {password, token}))
+        dispatch(resetpass( {password, token, history}))
 
     }
 

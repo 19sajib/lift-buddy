@@ -32,3 +32,10 @@ export const DSESTSOURCE = 'DESTSOURCE'
 export const NONESOURCE = 'NONESOURCE'
 export const NONEDEST = 'NONEDEST'
 export const NONENONE = 'NONENONE'
+
+// Alret constant
+export const SUCCESS = 'SUCCESS'
+export const ERROR = 'ERROR'
+export const WARN = 'WARN'
+export const INFO = 'INFO'
+export const LOGOUTALRET = 'LOGOUTALRET'

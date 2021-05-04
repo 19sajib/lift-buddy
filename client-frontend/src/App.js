@@ -18,6 +18,9 @@ import ChatRoom from './components/chat/ChatRoom'
 import { isAuthenticated } from './auth/auth'
 import NewNavbar from './components/Navbar/NewNavBar'
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function App () {
 
     const { token } = isAuthenticated()
@@ -69,6 +72,7 @@ function App () {
               <Route path="/chat-dashboard" render={() => <ChatDashboard socket={socket} />} exact />
               <Route path="/chatroom/:id" render={() => <ChatRoom socket={socket} />} exact />
           </Switch>
+          <ToastContainer autoClose={2000} />
       </Container>
   </BrowserRouter>
   )

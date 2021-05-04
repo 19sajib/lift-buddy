@@ -23,17 +23,17 @@ const signup = async (req, res) => {
    // Validation
 
    if(!firstName || !lastName || !email || !password || !confirmPassword )
-   return res.status(400).send({ errorMessage: "Please fill all the required feild."});
+   return res.status(400).send({ message: "Please fill all the required feild."});
 
    if(password.length < 8)
-   return res.status(400).send({ errorMessage: "Please enter a password of at least 8 chracters."})
+   return res.status(400).json({ message: "Please enter a password of at least 8 chracters."})
    
    if(password !== confirmPassword)
-   return res.status(400).send({ errorMessage: "Please enter a same password twice."})
+   return res.status(400).json({ message: "Please enter a same password twice."})
    
    const existingUser = await User.findOne({email: email})
    if(existingUser)
-   return res.status(400).send({ errorMessage: "An account with this email already exists."})
+   return res.status(400).json({ message: "An account with this email already exists."})
 
    // generate jwt token
    const token = jwt.sign({ email, password, firstName, lastName }, process.env.JWT_SECRET, { expiresIn: "1h" });
@@ -77,7 +77,7 @@ const signup = async (req, res) => {
   res.status(200).json({message: 'A email is on your way, Make sure you follow the instrauction.'})
 
    } catch (error) {
-    res.status(500).json({ message: 'something went worng.'})
+    res.status(500).json({ message: 'Something went worng.'})
    }
 }
 
@@ -110,7 +110,7 @@ const saveuser = async (req, res) => {
         //res.cookie("token", token, {httpOnly: false,secure: false}).send()
 
           // send result & token
-          res.status(200).json({ message: 'Your Account Created Successfully. Make Sure Your Log in to Continue Further.'})
+          res.status(200).json({ message: 'Your Account Created Successfully. Make Sure Your Logged in to Continue Further.'})
        }
      })
    
@@ -132,7 +132,7 @@ const signin = async (req, res) => {
     try {
         // validate
         if(!email || !password )
-        return res.status(400).send({errorMessage: "Please fill all the required feild."})
+        return res.status(400).json({message: "Please fill all the required feild."})
 
 
         const existingUser = await User.findOne({ email })
@@ -153,9 +153,9 @@ const signin = async (req, res) => {
             // })
             // res.status(200).json({result: existingUser, token})
         // send result & token    
-         res.status(200).json({ result: existingUser, token})
+         res.status(200).json({ result: existingUser, token, message: "Logged In successfully."})
     } catch (error) {
-        res.status(500).json({ message: 'something went worng.'})
+        res.status(500).json({ message: 'Something went worng.'})
     }
 }
 
@@ -191,19 +191,19 @@ const googleSignIn = async (req, res) => {
                           if (email_verified) {
                             User.findOne({email}).exec(async (err, user) => {
                               if (err) {
-                                res.status(400).json({ message: 'something went worng.'})
+                                res.status(400).json({ message: 'Something went worng!'})
                               } else {
                                     if (user) {
                                       const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, { expiresIn: "1h" })
                                       const { _id, email, name, avatar } = user
-                                      res.status(200).json({ result: {_id, name, email, avatar}, token})
+                                      res.status(200).json({ result: {_id, name, email, avatar}, token, message: "Logged In successfully."})
                                     } else {
                                       const password = email+process.env.JWT_PASSWORD_KEY;
                                       const hashedPassword = await bcrypt.hash(password, 12);
 
                                       const user = await User.create({ email, password: hashedPassword, name, avatar:picture});
                                       const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, { expiresIn: "1h" })
-                                      res.status(200).json({ result: user, token})
+                                      res.status(200).json({ result: user, token, message: "Account Created successfully & You Have been Logged In."})
                                       // const newUser = await new User({name, email, hashedPassword, avatar:picture })
                                       // newUser.save((err, data) => {
                                       //   if (err) {
@@ -242,14 +242,14 @@ const facebookSignIn = async (req, res) => {
     if (user) {
       const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, { expiresIn: "1h" })
       const { _id, email, name, avatar } = user
-      res.status(200).json({ result: user, token})
+      res.status(200).json({ result: user, token, message: "Logged In successfully."})
     } else {
       const password = email+process.env.JWT_PASSWORD_KEY;
       const hashedPassword = await bcrypt.hash(password, 12);
 
       const user = await User.create({ email, password: hashedPassword, name, avatar:picture.data.url});
       const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, { expiresIn: "1h" })
-      res.status(200).json({ result: user, token})
+      res.status(200).json({ result: user, token, message: "Account Created successfully & You Have been Logged In."})
 
     }
 
@@ -258,7 +258,7 @@ const facebookSignIn = async (req, res) => {
     
 
   } catch (err) {
-    return res.status(500).json({msg: err.message})
+    return res.status(500).json({message: err.message})
 }
 }
 

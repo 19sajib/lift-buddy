@@ -1,4 +1,4 @@
-import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE } from '../constants/actionTypes'
+import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE, ERROR, SUCCESS, WARN } from '../constants/actionTypes'
 import * as api from '../api';
 
 
@@ -21,8 +21,10 @@ export const createPost = (post) => async (dispatch) => {
         const { data } = await api.createPost(post)
         
         dispatch({ type: CREATE, payload: data})
+        dispatch({ type: SUCCESS, data})
     } catch (error) {
         console.log(error);
+        dispatch({ type: ERROR, error})
     }
 }
 
@@ -31,8 +33,10 @@ export const updatePost = (id, post) => async (dispatch) => {
         const { data } = await api.updatePost(id, post)
         
         dispatch({ type: UPDATE, payload: data})
+        dispatch({ type: SUCCESS, data})
     } catch (error) {
         console.log(error);
+        dispatch({ type: ERROR, error})
     }
 }
 
@@ -41,8 +45,10 @@ export const deletePost = (id) => async (dispatch) => {
          await api.deletePost(id)
         
         dispatch({ type: DELETE, payload: id})
+        dispatch({ type: WARN})
     } catch (error) {
         console.log(error);
+        dispatch({ type: ERROR, error})
     }
 }
 
@@ -51,7 +57,9 @@ export const likePost = ({postId, userId}) => async (dispatch) => {
         const { data } = await api.likePost({postId, userId})
         
         dispatch({ type: LIKE, payload: data})
+        dispatch({ type: SUCCESS, data})
     } catch (error) {
         console.log(error);
+        dispatch({ type: ERROR, error})
     }
 }

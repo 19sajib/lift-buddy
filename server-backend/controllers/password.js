@@ -22,7 +22,7 @@ const mailjet = require ('node-mailjet')
     try {
 
         if(!email )
-        return res.status(400).send({errorMessage: "Please fill all the required feild."})
+        return res.status(400).send({message: "Please fill all the required feild."})
 
         const existingUser = await User.findOne({ email })
 
@@ -84,7 +84,7 @@ const mailjet = require ('node-mailjet')
 
     try {
       const rightUser = await User.findOne({resetToken:token, expireToken:{$gt:Date.now()}})
-      if(!rightUser){ return res.status(422).json({error:"Try again session expired"}) }
+      if(!rightUser){ return res.status(422).json({message:"Session expired. Try again from forget password."}) }
           const hashedPassword = await bcrypt.hash(password, 12);
               rightUser.password = hashedPassword
               rightUser.resetToken = undefined

@@ -24,6 +24,7 @@ import BackToTop from "./BackToTop"
 
 import logo from '../../images/name.png'
 import { isAuthenticated, logout } from '../../auth/auth'
+import { LOGOUTALRET } from '../../constants/actionTypes'
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -119,9 +120,10 @@ export default function NewNavbar () {
     let location = useLocation()
 
     const signOut = () => {
-      dispatch({ type: 'LOGOUT'})
+      // dispatch({ type: 'LOGOUT'})
+      dispatch({ type: LOGOUTALRET })
       history.push('/')
-
+       
       logout()
     }
     
@@ -133,6 +135,7 @@ export default function NewNavbar () {
            
            if (decodedToken.exp * 1000 < new Date().getTime()) {
              logout()
+            //  dispatch({ type: 'LOGOUTALRET'})
              history.push('/')
            }
          }

@@ -11,7 +11,7 @@ const getProfile = async (req, res) => {
 
     try {
         if(!id )
-        return res.status(400).send({errorMessage: "Please Log in First."})
+        return res.status(400).json({message: "Please Log in First."})
 
         const user = User.findOne({ id })
 
@@ -44,11 +44,11 @@ const updateProfile = async (req, res) => {
 
     const user = await User.findOneAndUpdate({ _id: id }, { $set: profileData }, { new: true })
 
-    if(!user) return res.status(404).json({ message: "Mongoose Error"});
+    if(!user) return res.status(404).json({ message: "Internal Server Error"});
 
     const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, { expiresIn: "1h" })
 
-    return res.status(200).json({ result: user, token });
+    return res.status(200).json({ result: user, token, message: 'Your Profile Updated Successfully.' });
 
 }
 

@@ -11,12 +11,12 @@ import useStyles from '../../styles'
 
 
 const Home = () => {
-    const posts = useSelector((state) => state.posts)
-    console.log(posts);
-    const filterData = posts.filter(obj => {
-        return obj.destination === "Sajek"
-      })
-    console.log(filterData);
+     const posts = useSelector((state) => state.posts)
+    // console.log(posts);
+    // const filterData = posts.filter(obj => {
+    //     return obj.destination === "Sajek"
+    //   })
+    // console.log(filterData);
     const [currentId, setCurrentId] = useState(null);
     const classes = useStyles();
     const dispatch = useDispatch(getPosts());

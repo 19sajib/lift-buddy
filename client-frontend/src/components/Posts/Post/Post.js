@@ -31,8 +31,8 @@ const Post = ({ post, setCurrentId }) => {
       };
 
     const GuestList = () => {
-      if (post.likes.length > 0) {
-        return post.likes.find((like) => like === (user?._id))
+      if (post?.likes?.length > 0) {
+        return post?.likes.find((like) => like === (user?._id))
           ? (
             <><ListAltIcon color="primary" />&nbsp;{post.likes.length > 2 ? `You and ${post.likes.length - 1} Others Going` : `${post.likes.length > 1 ? 'You and 1 Person Going' : 'Only You are Going'}` }</>
           ) : (
@@ -44,7 +44,7 @@ const Post = ({ post, setCurrentId }) => {
     };
 
     const Likes = () => {
-        if (post.likes.find((like) => like === (user?._id))) {
+        if (post?.likes.find((like) => like === (user?._id))) {
           return (<>
               <Button size="small" color="primary" disabled={!user} onClick={() => dispatch(likePost({postId: post._id, userId: user._id}))}>
                 <DepartureBoardIcon fontSize="small" />Cancle My Ride

@@ -41,7 +41,7 @@ const createPost = async (req, res) => {
           try {
               await newPost.save();
               console.log(newPost);
-              res.status(201).json(newPost)
+              res.status(201).json({newPost, message: "Your post created successfully"})
             } catch (error) {
                 res.status(409).json({ message: error}) 
             }
@@ -52,17 +52,17 @@ const updatePost = async (req, res) => {
     const {id: _id} = req.params;
     const post = req.body;
 
-    if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send("No post with that id");
+    if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).json({message: "No post with that id, Maybe internal server error."});
 
     const updatedPost = await PostMessage.findByIdAndUpdate(_id, { ...post, _id }, { new: true });
 
-    res.json(updatedPost)
+    res.json({updatedPost, message: "Your post updated successfully"})
 }
 
 const deletePost = async (req, res) => {
     const { id } = req.params;
     
-    if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send("No post with that id");
+    if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).json({message: "No post with that id, Maybe internal server error."});
 
     await PostMessage.findByIdAndRemove(id);
 
@@ -75,7 +75,7 @@ const likePost = async (req, res) =>{
     const id = postId
     if(!userId) return res.json({ message: "Unauthenticated"})
     
-    if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send("No post with that id");
+    if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).json({message: "No post with that id, Maybe internal server error."});
 
     const post = await PostMessage.findById(id);
     const chat = await ChatRoom.findById(post.chatroomId)
@@ -105,7 +105,7 @@ const likePost = async (req, res) =>{
     const updateUser = await User.findOneAndUpdate({ _id: userId }, user, { new: true })
     const updateChat = await ChatRoom.findOneAndUpdate({ _id: post.chatroomId}, chat, { new: true })
     //console.log(user);
-    res.json(updatedPost)
+    res.json({updatedPost, message: "Your ride has been confirmed."})
 }
 
 const meAsGuest = async(req, res) => {

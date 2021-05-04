@@ -7,6 +7,9 @@ import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import FacebookIcon from '@material-ui/icons/Facebook';
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import Icon from './Icon';
 import Input from './Input';
 import useStyles from './styles';
@@ -139,6 +142,7 @@ const Auth = () => {
                           </Grid>
                       </form>
              </Paper>
+            
         </Container>
     )
 }
