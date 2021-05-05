@@ -1,4 +1,4 @@
-import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE } from '../constants/actionTypes'
+import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE, REPORT } from '../constants/actionTypes'
 // eslint-disable-next-line
 export default ( posts = [], action) => {
     switch(action.type) {
@@ -7,6 +7,9 @@ export default ( posts = [], action) => {
         case UPDATE:
         case LIKE:
             return posts.map((post) => post._id === action.payload._id ? action.payload : post );
+        case REPORT:
+            //console.log(action.payload);
+            return posts;    
         case FETCH_ALL:
             console.log(action.payload);
             return action.payload;

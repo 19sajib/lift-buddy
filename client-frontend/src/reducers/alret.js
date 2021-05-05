@@ -7,6 +7,8 @@ export default ( alret = [], action) => {
             toast.success(action?.data.message)
             return alret;
         case INFO:
+            //console.log(action?.data);
+            toast.info(action?.data.message, { autoClose: 6000 })
             return alret;
         case ERROR:
             toast.error(action?.error.response.data.message);

@@ -1,8 +1,22 @@
-import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE, ERROR, SUCCESS, WARN } from '../constants/actionTypes'
+import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE, REPORT, ERROR, SUCCESS, WARN, INFO } from '../constants/actionTypes'
 import * as api from '../api';
 
 
 // Action Creation here
+
+export const postReport = ({ReportData, history}) => async (dispatch) => {
+    try {
+        const { data } = await api.reportPost(ReportData)
+        
+        dispatch({ type: REPORT, payload: data })
+        dispatch({ type: INFO, data })
+        history.push('/')
+
+    } catch (error) {
+        console.log(error);
+        dispatch({ type: ERROR, error})
+    }
+}
 
 
 export const getPosts= () => async (dispatch) => {
@@ -10,7 +24,7 @@ export const getPosts= () => async (dispatch) => {
         const { data } = await api.fetchPosts();
 
         dispatch({ type: FETCH_ALL, payload: data})
-        
+
     } catch (error) {
         console.log(error);
     }

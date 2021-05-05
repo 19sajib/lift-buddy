@@ -1,6 +1,6 @@
 const express = require('express')
 
-const { getPosts, createPost, updatePost, deletePost, likePost, meAsGuest } = require('../controllers/posts.js')
+const { getPosts, createPost, updatePost, deletePost, likePost, reportPost, meAsGuest } = require('../controllers/posts.js')
 
 const auth = ('../middleware/auth.js')
 
@@ -10,6 +10,7 @@ router.get('/', getPosts)
 router.post('/', createPost)
 router.patch('/:id', updatePost)
 router.delete('/:id', deletePost)
+router.post('/reportPost/', reportPost)
 router.patch('/:postId/likePost/:userId', likePost)
 
 router.post('/meAsGuest', meAsGuest)

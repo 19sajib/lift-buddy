@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken')
 const PostMessage = require('../models/postMessage.js')
 const User = require('../models/user.js')
 const ChatRoom = require('../models/Chatroom')
+const Report = require('../models/Report')
 
 const getPosts = async (req, res) => {
     try {
@@ -121,4 +122,19 @@ const meAsGuest = async(req, res) => {
 
 }
 
-module.exports = { getPosts, createPost, updatePost, deletePost, likePost, meAsGuest }
+const reportPost = async(req, res) => {
+    const { reportedBy, reportedPost, reportedText } = req.body;
+    //console.log(req.body);
+
+    try {
+
+        const report = await Report.create({ reportedBy, reportedPost, reportedText, createdAt: new Date() })
+        res.status(200).json({report, message: "We have captured your report, We will let you know further update via email. Thank You for your report."})
+        
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({ message: error.message}) 
+    }
+}
+
+module.exports = { getPosts, createPost, updatePost, deletePost, likePost, reportPost, meAsGuest }

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
 import { Card, CardActions, CardContent, CardMedia, Button, Typography, Dialog, DialogActions, 
   DialogContent } from '@material-ui/core/';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -14,7 +13,7 @@ import { useDispatch } from 'react-redux'
 import { deletePost, likePost } from '../../../actions/posts'
 import { isAuthenticated } from '../../../auth/auth'
 import useStyles from './styles'
-import Directions from '../Map/Direction';
+import Directions from '../../Posts/Map/MapDirection';
 
 
 const Post = ({ post, setCurrentId }) => {
@@ -47,13 +46,13 @@ const Post = ({ post, setCurrentId }) => {
     const Likes = () => {
         if (post?.likes.find((like) => like === (user?._id))) {
           return (<>
-              <Button size="small" color="primary" disabled={!user} onClick={() => dispatch(likePost({postId: post._id, userId: user._id}))}>
+              <Button size="small" color="primary" disabled onClick={() => dispatch(likePost({postId: post._id, userId: user._id}))}>
                 <DepartureBoardIcon fontSize="small" />Cancle My Ride
                 </Button>
                 </>)
         }
         return (<>
-              <Button size="small" color="primary" disabled={!user || post.likes.length === post.guest} onClick={() => dispatch(likePost({postId: post._id, userId: user._id}))}>
+              <Button size="small" color="primary" disabled onClick={() => dispatch(likePost({postId: post._id, userId: user._id}))}>
                 <DepartureBoardIcon fontSize="small" />Confirm My Ride
                 </Button></>
             );
@@ -79,7 +78,7 @@ const Post = ({ post, setCurrentId }) => {
             <Typography className={classes.title} variant="h5" gutterBottom>I am leaving for {post.destination} from {post.source}, wanna join me?</Typography>  
             
             <CardContent>
-                  <Button variant="outlined" color="primary" onClick={handleClickOpen}>Wanna See The Possible Route?</Button>
+                  <Button disabled variant="outlined" color="primary" onClick={handleClickOpen}>Wanna See The Possible Route?</Button>
                   <Dialog disableBackdropClick disableEscapeKeyDown open={open} onClose={handleClose}>
                   <DialogContent>
                   <Directions origin={post.source} destination={post.destination} />  
@@ -104,16 +103,16 @@ const Post = ({ post, setCurrentId }) => {
                     <Likes />
                 {(user?._id === post.creator)
                  &&
-                (<Button size="small" color="secondary" disabled={!user} onClick={() => dispatch(deletePost(post._id))}>
+                (<Button size="small" color="secondary" disabled onClick={() => dispatch(deletePost(post._id))}>
                     <DeleteIcon fontSize="small" />
                     Delete
                 </Button>)}
                 {(user?._id !== post.creator)
                  &&
-                (<Button component={Link} to={"/report/"+post._id} size="small" color="secondary" disabled={!user} >
+                (<Button size="small" color="secondary" disabled >
                 <ReportIcon fontSize="small" />
-                  Report
-                </Button>)}
+                Report
+            </Button>)}
             </CardActions>
         </Card>      
     )

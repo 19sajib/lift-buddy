@@ -14,11 +14,13 @@ import ForgetPassword from './components/Auth/ForgetPassword'
 import ResetPassword from './components/Auth/ResetPassword'
 import ChatDashboard from './components/chat/ChatDashboard'
 import ChatRoom from './components/chat/ChatRoom'
+import Report from './components/Report/Report'
+
 
 import { isAuthenticated } from './auth/auth'
 import NewNavbar from './components/Navbar/NewNavBar'
 
-import { ToastContainer } from "react-toastify";
+import { Bounce, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function App () {
@@ -69,10 +71,11 @@ function App () {
               <Route path="/accountactivation/:token" component={AccountActivation}/>
               <Route path="/forget-password" exact component={ForgetPassword}/>
               <Route path="/reset-password/:token" component={ResetPassword}/>
+              <Route path="/report/:id" component={Report}/>
               <Route path="/chat-dashboard" render={() => <ChatDashboard socket={socket} />} exact />
               <Route path="/chatroom/:id" render={() => <ChatRoom socket={socket} />} exact />
           </Switch>
-          <ToastContainer autoClose={2000} />
+          <ToastContainer autoClose={3000} transition={Bounce}/>
       </Container>
   </BrowserRouter>
   )
