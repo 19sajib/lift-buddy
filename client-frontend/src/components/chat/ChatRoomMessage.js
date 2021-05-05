@@ -101,6 +101,7 @@ const ChatRoomMessage = ({ match, socket }) => {
             <input
               type="text"
               name="message"
+              required
               placeholder="Say something!"
               ref={messageRef}
             />

@@ -38,7 +38,7 @@ const ResetPassword = () => {
         <Container component="main" maxWidth="xs">
         <Paper className={classes.paper} elevation={3} variant="outlined" >
         <form className={classes.form} >
-        <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword} />
+        <Input required="true" name="password" label="Password" handleChange={handleChange} type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword} />
         <Button  variant="contained" color="primary" onClick={newpass} className={classes.submit}>
          Change Password
         </Button>
