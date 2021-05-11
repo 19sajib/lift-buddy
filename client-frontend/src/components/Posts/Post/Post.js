@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import { Card, CardActions, CardContent, CardMedia, Button, Typography, Dialog, DialogActions, 
-  DialogContent } from '@material-ui/core/';
+  DialogContent, Divider, List, ListItem, ListItemText } from '@material-ui/core/';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ReportIcon from '@material-ui/icons/Report';
 import ListAltIcon from '@material-ui/icons/ListAlt';
@@ -78,6 +78,8 @@ const Post = ({ post, setCurrentId }) => {
             </div>
             <Typography className={classes.title} variant="h5" gutterBottom>I am leaving for {post.destination} from {post.source}, wanna join me?</Typography>  
             
+
+
             <CardContent>
                   <Button variant="outlined" color="primary" onClick={handleClickOpen}>Wanna See The Possible Route?</Button>
                   <Dialog disableBackdropClick disableEscapeKeyDown open={open} onClose={handleClose}>
@@ -92,12 +94,25 @@ const Post = ({ post, setCurrentId }) => {
                   </Dialog>
             </CardContent>
 
+
             <div className={classes.infoLine}>
             <ListIcon color="secondary" />Only {post?.guest} Person Can Go!
             </div>
               
             <div className={classes.infoLine}>
                     <GuestList />
+            </div>
+
+            <div  >
+              <List>
+                <ListItem>
+                  <ListItemText 
+                  primary="Note:"
+                  // primary={ <Typography color="secondary" variant="h6" >Note:  </Typography>} 
+                  secondary={<Typography variant="body2" >{post?.message} </Typography>} />
+                </ListItem>
+                <Divider variant="middle" />
+              </List>
             </div>
 
             <CardActions className={classes.cardActions}>

@@ -22,6 +22,7 @@ export default makeStyles((theme) => ({
     marginBottom: 10,
   },
   formControl: {
-    width: '97%'
+    width: '94%',
+    margin: '10px 0',
   },
 }));

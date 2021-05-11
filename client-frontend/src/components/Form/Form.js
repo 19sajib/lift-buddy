@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react'
-import { TextField, Button, Typography, Paper, FormControl , InputLabel, Select, option, FormHelperText} from '@material-ui/core'
+import { TextField, Button, Typography, Paper, FormControl , InputLabel, Select, option, FormHelperText } from '@material-ui/core'
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import FileBase from 'react-file-base64'
 import { useDispatch, useSelector } from 'react-redux'
+import moment from 'moment'
+// import Autocomplete, { usePlacesWidget } from 'react-google-autocomplete';
 
 import useStyles from './styles'
 import { createPost, updatePost } from '../../actions/posts'
 import { isAuthenticated } from '../../auth/auth'
-
+import location from '../../json/bd-postcodes.json'
 // GET THE ID FOR EDIT
 
 
 const Form = ({ currentId, setCurrentId }) => {
+
     const [postData, setPostData] = useState({
         title: '', message: '', tags: '', selectedFile: '', destination: '', source: '', guest: '', leavingTime: ''
     })
@@ -36,10 +40,13 @@ const Form = ({ currentId, setCurrentId }) => {
 
     }
 
+
     const clear = () => {
         setCurrentId(null);
         setPostData({ title: '', message: '', tags: '', selectedFile: '', destination: '', source: '', guest: '', leavingTime: ''})
     }
+
+
 
     if(!user?.name) {
         return (
@@ -51,11 +58,12 @@ const Form = ({ currentId, setCurrentId }) => {
         )
     }
 
+
     return (
         <Paper className={classes.paper}>
                <form autoComplete="off" className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
                      <Typography variant="h6">{currentId ? "Editing" : "Hosting"} a Ride</Typography>
-                     <TextField 
+                     {/* <TextField 
                      required={true}
                      name="title" 
                      variant="outlined" 
@@ -63,17 +71,64 @@ const Form = ({ currentId, setCurrentId }) => {
                      fullWidth
                      value={postData.title}
                      onChange={(e) => setPostData({...postData, title: e.target.value })}
-                     />
+                     /> */}
+                    {/* <Autocomplete
+                            id="combo-box-demo"
+                            options={location.postcodes}
+                            getOptionLabel={(option) => option.upazila}
+                            style={{ width: '93%' }}
+                            value={postData.destination}
+                            renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
+                    /> */}
+                    <FormControl variant="outlined" className={classes.formControl}>
+                        <InputLabel htmlFor="outlined-age-native-simple">Destination</InputLabel>
+                        <Select
+                        required
+                        native
+                        value={postData.destination}
+                        onChange={(e) => setPostData({...postData, destination: e.target.value })}
+                        label="Destination"
+                        inputProps={{
+                            name: 'Destination',
+                            id: 'outlined-age-native-simple',
+                        }}
+                        >
+                        <option aria-label="None" value="" />
+                       { location.postcodes.map((dest, i) => 
+                        <option key={i} value={dest.upazila}>{dest.upazila}</option>
+                        )}
+                        </Select>
+                    </FormControl>
+                    <FormControl variant="outlined" className={classes.formControl}>
+                        <InputLabel htmlFor="outlined-age-native-simple">Leaving From</InputLabel>
+                        <Select
+                        required
+                        native
+                        value={postData.source}
+                        onChange={(e) => setPostData({...postData, source: e.target.value })}
+                        label="Leaving From"
+                        inputProps={{
+                            name: 'Leaving From',
+                            id: 'outlined-age-native-simple',
+                        }}
+                        >
+                        <option aria-label="None" value="" />
+                       { location.postcodes.map((dest,d) => 
+                        <option key={d} value={dest.upazila}>{dest.upazila}</option>
+                        )}
+                        </Select>
+                    </FormControl>
                      <TextField 
                      required={true}
                      name="message" 
                      variant="outlined" 
                      label="Message" 
+                     placeholder="Any request!"
                      fullWidth
                      value={postData.message}
                      onChange={(e) => setPostData({...postData, message: e.target.value })}
                      />
-                     <TextField 
+                     {/* <TextField 
                      required={true}
                      name="destination" 
                      variant="outlined" 
@@ -90,7 +145,7 @@ const Form = ({ currentId, setCurrentId }) => {
                      fullWidth
                      value={postData.source}
                      onChange={(e) => setPostData({...postData, source: e.target.value })}
-                     />
+                     /> */}
                      <FormControl variant="outlined" className={classes.formControl}>
                         <InputLabel htmlFor="outlined-age-native-simple">Guest</InputLabel>
                         <Select
@@ -111,7 +166,7 @@ const Form = ({ currentId, setCurrentId }) => {
                         </Select>
                         <FormHelperText>Number Of Guest Expecting</FormHelperText>
                     </FormControl>
-                     <TextField 
+                     {/* <TextField 
                      required={true}
                      name="tags" 
                      variant="outlined" 
@@ -119,7 +174,7 @@ const Form = ({ currentId, setCurrentId }) => {
                      fullWidth
                      value={postData.tags}
                      onChange={(e) => setPostData({...postData, tags: e.target.value.split(',') })}
-                     />
+                     /> */}
                      <TextField
                         required={true}
                         id="datetime-local"
@@ -129,8 +184,8 @@ const Form = ({ currentId, setCurrentId }) => {
                         InputLabelProps={{
                             shrink: true,
                         }}
-                        value={postData.leavingTime}
-                        //value={moment(postData.leavingTime).format('YYYY-MM-DD hh:mm A')}
+                        //value={postData.leavingTime}
+                        value={moment(postData.leavingTime).format('YYYY-MM-DDTHH:mm')}
                         onChange={(e) => setPostData({...postData, leavingTime: e.target.value })}
                     />
                      
