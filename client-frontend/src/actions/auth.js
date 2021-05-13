@@ -1,4 +1,4 @@
-import {  AUTH, FORGET_PASSWORD, RESET_PASSWORD, 
+import {  AUTH, FORGET_PASSWORD, RESET_PASSWORD, VERIFY_PROFILE,
           LOGIN, GOOGLE_LOGIN, FACEBOOK_LOGIN, GET_PROFILE, UPDATE_PROFILE, SUCCESS, ERROR } from '../constants/actionTypes'
 import * as api from '../api';
 
@@ -114,6 +114,19 @@ export const updateProfile = ( formData, history ) => async (dispatch) => {
         dispatch({ type: UPDATE_PROFILE, data })
         dispatch({ type: SUCCESS, data})
         history.push('/profile')
+    } catch (error) {
+        console.log(error);
+        dispatch({ type: ERROR, error})
+    }
+}
+
+export const verifyProfile = ( {formData, history} ) => async (dispatch) => {
+    try {
+        const { data } = await api.verifyprofile(formData)
+        console.log(data);
+        dispatch({ type: VERIFY_PROFILE, payload: data })
+        dispatch({ type: SUCCESS, data})
+        history.push('/')
     } catch (error) {
         console.log(error);
         dispatch({ type: ERROR, error})

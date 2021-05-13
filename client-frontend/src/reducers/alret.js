@@ -4,6 +4,7 @@ import { SUCCESS, ERROR, WARN, INFO, LOGOUTALRET } from '../constants/actionType
 export default ( alret = [], action) => {
     switch(action.type) {
         case SUCCESS:
+            //console.log(action?.data);
             toast.success(action?.data.message)
             return alret;
         case INFO:

@@ -7,6 +7,7 @@ export const FORGET_PASSWORD = 'FORGET_PASSWORD';
 export const RESET_PASSWORD = 'RESET_PASSWORD';
 export const GET_PROFILE = 'GET_PROFILE';
 export const UPDATE_PROFILE = 'UPDATE_PROFILE'
+export const VERIFY_PROFILE = 'VERIFY_PROFILE'
 
 //Project Posts Action Type Bellow Down
 

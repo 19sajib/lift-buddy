@@ -13,6 +13,7 @@ export const resetpassword = (formData) => axios.post("http://localhost:8080/use
 
 export const getprofile = (formData) => axios.get("http://localhost:8080/users/get-profile/", formData)
 export const updateprofile = (formData) => axios.patch("http://localhost:8080/users/update-profile/", formData)
+export const verifyprofile = (formData) => axios.post("http://localhost:8080/users/verify-profile/", formData)
 
 const PRO_API = 'http://localhost:8080/pro-post';
 // Project Post api 

@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/user.js')
+const Verification = require('../models/Verification')
 const auth = require('../middleware/auth.js')
 
 const getProfile = async (req, res) => {
@@ -52,4 +53,27 @@ const updateProfile = async (req, res) => {
 
 }
 
-module.exports = { getProfile, updateProfile}
+const verifyProfile = async (req, res) => {
+    const { file1, file2, file3, userId } = req.body;
+
+    try {
+        if (!file1 || !file2 ||!file3|| !userId ) {
+            return res.status(400).json({message: 'Please fill all required feild'})
+        }
+        const post = await Verification.find({ userId: userId })
+        console.log(post);
+        if (post) {
+            const verifyAgain = await Verification.findOneAndUpdate({ userId: userId }, { file1, file2, file3,  $inc: { attempt: 1 }, updatedAt: new Date() }, { new: true })
+            return res.status(200).json({ verifyAgain, message: 'We have recived your response again, we will notify you through email.' });
+        }
+
+        const verify = await Verification.create({ userId, file1, file2, file3, attempt: 1, createdAt: new Date()});
+        return res.status(200).json({ verify, message: 'We have recived your response, we will notify you through email.' });
+
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+module.exports = { getProfile, updateProfile, verifyProfile}

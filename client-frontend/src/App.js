@@ -15,7 +15,9 @@ import ResetPassword from './components/Auth/ResetPassword'
 import ChatDashboard from './components/chat/ChatDashboard'
 import ChatRoom from './components/chat/ChatRoom'
 import Report from './components/Report/Report'
-
+import Verify from './components/Verification/ImageUpload'
+import Terms from './legal/terms'
+ 
 
 import { isAuthenticated } from './auth/auth'
 import NewNavbar from './components/Navbar/NewNavBar'
@@ -65,8 +67,10 @@ function App () {
           <NewNavbar />
           <Switch>
               <Route path="/" exact component={Home}/>
+              <Route path="/terms-and-conditions" exact component={Terms}/>
               <Route path="/proHome" exact component={proHome}/>
               <Route path="/auth" exact component={Auth}/>
+              <Route path="/verification" exact component={Verify}/>
               <Route path="/profile" exact component={Account}/>
               <Route path="/accountactivation/:token" component={AccountActivation}/>
               <Route path="/forget-password" exact component={ForgetPassword}/>

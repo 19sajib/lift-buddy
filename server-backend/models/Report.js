@@ -18,6 +18,10 @@ const reportSchema = new mongoose.Schema({
         type: Date,
         default: new Date()
     },
+    isSolved: {
+        type: Boolean,
+        default: false,
+      },
 })
 
 const Report = mongoose.model('Report', reportSchema)

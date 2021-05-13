@@ -2,7 +2,7 @@ const express = require('express')
 
 const  { signin, signup, signout, profile, saveuser, googleSignIn, facebookSignIn } = require('../controllers/user.js')
 const { forgetpassword, resetpassword } = require('../controllers/password.js')
-const { getProfile, updateProfile } = require('../controllers/profile.js')
+const { getProfile, updateProfile, verifyProfile } = require('../controllers/profile.js')
 
 const router = express.Router()
 
@@ -20,5 +20,6 @@ router.post('/facebook-signin', facebookSignIn)
 
 router.get('/get-profile', getProfile)
 router.patch('/update-profile', updateProfile)
+router.post('/verify-profile', verifyProfile)
 
 module.exports = router;
