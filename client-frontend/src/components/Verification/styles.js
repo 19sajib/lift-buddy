@@ -1,5 +1,6 @@
 import { makeStyles, } from '@material-ui/core/styles';
 import blue from "@material-ui/core/colors/blue";
+import red from "@material-ui/core/colors/red";
 
 export default makeStyles((theme) => ({
   root: {
@@ -16,6 +17,10 @@ export default makeStyles((theme) => ({
   img: {
     height: '400px',
     margin: '10px',
+    [theme.breakpoints.down('sm')]: {
+      height: '300px',
+      width: '300px'
+    }
   },
   input: {
         display: "none"
@@ -33,4 +38,8 @@ export default makeStyles((theme) => ({
         display: 'flex',
         justify: "flex-end",
       },
+  error: {
+    color: red[600],
+    margin: '16px'
+  }     
 }));

@@ -61,7 +61,7 @@ const verifyProfile = async (req, res) => {
             return res.status(400).json({message: 'Please fill all required feild'})
         }
         const post = await Verification.find({ userId: userId })
-        console.log(post);
+        //console.log(post);
         if (post) {
             const verifyAgain = await Verification.findOneAndUpdate({ userId: userId }, { file1, file2, file3,  $inc: { attempt: 1 }, updatedAt: new Date() }, { new: true })
             return res.status(200).json({ verifyAgain, message: 'We have recived your response again, we will notify you through email.' });

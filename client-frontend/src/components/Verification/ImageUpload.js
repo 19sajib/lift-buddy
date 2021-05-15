@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Card, Divider, Fab, Grid, Typography, Box,
-         Checkbox, FormControlLabel } from '@material-ui/core';
+         Checkbox, FormControlLabel, FormHelperText, FormControl } from '@material-ui/core';
 import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
 import { withStyles } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
@@ -32,6 +32,7 @@ export const GreenCheckbox = withStyles({
 
     function handleImageChange (e) {
         e.preventDefault();
+        setImageError("")
         let file = e.target.files[0];
         let reader = new FileReader();
         reader.readAsDataURL(file);
@@ -41,6 +42,7 @@ export const GreenCheckbox = withStyles({
      }          
     function handleImageChange2 (e) {
         e.preventDefault();
+        setImageError("")
         let file = e.target.files[0];
         let reader = new FileReader();
         reader.readAsDataURL(file);
@@ -50,6 +52,7 @@ export const GreenCheckbox = withStyles({
      }        
     function handleImageChange3 (e) {
         e.preventDefault();
+        setImageError("")
         let file = e.target.files[0];
         let reader = new FileReader();
         reader.readAsDataURL(file);
@@ -60,25 +63,33 @@ export const GreenCheckbox = withStyles({
     }
 
     const [checked, setChecked] = React.useState(false);
+    const [checkedError, setCheckedError] = React.useState("");
+    const [imageError, setImageError] = React.useState("");
+    
   
     const handleChange = (event) => {
       setChecked(event.target.checked);
+      setCheckedError("")
     };
 
     const handleSubmit = async (e) => {
       e.preventDefault();
-      if(checked) {
-        dispatch(verifyProfile({formData: {userId: user._id, file1: base64.file1, file2: base64.file2, file3: base64.file3 }, history}))
+      if (!base64.file1.length || !base64.file2.length || !base64.file3.length) {
+        return setImageError("Please upload all the image to submit the form.")
       } else {
-        return(
-          <Typography>Please, thik this before submit.</Typography>
-        )
+            if(checked) {
+              dispatch(verifyProfile({formData: {userId: user._id, file1: base64.file1, file2: base64.file2, file3: base64.file3 }, history}))
+            } else {
+              setCheckedError("To continue further, please tik this checkbox.")
+            }
+          }
       }
-    }
 
     return (
+
         <div>
           <form >
+            <FormControl>
           <Typography color="secondary" variant="h4" align="center" >Verify Your Profile!</Typography>
             <Divider className={classes.titleHead} variant="middle" />
             <Grid container spacing={2} >
@@ -149,15 +160,17 @@ export const GreenCheckbox = withStyles({
             </Grid>
                     
             </Grid>
-
+            <FormHelperText className={classes.error} >{imageError}</FormHelperText>
+                                  
         <FormControlLabel
           required={true}
           control={<GreenCheckbox checked={checked} 
           onChange={handleChange} 
           name="checked"
           />}
-          label={<Typography >By checking this box, I am accepting all the <Link to={"/terms-and-conditions"} >terms and conditions</Link> and will act accordingly.</Typography>}
-        />
+          label={<Typography >By checking this box, I am accepting all the <Link to={"/terms-and-conditions"} >terms and conditions</Link> and will act accordingly.</Typography> }
+        /> 
+        <FormHelperText className={classes.error} >{checkedError}</FormHelperText>
 
         <Box
           display="flex"
@@ -173,6 +186,7 @@ export const GreenCheckbox = withStyles({
             Submit Details
           </Button>
         </Box>
+        </FormControl>
       </form>
       </div>
     )
