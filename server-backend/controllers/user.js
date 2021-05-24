@@ -4,6 +4,7 @@ const {OAuth2Client} = require('google-auth-library');
 const fetch = require("node-fetch");
 
 const User = require('../models/user.js')
+const Admin = require('../models/Admin.js')
 const auth = require('../middleware/auth.js');
 
 const { MJ_APIKEY_PRIVATE, MJ_APIKEY_PUBLIC } = require('../config/keys.js')
@@ -105,6 +106,8 @@ const saveuser = async (req, res) => {
 
           const result = await User.create({ email, password: hashedPassword, name: `${firstName} ${lastName}` });
 
+          //Admin Panel thing
+          const admin = await Admin.findOneAndUpdate({ _id: "60aa628a829ead2cf45bfa0f" }, { $inc: { user: 1 }}, { new: true })
           
         // send the token in a HTTP-only cookie
         //res.cookie("token", token, {httpOnly: false,secure: false}).send()
@@ -202,6 +205,7 @@ const googleSignIn = async (req, res) => {
                                       const hashedPassword = await bcrypt.hash(password, 12);
 
                                       const user = await User.create({ email, password: hashedPassword, name, avatar:picture});
+                                      const admin = await Admin.findOneAndUpdate({ _id: "60aa628a829ead2cf45bfa0f" }, { $inc: { user: 1 }}, { new: true })
                                       const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, { expiresIn: "1h" })
                                       res.status(200).json({ result: user, token, message: "Account Created successfully & You Have been Logged In."})
                                       // const newUser = await new User({name, email, hashedPassword, avatar:picture })
@@ -248,6 +252,7 @@ const facebookSignIn = async (req, res) => {
       const hashedPassword = await bcrypt.hash(password, 12);
 
       const user = await User.create({ email, password: hashedPassword, name, avatar:picture.data.url});
+      const admin = await Admin.findOneAndUpdate({ _id: "60aa628a829ead2cf45bfa0f" }, { $inc: { user: 1 }}, { new: true })
       const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, { expiresIn: "1h" })
       res.status(200).json({ result: user, token, message: "Account Created successfully & You Have been Logged In."})
 

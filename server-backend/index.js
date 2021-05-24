@@ -11,6 +11,7 @@ const proPostRoutes = require('./routes/proPosts.js')
 const postRoutes = require('./routes/posts.js')
 const chatRoomRoutes = require('./routes/chatRoom.js')
 const messageRoutes = require('./routes/Messages.js')
+const adminRoutes = require('./routes/Admin.js')
 
 const app = express();
 
@@ -36,6 +37,7 @@ app.use('/posts', postRoutes)
 app.use('/pro-post', proPostRoutes)
 app.use('/chatroom', chatRoomRoutes)
 app.use('/message', messageRoutes)
+app.use('/admin', adminRoutes)
 
 
 app.get('/', (req, res) => {

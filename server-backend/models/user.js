@@ -11,6 +11,14 @@ const userSchema = new mongoose.Schema({
      phoneNumber: { type: String },
      resetToken:{ type: String },
      expireToken:{ type: Date },
+     isVerified: {
+          type: Boolean,
+          default: false,
+        },
+     isAdmin: {
+          type: Boolean,
+          default: false,
+        },
      meAsGuest: {
           type: [String],
           default: []

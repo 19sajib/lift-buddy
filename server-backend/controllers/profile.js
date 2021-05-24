@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../models/user.js')
 const Verification = require('../models/Verification')
+const Admin = require('../models/Admin.js')
 const auth = require('../middleware/auth.js')
 
 const getProfile = async (req, res) => {
@@ -68,6 +69,7 @@ const verifyProfile = async (req, res) => {
         }
 
         const verify = await Verification.create({ userId, file1, file2, file3, attempt: 1, createdAt: new Date()});
+        const admin = await Admin.findOneAndUpdate({ _id: "60aa628a829ead2cf45bfa0f" }, { $inc: { pendingVerifiedUser: 1 }}, { new: true })
         return res.status(200).json({ verify, message: 'We have recived your response, we will notify you through email.' });
 
 

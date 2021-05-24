@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken')
 
 const PostMessage = require('../models/postMessage.js')
 const User = require('../models/user.js')
+const Admin = require('../models/Admin.js')
 const ChatRoom = require('../models/Chatroom')
 const Report = require('../models/Report')
 
@@ -37,11 +38,12 @@ const createPost = async (req, res) => {
           });
         
           await chatroom.save();
-          console.log(chatroom);
+          //console.log(chatroom);
           const newPost = new PostMessage({...post,chatroomId: chatroom._id, hideAfter, createdAt: new Date().toISOString() })
           try {
               await newPost.save();
-              console.log(newPost);
+              const admin = await Admin.findOneAndUpdate({ _id: "60aa628a829ead2cf45bfa0f" }, { $inc: { totalPost: 1 }}, { new: true })
+              //console.log(newPost);
               res.status(201).json({newPost, message: "Your post created successfully"})
             } catch (error) {
                 res.status(409).json({ message: error}) 
@@ -129,6 +131,7 @@ const reportPost = async(req, res) => {
     try {
 
         const report = await Report.create({ reportedBy, reportedPost, reportedText, createdAt: new Date() })
+        const admin = await Admin.findOneAndUpdate({ _id: "60aa628a829ead2cf45bfa0f" }, { $inc: { totalReport: 1 }}, { new: true })
         res.status(200).json({report, message: "We have captured your report, We will let you know further update via email. Thank You for your report."})
         
     } catch (error) {
