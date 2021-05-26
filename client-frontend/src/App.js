@@ -18,6 +18,7 @@ import Report from './components/Report/Report'
 import Verify from './components/Verification/ImageUpload'
 import Terms from './legal/terms'
 import AdminPanel from './views/Admin/Index'
+import UserVerification from './views/UserVerification/Index'
  
 
 import { isAuthenticated } from './auth/auth'
@@ -73,6 +74,7 @@ function App () {
               <Route path="/auth" exact component={Auth}/>
               <Route path="/verification" exact component={Verify}/>
               <Route path="/admin-dashboard" render={() => <AdminPanel />} exact />
+              <Route path="/user-verification" render={() => <UserVerification />} exact />
               <Route path="/profile" exact component={Account}/>
               <Route path="/accountactivation/:token" component={AccountActivation}/>
               <Route path="/forget-password" exact component={ForgetPassword}/>

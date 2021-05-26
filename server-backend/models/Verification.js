@@ -21,6 +21,8 @@ const verificationSchema = new mongoose.Schema({
       type: Date,
       default: new Date()
    },
+   idType: { type: String},
+   idValue: { type: String},
 
 })
 

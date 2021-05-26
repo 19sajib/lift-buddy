@@ -62,15 +62,15 @@ const verifyProfile = async (req, res) => {
             return res.status(400).json({message: 'Please fill all required feild'})
         }
         const post = await Verification.find({ userId: userId })
-        //console.log(post);
-        if (post) {
-            const verifyAgain = await Verification.findOneAndUpdate({ userId: userId }, { file1, file2, file3,  $inc: { attempt: 1 }, updatedAt: new Date() }, { new: true })
+        console.log(post);
+        if (post.length) {
+            const verifyAgain = await Verification.findOneAndUpdate({ userId: userId }, { file1, file2, file3, isSolved: false, $inc: { attempt: 1 }, updatedAt: new Date() }, { new: true })
             return res.status(200).json({ verifyAgain, message: 'We have recived your response again, we will notify you through email.' });
         }
 
         const verify = await Verification.create({ userId, file1, file2, file3, attempt: 1, createdAt: new Date()});
         const admin = await Admin.findOneAndUpdate({ _id: "60aa628a829ead2cf45bfa0f" }, { $inc: { pendingVerifiedUser: 1 }}, { new: true })
-        return res.status(200).json({ verify, message: 'We have recived your response, we will notify you through email.' });
+        res.status(200).json({ verify, message: 'We have recived your response, we will notify you through email.' });
 
 
     } catch (error) {

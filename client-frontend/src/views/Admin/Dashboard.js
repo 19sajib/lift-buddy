@@ -35,7 +35,7 @@ export default function Dashboard(admin) {
               <CardIcon color="warning">
                 <VerifiedUserIcon />
               </CardIcon>
-              <p className={classes.cardCategory}>Pending Verification</p>
+              <p className={classes.cardCategory}>Verification Asked</p>
               <h3 className={classes.cardTitle}>
               {!admin ? <LinearProgress/> : <Typography>{admin.admin?.pendingVerifiedUser} <small>Users</small></Typography> }
               </h3>
@@ -45,7 +45,7 @@ export default function Dashboard(admin) {
                 
                   <Warning color="error" />
                 
-                <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                <a href="/user-verification">
                   Verify Now!
                 </a>
               </div>
