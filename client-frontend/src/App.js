@@ -16,6 +16,8 @@ import ChatDashboard from './components/chat/ChatDashboard'
 import ChatRoom from './components/chat/ChatRoom'
 import Report from './components/Report/Report'
 import Verify from './components/Verification/ImageUpload'
+import ContactUs from './components/Contact-Us/Index'
+import ContactUsHelp from './views/ContactHelp/Index'
 import Terms from './legal/terms'
 import AdminPanel from './views/Admin/Index'
 import UserVerification from './views/UserVerification/Index'
@@ -73,6 +75,8 @@ function App () {
               <Route path="/proHome" exact component={proHome}/>
               <Route path="/auth" exact component={Auth}/>
               <Route path="/verification" exact component={Verify}/>
+              <Route path="/contact-us" exact component={ContactUs}/>
+              <Route path="/contact-us/view" exact component={ContactUsHelp}/>
               <Route path="/admin-dashboard" render={() => <AdminPanel />} exact />
               <Route path="/user-verification" render={() => <UserVerification />} exact />
               <Route path="/profile" exact component={Account}/>

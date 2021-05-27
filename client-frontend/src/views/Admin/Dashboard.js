@@ -79,7 +79,7 @@ export default function Dashboard(admin) {
               <CardIcon color="warning">
                 <ContactSupportIcon />
               </CardIcon>
-              <p className={classes.cardCategory}>Pending Help</p>
+              <p className={classes.cardCategory}>Total Help Asked</p>
               <h3 className={classes.cardTitle}>
               {!admin ? <LinearProgress/> : <Typography>{admin.admin?.totalHelp} <small>Mail</small> </Typography> }
               </h3>
@@ -89,8 +89,8 @@ export default function Dashboard(admin) {
                 
                   <Warning color="error" />
                 
-                <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                  Help Them Now!
+                <a href="/contact-us/view">
+                  Pending Help Here!
                 </a>
               </div>
             </CardFooter>

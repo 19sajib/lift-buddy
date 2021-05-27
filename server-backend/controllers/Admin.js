@@ -3,6 +3,7 @@ const Verification = require('../models/Verification')
 const Report = require('../models/Report')
 const Post = require('../models/postMessage')
 const Admin = require('../models/Admin.js')
+const Help = require('../models/Help.js')
 
 const { MJ_APIKEY_PRIVATE, MJ_APIKEY_PUBLIC } = require('../config/keys.js')
 
@@ -169,6 +170,83 @@ const adminDashboardReport = async (req, res) => {
 
 }
 
+const adminDashboardHelp = async (req, res) => {
+        const { mail, message } = req.body;
+  try {
+      const help = await Help.create({ mail, message, createdAt: new Date()})
+      const admin = await Admin.findOneAndUpdate({ _id: "60aa628a829ead2cf45bfa0f" }, { $inc: { totalHelp: 1 }}, { new: true })
+
+      res.status(200).json({ message: 'We have recived your query. we will get back to you soon!' })
+      
+  } catch (error) {
+      res.status(500).json({message: "Internal Server Error. Please, try again later!"})
+  }
+
+}
+
+const adminDashboardHelpView = async (req, res) => {
+
+  try {
+      const help = await Help.find({isSolved: false}).sort({createdAt: 1})
+
+      res.status(200).json({ help })
+      
+  } catch (error) {
+      console.log(error);
+      res.status(500).json({message: "Internal Server Error"})
+  }
+
+}
+
+const adminDashboardHelpReply = async (req, res) => {
+        const { id, replyMessage } = req.body;
+  try {
+      const help = await Help.findByIdAndUpdate({_id: id},{ replyMessage, isSolved: true, replayedAt: new Date() }, {new: true})
+      console.log(help);
+      const mail = help.mail;
+      const msg = help.message;
+
+      const request = mailjet.post("send").request({
+        "Messages":[
+          {
+            "From": {
+              "Email": "contact2sajib@gmail.com",
+              "Name": "Abu"
+            },
+            "To": [
+              {
+                "Email": mail,
+                "Name": "Mr/Mrs"
+              }
+            ],
+            "Subject": "Last Spot Bd - Here is your answer.",
+            "TextPart": "Your question has been answered.",
+            "HTMLPart": `<h3 align="center" > Your question was: ${msg} </h3>
+                         <br /> <h3 align="center" style="color:green;">Here is our response: ${replyMessage}</h3>
+                         <br />Still Need help? Then reply in this mail.
+                         <br />Have a nice day!`,
+            "CustomID": "AppGettingStartedTest"
+          }
+        ]
+      })
+      request.then((result) => { console.log(result.body)})
+        .catch((err) => {
+          console.log(err.statusCode)
+          console.log(err)
+        })
+    
+
+
+      res.status(200).json({ message: "We have sent an email to the user with your response." })
+      
+  } catch (error) {
+     // console.log(error);
+      res.status(500).json({message: "Internal Server Error. Please, try again later."})
+  }
+
+}
+
 
 module.exports = { adminDashboard, adminDashboardPost, adminDashboardUser, 
-    adminDashboardVerification, adminDashboardReport, adminDashboardVerificationResponse }
+    adminDashboardVerification, adminDashboardReport, adminDashboardVerificationResponse,
+    adminDashboardHelp, adminDashboardHelpView, adminDashboardHelpReply  }

@@ -19,6 +19,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Fab from '@material-ui/core/Fab';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import LiveHelpIcon from '@material-ui/icons/LiveHelp';
 
 import BackToTop from "./BackToTop"
 
@@ -185,7 +186,7 @@ export default function NewNavbar () {
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
-     user ? (
+
     <Menu
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -195,6 +196,15 @@ export default function NewNavbar () {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
+     {user ? ( <div>
+      <MenuItem onClick={handleMenuClose} component={Link} to="/contact-us" >
+        <IconButton aria-label="show 11 new notifications" color="inherit">
+          {/* <Badge badgeContent={11} color="secondary"> */}
+            <LiveHelpIcon />
+          {/* </Badge> */}
+        </IconButton>
+        <p>Contact Us</p>
+      </MenuItem>
       <MenuItem onClick={handleMenuClose} component={Link} to="/chat-dashboard" >
         <IconButton aria-label="show 4 new mails" color="inherit">
           {/* <Badge badgeContent={4} color="secondary"> */}
@@ -202,14 +212,6 @@ export default function NewNavbar () {
           {/* </Badge> */}
         </IconButton>
         <p>Inbox</p>
-      </MenuItem>
-      <MenuItem onClick={handleMenuClose} >
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          {/* <Badge badgeContent={11} color="secondary"> */}
-            <NotificationsIcon />
-          {/* </Badge> */}
-        </IconButton>
-        <p>Notifications</p>
       </MenuItem>
       <MenuItem onClick={handleMenuClose} >
         <IconButton
@@ -226,12 +228,20 @@ export default function NewNavbar () {
       <MenuItem onClick={handleMenuClose} >
       <Button variant="outlined" color="secondary" onClick={signOut}>Logout</Button>
       </MenuItem>
-    </Menu>
+      </div>
     ) 
-    : (
-    // <Button component={Link} to="/auth" variant="contained" color="primary">Sign In</Button>
-    <></>
-                   )
+    : (<div>
+      <MenuItem onClick={handleMenuClose} component={Link} to="/contact-us" >
+      <IconButton aria-label="show 11 new notifications" color="inherit">
+          <LiveHelpIcon />
+      </IconButton>
+      <p>Contact Us</p>
+    </MenuItem>
+    <MenuItem onClick={handleMenuClose} >
+   <Button component={Link} to="/auth" variant="contained" color="primary">Sign In</Button>
+   </MenuItem>
+    </div>               )}
+                   </Menu>
   );
 
   return (
@@ -259,8 +269,8 @@ export default function NewNavbar () {
               </Badge>
               <p>Inbox</p>
             </IconButton> */}
+            <Button component={Link} to="/contact-us" endIcon={<LiveHelpIcon />} >Contact Us</Button>
             <Button component={Link} to="/chat-dashboard" endIcon={<MailIcon />} >Inbox</Button>
-            <Button endIcon={<NotificationsIcon />} >Alret</Button>
             {/* <IconButton aria-label="show 17 new notifications" color="inherit">
               <Badge badgeContent={17} color="secondary">
                 <NotificationsIcon />
@@ -296,8 +306,26 @@ export default function NewNavbar () {
                      </div>
                          
                        </div>
-                   ) : (
-                       <Button component={Link} to="/auth" variant="contained" color="primary">Sign In</Button>
+                   ) : ( 
+                    <div className={classes.profile}>
+                   <div className={classes.sectionDesktop}>
+                    <Button component={Link} to="/contact-us" endIcon={<LiveHelpIcon />} >Contact Us</Button>
+                    <Button component={Link} to="/auth" variant="contained" color="primary">Sign In</Button>
+                   </div>
+                   <div className={classes.sectionMobile}>
+                    <IconButton
+                      edge="end"
+                      aria-label="show more"
+                      aria-controls={mobileMenuId}
+                      aria-haspopup="true"
+                      onClick={handleMobileMenuOpen}
+                      color="inherit"
+                    >
+                      <MenuIcon />
+                      {/* <MoreIcon  /> */}
+                    </IconButton>
+                     </div>
+                   </div>
                    )}
         </Toolbar>
       </AppBar>
