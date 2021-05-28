@@ -13,7 +13,7 @@ import { useDispatch } from 'react-redux'
 import { deletePost, likePost } from '../../../actions/posts'
 import { isAuthenticated } from '../../../auth/auth'
 import useStyles from './styles'
-import Directions from '../../Posts/Map/MapDirection';
+import Directions from '../../../components/Posts/Map/Direction';
 
 
 const Post = ({ post, setCurrentId }) => {
@@ -65,54 +65,25 @@ const Post = ({ post, setCurrentId }) => {
                 <Typography variant="h6">{post.name}</Typography>
                 <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
             </div>
-            {(user?._id === post.creator) 
-                 &&
-                (<div className={classes.overlay2}>
-               <Button style={{color: 'white'}} size="small" onClick={() => setCurrentId(post._id)}>
-                   <MoreHorizIcon fontSize="default" color="secondary"/>
-               </Button>
-            </div>)}
             <div className={classes.details}>
             <Typography variant="body2" color="textSecondary" >Leaving At: { moment(post?.leavingTime).format('YYYY-MM-DD hh:mm A') }</Typography>  
             </div>
-            <Typography className={classes.title} variant="h5" gutterBottom>I am leaving for {post.destination} from {post.source}, wanna join me?</Typography>  
-            
-            <CardContent>
-                  <Button disabled variant="outlined" color="primary" onClick={handleClickOpen}>Wanna See The Possible Route?</Button>
-                  <Dialog disableBackdropClick disableEscapeKeyDown open={open} onClose={handleClose}>
-                  <DialogContent>
-                  <Directions origin={post.source} destination={post.destination} />  
-                  </DialogContent>
-                  <DialogActions>
-                    <Button onClick={handleClose} color="primary">
-                      Close
-                    </Button>
-                  </DialogActions>
-                  </Dialog>
-            </CardContent>
+            <Typography className={classes.title} variant="h6">I am leaving for {post.destination} from {post.source}, wanna join me?</Typography>  
             <Typography className={classes.infoLine} variant="body2" >Note: {post?.message} </Typography>
-            <div className={classes.infoLine}>
+            {/* <div className={classes.infoLine}>
             <ListIcon color="secondary" />Only {post?.guest} Person Can Go!
             </div>
               
             <div className={classes.infoLine}>
                     <GuestList />
-            </div>
+            </div> */}
 
             <CardActions className={classes.cardActions}>
                     <Likes />
-                {(user?._id === post.creator)
-                 &&
-                (<Button size="small" color="secondary" disabled onClick={() => dispatch(deletePost(post._id))}>
+                <Button size="small" color="secondary" onClick={() => dispatch(deletePost(post._id))}>
                     <DeleteIcon fontSize="small" />
                     Delete
-                </Button>)}
-                {(user?._id !== post.creator)
-                 &&
-                (<Button size="small" color="secondary" disabled >
-                <ReportIcon fontSize="small" />
-                Report
-            </Button>)}
+                </Button>
             </CardActions>
         </Card>      
     )

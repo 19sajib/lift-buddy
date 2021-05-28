@@ -17,6 +17,18 @@ const getPosts = async (req, res) => {
        res.status(400).json({ message: error.message}) 
     } 
 };
+
+const getPost = async (req, res) => {
+    const { postId2 } = req.body;
+    try {
+        const post = await PostMessage.findOne({_id: postId2})
+        //console.log(postMessage);
+        res.status(200).json(post)
+    } catch (error) {
+       res.status(400).json({ message: error.message}) 
+    } 
+};
+
 const createPost = async (req, res) => {
     const post = req.body;
 
@@ -125,12 +137,12 @@ const meAsGuest = async(req, res) => {
 }
 
 const reportPost = async(req, res) => {
-    const { reportedBy, reportedPost, reportedText } = req.body;
+    const { reportedBy, reportedPost, reportedText, postOwner } = req.body;
     //console.log(req.body);
 
     try {
 
-        const report = await Report.create({ reportedBy, reportedPost, reportedText, createdAt: new Date() })
+        const report = await Report.create({ reportedBy, reportedPost, reportedText, postOwner, createdAt: new Date() })
         const admin = await Admin.findOneAndUpdate({ _id: "60aa628a829ead2cf45bfa0f" }, { $inc: { totalReport: 1 }}, { new: true })
         res.status(200).json({report, message: "We have captured your report, We will let you know further update via email. Thank You for your report."})
         
@@ -140,4 +152,4 @@ const reportPost = async(req, res) => {
     }
 }
 
-module.exports = { getPosts, createPost, updatePost, deletePost, likePost, reportPost, meAsGuest }
+module.exports = { getPost, getPosts, createPost, updatePost, deletePost, likePost, reportPost, meAsGuest }

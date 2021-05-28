@@ -160,13 +160,137 @@ const adminDashboardVerificationResponse = async (req, res) => {
 const adminDashboardReport = async (req, res) => {
 
     try {
-        const reports = await Report.find()
-
+        const reports = await Report.find({isSolved: false}).sort({createdAt: 1})
+        console.log(reports);
         res.status(200).json({ reports })
         
     } catch (error) {
         res.status(500).json({message: "Internal Server Error"})
     }
+
+}
+
+const adminDashboardReportResponse = async (req, res) => {
+          const { postId, postOwnerId, reporterId, deletePost, response } = req.body;
+  try {
+    if (deletePost === "no") {
+      const reports = await Report.findOneAndUpdate({reportedPost: postId}, { isSolved: true, response }, { new: true })
+      const reporter = await User.findById({_id: reporterId})
+      console.log(reporter);
+      const mail = reporter.email
+      const name = reporter.name
+
+      const request = mailjet.post("send").request({
+        "Messages":[
+          {
+            "From": {
+              "Email": "contact2sajib@gmail.com",
+              "Name": "Abu"
+            },
+            "To": [
+              {
+                "Email": mail,
+                "Name": name
+              }
+            ],
+            "Subject": "Last Spot Bd - We have checked your report.",
+            "TextPart": "Your report has been resolved.",
+            "HTMLPart": `<h3 align="center" > You had make a report on a post with id: ${postId} </h3>
+                         <br /> <h3 align="center" style="color:green;">Here is our response: ${response}</h3>
+                         <br />Still Need help? Then reply in this mail.
+                         <br />Have a nice day!`,
+            "CustomID": "AppGettingStartedTest"
+          }
+        ]
+      })
+      request.then((result) => { console.log(result.body)})
+        .catch((err) => {
+          console.log(err.statusCode)
+          console.log(err)
+        })
+    
+
+
+      res.status(200).json({ message: "We have sent an email to the reporter with your response." })
+
+    } else {
+      
+      const reports = await Report.findOneAndUpdate({reportedPost: postId}, { isSolved: true, response }, { new: true })
+      const reporter = await User.findById({_id: reporterId})
+      const mail = reporter.email
+      const name = reporter.name
+      const postOwner = await User.findById({_id: postOwnerId})
+      const ownerMail = postOwner.email
+      const OwnerName = postOwner.name
+      //console.log(reporter);
+
+      const request = mailjet.post("send").request({
+        "Messages":[
+          {
+            "From": {
+              "Email": "contact2sajib@gmail.com",
+              "Name": "Abu"
+            },
+            "To": [
+              {
+                "Email": mail,
+                "Name": name
+              }
+            ],
+            "Subject": "Last Spot Bd - We have checked your report & deleted the post.",
+            "TextPart": "Your report has been resolved.",
+            "HTMLPart": `<h3 align="center" > You had make a report on a post with id: ${postId} </h3>
+                         <br /> <h3 align="center" style="color:green;">Here is our response: ${response}</h3>
+                         <br />Still Need help? Then reply in this mail.
+                         <br />Have a nice day!`,
+            "CustomID": "AppGettingStartedTest"
+          }
+        ]
+      })
+      request.then((result) => { console.log(result.body)})
+        .catch((err) => {
+          console.log(err.statusCode)
+          console.log(err)
+        })
+
+    const request2 = mailjet.post("send").request({
+          "Messages":[
+            {
+              "From": {
+                "Email": "contact2sajib@gmail.com",
+                "Name": "Abu"
+              },
+              "To": [
+                {
+                  "Email": ownerMail,
+                  "Name": OwnerName
+                }
+              ],
+              "Subject": "Last Spot Bd - We had a report against one of your post & we deleted the post.",
+              "TextPart": "We had a report against one of your post.",
+              "HTMLPart": `<h3 align="center" > We have received a report on a post of your with id: ${postId} </h3>
+                           <br /> <h3 align="center" style="color:green;">Here is our reason to delete it: ${response}</h3>
+                           <br />Still Need help? Then reply in this mail.
+                           <br />Have a nice day!`,
+              "CustomID": "AppGettingStartedTest"
+            }
+          ]
+        })
+        request.then((result) => { console.log(result.body)})
+          .catch((err) => {
+            console.log(err.statusCode)
+            console.log(err)
+          })
+      
+
+
+      res.status(200).json({ message: "We have sent an email to the reporter & post owner with your response." })
+
+    }
+      
+  } catch (error) {
+      res.status(500).json({message: "Internal Server Error"})
+  }
 
 }
 
@@ -249,4 +373,4 @@ const adminDashboardHelpReply = async (req, res) => {
 
 module.exports = { adminDashboard, adminDashboardPost, adminDashboardUser, 
     adminDashboardVerification, adminDashboardReport, adminDashboardVerificationResponse,
-    adminDashboardHelp, adminDashboardHelpView, adminDashboardHelpReply  }
+    adminDashboardHelp, adminDashboardHelpView, adminDashboardHelpReply , adminDashboardReportResponse }

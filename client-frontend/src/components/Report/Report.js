@@ -24,10 +24,10 @@ const Report = () => {
     const post = posts.filter(obj => {
         return obj?._id === id
       })
-
+      console.log(post);
       const handleSubmit = async (e) => {
         e.preventDefault();
-        dispatch(postReport({ReportData:{ reportedPost: id, reportedBy: user._id, reportedText }, history}))
+        dispatch(postReport({ReportData:{ reportedPost: id, reportedBy: user._id, reportedText, postOwner: post[0].creator }, history}))
 
     }
     React.useEffect(() => {

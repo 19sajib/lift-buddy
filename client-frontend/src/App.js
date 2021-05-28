@@ -21,6 +21,7 @@ import ContactUsHelp from './views/ContactHelp/Index'
 import Terms from './legal/terms'
 import AdminPanel from './views/Admin/Index'
 import UserVerification from './views/UserVerification/Index'
+import ReportResponse from './views/ReportResponse/Index'
  
 
 import { isAuthenticated } from './auth/auth'
@@ -83,7 +84,8 @@ function App () {
               <Route path="/accountactivation/:token" component={AccountActivation}/>
               <Route path="/forget-password" exact component={ForgetPassword}/>
               <Route path="/reset-password/:token" component={ResetPassword}/>
-              <Route path="/report/:id" component={Report}/>
+              <Route path="/report/:id" exact component={Report}/>
+              <Route path="/report-response" exact component={ReportResponse}/>
               <Route path="/chat-dashboard" render={() => <ChatDashboard socket={socket} />} exact />
               <Route path="/chatroom/:id" render={() => <ChatRoom socket={socket} />} exact />
           </Switch>

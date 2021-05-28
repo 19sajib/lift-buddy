@@ -11,6 +11,11 @@ const reportSchema = new mongoose.Schema({
         required: "PostId is required!",
         ref: "PostMessage",
     },
+    postOwner: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: "UserId is required!",
+        ref: "User",
+      },
     reportedText: {
         type : String
     },
@@ -22,6 +27,9 @@ const reportSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
       },
+    reponse: {
+      type: String
+    }  
 })
 
 const Report = mongoose.model('Report', reportSchema)

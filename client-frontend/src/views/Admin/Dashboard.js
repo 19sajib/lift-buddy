@@ -66,7 +66,7 @@ export default function Dashboard(admin) {
             <CardFooter stats>
               <div className={classes.stats}>
                 <ReportProblemIcon color="error"/>
-                <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                <a href="/report-response" >
                  Resolve Them Now!
                 </a>
               </div>
