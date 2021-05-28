@@ -25,6 +25,26 @@ const adminDashboard = async (req, res) => {
 
 }
 
+const adminDashboardTrafic = async (req, res) => {
+      const { trafic, desktopTrafic, tabletTrafic, mobileTrafic } = req.body;
+  try {
+
+    const traficData = {};
+    if(trafic) traficData.trafic = trafic;
+    if(desktopTrafic) traficData. desktopTrafic =  desktopTrafic;
+    if(tabletTrafic) traficData. tabletTrafic =  tabletTrafic;
+    if(mobileTrafic) traficData. mobileTrafic =  mobileTrafic;
+
+      const admin = await Admin.findOneAndUpdate({ _id: "60b1137d2fe6ed3438de8ed0" }, { $set: traficData }, { new: true })
+      console.log(admin);
+      res.status(200).json({admin, message: "Data updated & you can see it now."})
+      
+  } catch (error) {
+      res.status(500).json({message: "Internal Server Error"})
+  }
+
+}
+
 const adminDashboardPost = async (req, res) => {
 
     try {
@@ -113,7 +133,7 @@ const adminDashboardVerificationResponse = async (req, res) => {
             console.log(mail)
             const name = user[0].name ;
             const verify = await Verification.findOneAndUpdate({userId: userId}, { isSolved: true, idType, idValue}, { new: true })
-            const admin = await Admin.findOneAndUpdate({ _id: "60aa628a829ead2cf45bfa0f" }, { $inc: { verifiedUser: 1 }}, { new: true })
+            const admin = await Admin.findOneAndUpdate({ _id: "60b1137d2fe6ed3438de8ed0" }, { $inc: { verifiedUser: 1 }}, { new: true })
 
             const request = mailjet.post("send").request({
                 "Messages":[
@@ -298,7 +318,7 @@ const adminDashboardHelp = async (req, res) => {
         const { mail, message } = req.body;
   try {
       const help = await Help.create({ mail, message, createdAt: new Date()})
-      const admin = await Admin.findOneAndUpdate({ _id: "60aa628a829ead2cf45bfa0f" }, { $inc: { totalHelp: 1 }}, { new: true })
+      const admin = await Admin.findOneAndUpdate({ _id: "60b1137d2fe6ed3438de8ed0" }, { $inc: { totalHelp: 1 }}, { new: true })
 
       res.status(200).json({ message: 'We have recived your query. we will get back to you soon!' })
       
@@ -373,4 +393,5 @@ const adminDashboardHelpReply = async (req, res) => {
 
 module.exports = { adminDashboard, adminDashboardPost, adminDashboardUser, 
     adminDashboardVerification, adminDashboardReport, adminDashboardVerificationResponse,
-    adminDashboardHelp, adminDashboardHelpView, adminDashboardHelpReply , adminDashboardReportResponse }
+    adminDashboardHelp, adminDashboardHelpView, adminDashboardHelpReply , adminDashboardReportResponse,
+    adminDashboardTrafic }

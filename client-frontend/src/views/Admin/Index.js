@@ -79,7 +79,7 @@ const Index = (result) => {
         </Box>
         <Dashboard admin={admin} />
         <Grid container spacing={3} >
-        <Grid
+        {/* <Grid
             item
             lg={8}
             md={12}
@@ -87,7 +87,7 @@ const Index = (result) => {
             xs={12}
           >
             <DailyPost />
-          </Grid>
+          </Grid> */}
           <Grid
             item
             lg={4}

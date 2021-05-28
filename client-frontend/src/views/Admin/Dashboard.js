@@ -110,7 +110,9 @@ export default function Dashboard(admin) {
             <CardFooter stats>
               <div className={classes.stats}>
                 <Update />
-                Last Update 24 Hours Ago
+                <a href="/trafic/update">
+                  Update Now!
+                </a>
               </div>
             </CardFooter>
           </Card>

@@ -54,7 +54,7 @@ const createPost = async (req, res) => {
           const newPost = new PostMessage({...post,chatroomId: chatroom._id, hideAfter, createdAt: new Date().toISOString() })
           try {
               await newPost.save();
-              const admin = await Admin.findOneAndUpdate({ _id: "60aa628a829ead2cf45bfa0f" }, { $inc: { totalPost: 1 }}, { new: true })
+              const admin = await Admin.findOneAndUpdate({ _id: "60b1137d2fe6ed3438de8ed0" }, { $inc: { totalPost: 1 }}, { new: true })
               //console.log(newPost);
               res.status(201).json({newPost, message: "Your post created successfully"})
             } catch (error) {
@@ -143,7 +143,7 @@ const reportPost = async(req, res) => {
     try {
 
         const report = await Report.create({ reportedBy, reportedPost, reportedText, postOwner, createdAt: new Date() })
-        const admin = await Admin.findOneAndUpdate({ _id: "60aa628a829ead2cf45bfa0f" }, { $inc: { totalReport: 1 }}, { new: true })
+        const admin = await Admin.findOneAndUpdate({ _id: "60b1137d2fe6ed3438de8ed0" }, { $inc: { totalReport: 1 }}, { new: true })
         res.status(200).json({report, message: "We have captured your report, We will let you know further update via email. Thank You for your report."})
         
     } catch (error) {

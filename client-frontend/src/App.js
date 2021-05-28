@@ -22,6 +22,7 @@ import Terms from './legal/terms'
 import AdminPanel from './views/Admin/Index'
 import UserVerification from './views/UserVerification/Index'
 import ReportResponse from './views/ReportResponse/Index'
+import Trafic from './views/trafic/Index'
  
 
 import { isAuthenticated } from './auth/auth'
@@ -75,6 +76,7 @@ function App () {
               <Route path="/terms-and-conditions" exact component={Terms}/>
               <Route path="/proHome" exact component={proHome}/>
               <Route path="/auth" exact component={Auth}/>
+              <Route path="/trafic/update" exact component={Trafic}/>
               <Route path="/verification" exact component={Verify}/>
               <Route path="/contact-us" exact component={ContactUs}/>
               <Route path="/contact-us/view" exact component={ContactUsHelp}/>
