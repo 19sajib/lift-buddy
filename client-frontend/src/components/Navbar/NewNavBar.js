@@ -8,14 +8,12 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
-import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Avatar, Button } from '@material-ui/core';
 import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
+import PostAddIcon from '@material-ui/icons/PostAdd';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Fab from '@material-ui/core/Fab';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
@@ -23,7 +21,7 @@ import LiveHelpIcon from '@material-ui/icons/LiveHelp';
 
 import BackToTop from "./BackToTop"
 
-import logo from '../../images/name.png'
+import logo from '../../images/logo.png'
 import { isAuthenticated, logout } from '../../auth/auth'
 import { LOGOUTALRET } from '../../constants/actionTypes'
 
@@ -256,9 +254,10 @@ export default function NewNavbar () {
             aria-label="open drawer"
           >
           <Link to="/">
-                <img className={classes.image} src={logo} alt="logo" height="50" />
+                <img className={classes.image} src={logo} alt="logo" height="70" />
            </Link>
           </IconButton>
+          <Button component={Link} to="/posts" endIcon={<PostAddIcon/>} >Posts</Button>
           <div className={classes.grow} />
           { user ? (
             <div className={classes.profile}>

@@ -24,6 +24,7 @@ import UserVerification from './views/UserVerification/Index'
 import ReportResponse from './views/ReportResponse/Index'
 import Trafic from './views/trafic/Index'
 import Main from './components/Main/Index'
+import Footer from './components/Footer/Index'
  
 
 import { isAuthenticated } from './auth/auth'
@@ -94,6 +95,7 @@ function App () {
               <Route path="/chat-dashboard" render={() => <ChatDashboard socket={socket} />} exact />
               <Route path="/chatroom/:id" render={() => <ChatRoom socket={socket} />} exact />
           </Switch>
+          <Footer />
           <ToastContainer autoClose={3000} transition={Bounce}/>
       </Container>
   </BrowserRouter>
