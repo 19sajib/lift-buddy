@@ -23,6 +23,7 @@ import AdminPanel from './views/Admin/Index'
 import UserVerification from './views/UserVerification/Index'
 import ReportResponse from './views/ReportResponse/Index'
 import Trafic from './views/trafic/Index'
+import Main from './components/Main/Index'
  
 
 import { isAuthenticated } from './auth/auth'
@@ -72,7 +73,7 @@ function App () {
           <NavbarNew /> */}
           <NewNavbar />
           <Switch>
-              <Route path="/" exact component={()=> <Redirect to="/posts" /> }/>
+              <Route path="/" exact component={Main }/>
               <Route path="/posts" exact component={Home}/>
               <Route path="/posts/search" exact component={Home} />
               <Route path="/terms-and-conditions" exact component={Terms}/>
