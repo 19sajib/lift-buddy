@@ -1,5 +1,5 @@
 import React from "react";
-
+import { useHistory } from 'react-router-dom'
 // @material-ui/core
 import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
@@ -21,10 +21,18 @@ import CardFooter from "../../components/Admin/Card/CardFooter.js";
 import styles from "./dashboardStyle.js";
 import { LinearProgress, Typography } from "@material-ui/core";
 
+import { isAuthenticated } from '../../auth/auth'
+
 const useStyles = makeStyles(styles);
 
 export default function Dashboard(admin) {
   const classes = useStyles();
+  const history = useHistory()
+  const { user } = isAuthenticated()
+
+  if(!user?.isAdmin) {
+    history.push('/')
+  }
 
   return (
     <div>

@@ -79,7 +79,7 @@ function App () {
               <Route path="/posts/search" exact component={Home} />
               <Route path="/terms-and-conditions" exact component={Terms}/>
               <Route path="/proHome" exact component={proHome}/>
-              <Route path="/auth" exact component={()=> (!user ? <Auth /> : <Redirect to="/posts" /> )}/>
+              <Route path="/auth" exact component={Auth}/>
               <Route path="/trafic/update" exact component={Trafic}/>
               <Route path="/verification" exact component={Verify}/>
               <Route path="/contact-us" exact component={ContactUs}/>

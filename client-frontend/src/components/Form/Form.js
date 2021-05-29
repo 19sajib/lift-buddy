@@ -3,7 +3,7 @@ import { TextField, Button, Typography, Paper, FormControl , InputLabel, Select,
 //import Autocomplete from '@material-ui/lab/Autocomplete';
 import FileBase from 'react-file-base64'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import moment from 'moment'
 // import Autocomplete, { usePlacesWidget } from 'react-google-autocomplete';
 import Auto from './useAutocomplete'
@@ -68,12 +68,12 @@ const Form = ({ currentId, setCurrentId }) => {
 
 
 
-    if(!user?.name) {
+    if(!user?.isVerified) {
         return (
             <Paper className={classes.paper}>
-                <Typography variant="h6" align="center">
-                    Please Sign In to became a Host or to became a Guest.
-                </Typography>
+                <Link to="/verification"> <Typography variant="h6" align="center">
+                    Please Verify your profile to became a Host or to became a Guest.
+                </Typography></Link>
             </Paper>
         )
     }

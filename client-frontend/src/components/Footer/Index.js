@@ -4,16 +4,16 @@ import './index.css'
 const Index = () => {
     return (
         <div className="App">
-            <div class="inner_footer container">
+            <div className="inner_footer container">
 
-<div class="child_footer">
+<div className="child_footer">
 <h3>LIFT-BUDDY</h3>
 <p> Your ride hacker</p>
 <p>We are here for you 24/7.</p>
 
 </div>
 
-<div class="child_footer">
+<div className="child_footer">
   <h3>IMPORTANT LINKS</h3>
   <ul>
     <li><a href="/">Home Page</a></li>
@@ -23,7 +23,7 @@ const Index = () => {
     <li><a href="/auth">Sign In / Up</a></li>
   </ul>
 </div>
-<div class="child_footer">
+<div className="child_footer">
   <h3>QUICK LINKS</h3>
   <ul>
     <li><a href="/contact-us">Contact Us</a></li>
@@ -35,11 +35,11 @@ const Index = () => {
 </div>
 
 <section id="copyright_area">
-          <div class="inner_copyright container">
-              <div class="left_copyright">
+          <div className="inner_copyright container">
+              <div className="left_copyright">
                    <p>Copyright © 2021 Lift-Buddy - All Rights Reserved</p>
               </div>
-              <div class="right_copyright">
+              <div className="right_copyright">
                    <p>MERN Project by Sajib</p>
               </div>
           </div>

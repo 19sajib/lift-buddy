@@ -2,8 +2,18 @@ import React from 'react'
 import Axios from 'axios'
 import Help from './Help'
 import { CircularProgress, Divider, Typography } from '@material-ui/core'
+import {useHistory} from 'react-router-dom'
+
+import { isAuthenticated } from '../../auth/auth'
 
 const Index = () => {
+
+  const history = useHistory()
+  const {user} = isAuthenticated()
+
+  if(!user?.isAdmin) {
+    history.push('/')
+  }
     const [empty, setEmpty] = React.useState(false)
     const [data, setData] = React.useState()
     const [sortData, setSortData] = React.useState([])

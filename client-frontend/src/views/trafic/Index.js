@@ -2,9 +2,11 @@ import React from 'react'
 import { useHistory } from 'react-router-dom'
 import Axios from 'axios'
 import { makeStyles } from '@material-ui/core/styles'
-import { Button, Typography, Divider, TextField, FormHelperText } from '@material-ui/core/';
+import { Button, Typography, Divider, TextField } from '@material-ui/core/';
 import red from "@material-ui/core/colors/red";
 import { toast } from "react-toastify";
+
+import { isAuthenticated } from '../../auth/auth'
 
 const useStyles = makeStyles((theme) => ({
         head: {
@@ -31,6 +33,12 @@ const useStyles = makeStyles((theme) => ({
 const Index = () => {
     const classes = useStyles();
     const history = useHistory()
+    const {user} = isAuthenticated()
+
+    if(!user?.isAdmin) {
+      history.push('/')
+    }
+    
     const [trafic, setTrafic] = React.useState()
     const [desktopTrafic, setDesktopTrafic] = React.useState()
     const [tabletTrafic, setTabletTrafic] = React.useState()
@@ -56,7 +64,7 @@ const Index = () => {
 
     return (
         <div className={classes.root}>
-            <Typography color="secondary" variant="h4" align="center" >Update Trafic No?</Typography>
+            <Typography color="secondary" variant="h4" align="center" >Update Trafic Now!</Typography>
             <Divider variant="middle" />
             
         <div className={classes.head} >

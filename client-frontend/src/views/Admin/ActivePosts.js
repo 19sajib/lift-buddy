@@ -33,12 +33,12 @@ import {
             >
               Active Posts
             </Typography>
-            {!posts.length ? <LinearProgress /> :
+            {!posts?.length ? <LinearProgress /> :
             <Typography
               color="textPrimary"
               variant="h3"
             >
-              {posts.length}
+              {posts?.length}
             </Typography>}
           </Grid>
           <Grid item>

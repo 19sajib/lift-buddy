@@ -1,6 +1,6 @@
 import React from "react";
 import Axios from "axios";
-import { withRouter } from "react-router-dom";
+import { withRouter, useHistory } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import moment from 'moment'
 import ReactEmoji from 'react-emoji';
@@ -13,6 +13,10 @@ import './chat.css'
 
 const ChatRoom = ({ match, socket }) => {
   const { token, user } = isAuthenticated()
+  const history = useHistory()
+  if(!user) {
+    history.push('/')
+  }
   const chatroomId = match.params.id;
   const [chatRoomData, setChatRoomData] = React.useState();
   const [messages, setMessages] = React.useState([]);

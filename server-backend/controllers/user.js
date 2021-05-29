@@ -198,8 +198,8 @@ const googleSignIn = async (req, res) => {
                               } else {
                                     if (user) {
                                       const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, { expiresIn: "1h" })
-                                      const { _id, email, name, avatar } = user
-                                      res.status(200).json({ result: {_id, name, email, avatar}, token, message: "Logged In successfully."})
+                                      const { _id, email, name, avatar, isAdmin, isVerified } = user
+                                      res.status(200).json({ result: user, token, message: "Logged In successfully."})
                                     } else {
                                       const password = email+process.env.JWT_PASSWORD_KEY;
                                       const hashedPassword = await bcrypt.hash(password, 12);

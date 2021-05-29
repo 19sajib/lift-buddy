@@ -15,18 +15,24 @@ import Input from './Input';
 import useStyles from './styles';
 import { FB_APP_ID, GOOGLE_CLIENT_ID } from '../../config/keys';
 import { signin, signup, googleSignIn, facebookSignIn } from '../../actions/auth'
+import { isAuthenticated } from '../../auth/auth'
 
 
 const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: ''}
 
 const Auth = () => {
     const classes = useStyles()
+    const history = useHistory()
+    const { user } = isAuthenticated()
+  
+    if(user) {
+      history.push('/')
+    }
 
     const [showPassword, setShowPassword] = useState(false)
     const [isSignup, setIsSignup] = useState(false)
     const [formData, setFormData] = useState(initialState)
     const dispatch = useDispatch()
-    const history = useHistory()
 
     const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword )
 

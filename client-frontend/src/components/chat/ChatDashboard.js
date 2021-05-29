@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import moment from 'moment';
-import { Link } from "react-router-dom";
+import { Link, useHistory} from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
@@ -44,8 +44,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ChatDashboard = (props) => {
+  const history = useHistory()
   const { user } = isAuthenticated()
   const userId = user._id
+
+  if(!user) {
+    history.push('/')
+  }
 
   const classes = useStyles();
 

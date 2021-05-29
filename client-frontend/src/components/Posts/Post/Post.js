@@ -47,13 +47,13 @@ const Post = ({ post, setCurrentId }) => {
     const Likes = () => {
         if (post?.likes.find((like) => like === (user?._id))) {
           return (<>
-              <Button size="small" color="primary" disabled={!user} onClick={() => dispatch(likePost({postId: post._id, userId: user._id}))}>
+              <Button size="small" color="primary" disabled={!user?.isVerified} onClick={() => dispatch(likePost({postId: post._id, userId: user._id}))}>
                 <DepartureBoardIcon fontSize="small" />Cancle My Ride
                 </Button>
                 </>)
         }
         return (<>
-              <Button size="small" color="primary" disabled={!user || post.likes.length === post.guest} onClick={() => dispatch(likePost({postId: post._id, userId: user._id}))}>
+              <Button size="small" color="primary" disabled={!user?.isVerified || post.likes.length === post.guest} onClick={() => dispatch(likePost({postId: post._id, userId: user._id}))}>
                 <DepartureBoardIcon fontSize="small" />Confirm My Ride
                 </Button></>
             );
@@ -81,7 +81,7 @@ const Post = ({ post, setCurrentId }) => {
 
 
             <CardContent>
-                  <Button variant="outlined" color="primary" onClick={handleClickOpen}>Wanna See The Possible Route?</Button>
+                  <Button disabled={!user?.isVerified} variant="outlined" color="primary" onClick={handleClickOpen}>Wanna See The Possible Route?</Button>
                   <Dialog disableBackdropClick disableEscapeKeyDown open={open} onClose={handleClose}>
                   <DialogContent>
                   <Directions origin={post.source} destination={post.destination} />  
@@ -107,9 +107,10 @@ const Post = ({ post, setCurrentId }) => {
               <List>
                 <ListItem>
                   <ListItemText 
-                  primary="Note:"
-                  // primary={ <Typography color="secondary" variant="h6" >Note:  </Typography>} 
-                  secondary={<Typography variant="body2" >{post?.message} </Typography>} />
+                  // primary="Note:"
+                   primary={ <Typography color="secondary" variant="h6" >Note: {post?.message} </Typography>} 
+                  // secondary={<Typography variant="body2" >{post?.message} </Typography>}
+                   />
                 </ListItem>
                 <Divider variant="middle" />
               </List>
@@ -125,7 +126,7 @@ const Post = ({ post, setCurrentId }) => {
                 </Button>)}
                 {(user?._id !== post.creator)
                  &&
-                (<Button component={Link} to={"/report/"+post._id} size="small" color="secondary" disabled={!user} >
+                (<Button component={Link} to={"/report/"+post._id} size="small" color="secondary" disabled={!user?.isVerified} >
                 <ReportIcon fontSize="small" />
                   Report
                 </Button>)}
