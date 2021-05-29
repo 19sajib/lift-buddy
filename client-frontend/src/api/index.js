@@ -25,7 +25,8 @@ export const deletepropost = (id) => axios.post(`${PRO_API}/create-post`,id)
 // post
 const POST_API = 'http://localhost:8080';
 
-export const fetchPosts= () => axios.get(`${POST_API}/posts`)
+export const fetchPosts= (page) => axios.get(`${POST_API}/posts?page=${page}`)
+export const fetchPostsBySearch = (searchQuery) => axios.post(`${POST_API}/posts/search?searchQuery=${searchQuery.search || 'none'}`);
 export const createPost = (newPost) => axios.post(`${POST_API}/posts`, newPost)
 export const updatePost = (id, updatedPost) => axios.patch(`${POST_API}/posts/${id}`, updatedPost)
 export const deletePost = (id) => axios.delete(`${POST_API}/posts/${id}`)

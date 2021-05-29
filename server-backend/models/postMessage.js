@@ -8,6 +8,8 @@ const postSchema = mongoose.Schema({
     tags: [String],
     selectedFile: String,
     destination: String,
+    destPlaceId: String,
+    sourcePlaceId: String,
     source: String,
     guest: Number,
     chatroomId: String,

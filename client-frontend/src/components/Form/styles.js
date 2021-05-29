@@ -25,4 +25,8 @@ export default makeStyles((theme) => ({
     width: '94%',
     margin: '10px 0',
   },
+  icon: {
+    color: theme.palette.text.secondary,
+    marginRight: theme.spacing(2),
+  },
 }));

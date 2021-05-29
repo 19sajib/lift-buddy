@@ -1,12 +1,13 @@
 const express = require('express')
 
-const { getPost, getPosts, createPost, updatePost, deletePost, likePost, reportPost, meAsGuest } = require('../controllers/posts.js')
+const { getPostsBySearch, getPost, getPosts, createPost, updatePost, deletePost, likePost, reportPost, meAsGuest } = require('../controllers/posts.js')
 
 const auth = ('../middleware/auth.js')
 
 const router = express.Router()
 
 router.get('/', getPosts)
+router.post('/search', getPostsBySearch)
 router.post('/single-post', getPost)
 router.post('/', createPost)
 router.patch('/:id', updatePost)

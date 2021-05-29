@@ -12,7 +12,7 @@ import {
   
   const Budget = (props) => {
 
-  const posts = useSelector((state) => state.posts)
+  const {posts} = useSelector((state) => state.posts)
 
   return(
     <Card

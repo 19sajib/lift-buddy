@@ -16,6 +16,7 @@ export const UPDATE_PRO_POST = 'UPDATE_PRO_POST'
 export const DELETE_PRO_POST = 'DELETE_PRO_POST'
 export const READ_PRO_POST = 'READ_PRO_POST'
 export const REPOST_PRO_POST = 'REPORT_PRO_POST'
+export const FETCH_BY_SEARCH = 'FETCH_BY_SEARCH'
 
 // Something Else maybe 
 
@@ -41,3 +42,8 @@ export const ERROR = 'ERROR'
 export const WARN = 'WARN'
 export const INFO = 'INFO'
 export const LOGOUTALRET = 'LOGOUTALRET'
+export const CREATPOST = 'CREATPOST'
+
+//Loading Constant
+export const START_LOADING = 'START_LOADING'
+export const END_LOADING = 'END_LOADING'

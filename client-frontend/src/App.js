@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import { Container } from '@material-ui/core'
 import io from 'socket.io-client'
 
@@ -33,7 +33,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function App () {
 
-  const { token } = isAuthenticated()
+  const { token, user } = isAuthenticated()
 
   const [socket, setSocket] = React.useState(null);
 
@@ -72,10 +72,12 @@ function App () {
           <NavbarNew /> */}
           <NewNavbar />
           <Switch>
-              <Route path="/" exact component={Home}/>
+              <Route path="/" exact component={()=> <Redirect to="/posts" /> }/>
+              <Route path="/posts" exact component={Home}/>
+              <Route path="/posts/search" exact component={Home} />
               <Route path="/terms-and-conditions" exact component={Terms}/>
               <Route path="/proHome" exact component={proHome}/>
-              <Route path="/auth" exact component={Auth}/>
+              <Route path="/auth" exact component={()=> (!user ? <Auth /> : <Redirect to="/posts" /> )}/>
               <Route path="/trafic/update" exact component={Trafic}/>
               <Route path="/verification" exact component={Verify}/>
               <Route path="/contact-us" exact component={ContactUs}/>

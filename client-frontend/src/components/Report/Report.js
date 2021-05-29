@@ -18,7 +18,7 @@ const Report = () => {
     const [reportedText, setReportedText] = React.useState("")
     const {id} = useParams()
     console.log(id);
-    const posts = useSelector((state) => state.posts)
+    const {posts} = useSelector((state) => state.posts)
     console.log(posts);
     
     const post = posts.filter(obj => {

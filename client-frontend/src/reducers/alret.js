@@ -1,8 +1,11 @@
 import { toast } from "react-toastify";
-import { SUCCESS, ERROR, WARN, INFO, LOGOUTALRET } from '../constants/actionTypes'
+import { SUCCESS, ERROR, WARN, INFO, LOGOUTALRET,CREATPOST } from '../constants/actionTypes'
 // eslint-disable-next-line
 export default ( alret = [], action) => {
     switch(action.type) {
+        case CREATPOST:
+            toast.success("Your post created successfully")
+            return alret;
         case SUCCESS:
             //console.log(action?.data);
             toast.success(action?.data.message)

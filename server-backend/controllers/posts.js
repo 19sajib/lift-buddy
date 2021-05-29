@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const jwt = require('jsonwebtoken')
+const moment = require('moment')
 
 
 const PostMessage = require('../models/postMessage.js')
@@ -8,11 +9,22 @@ const Admin = require('../models/Admin.js')
 const ChatRoom = require('../models/Chatroom')
 const Report = require('../models/Report')
 
+const { MJ_APIKEY_PRIVATE, MJ_APIKEY_PUBLIC } = require('../config/keys.js')
+
+const mailjet = require ('node-mailjet')
+.connect(MJ_APIKEY_PUBLIC, MJ_APIKEY_PRIVATE)
+
 const getPosts = async (req, res) => {
+    const { page } = req.query;
+    
     try {
-        const postMessage = await PostMessage.find({hideAfter: { $gt:Date.now()}}).sort({hideAfter: 1})
-        //console.log(postMessage);
-        res.status(200).json(postMessage)
+        const LIMIT = 6;
+        const startIndex = (Number(page) - 1) * LIMIT; // get the starting index of every page
+    
+        const total = await PostMessage.countDocuments({});
+        const posts =await PostMessage.find({hideAfter: { $gt:Date.now()}}).sort({hideAfter: 1}).limit(LIMIT).skip(startIndex);
+
+        res.json({ data: posts, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT)});
     } catch (error) {
        res.status(400).json({ message: error.message}) 
     } 
@@ -56,8 +68,9 @@ const createPost = async (req, res) => {
               await newPost.save();
               const admin = await Admin.findOneAndUpdate({ _id: "60b1137d2fe6ed3438de8ed0" }, { $inc: { totalPost: 1 }}, { new: true })
               //console.log(newPost);
-              res.status(201).json({newPost, message: "Your post created successfully"})
+              res.status(201).json({data: newPost, message: "Your post created successfully"})
             } catch (error) {
+                console.log(error);
                 res.status(409).json({ message: error}) 
             }
         }
@@ -98,29 +111,99 @@ const likePost = async (req, res) =>{
 //console.log(user);
     const index = post.likes.findIndex((id) => id === String(userId));
 
-    if (index === -1) {
-        // like the post
-        post.likes.push(userId)
-        user.meAsGuest.push(postId)
-        chat.user.push(user._id)
-        chat.userName.push(user.name)
-        chat.userAvatar.push(user.avatar)
-        chat.showOrNot = true
-    } else {
-        // dislike post
-        post.likes = post.likes.filter((id) => id !== String(userId));
-        user.meAsGuest = user.meAsGuest.filter((id) => id !== String(postId));
-        chat.user = chat.user.filter((id)=> id !== String(user._id));
-        chat.userName = chat.userName.filter((name)=> name !== String(user.name));
-        chat.userAvatar = chat.userAvatar.filter((avatar)=> avatar !== String(user.avatar));
-        //console.log(user.meAsGuest);
-    }
+    try {
+        if (index === -1) {
+            // like the post
+            post.likes.push(userId)
+            user.meAsGuest.push(postId)
+            chat.user.push(user._id)
+            chat.userName.push(user.name)
+            chat.userAvatar.push(user.avatar)
+            chat.showOrNot = true
 
-    const updatedPost = await PostMessage.findByIdAndUpdate(id, post, { new: true})
-    const updateUser = await User.findOneAndUpdate({ _id: userId }, user, { new: true })
-    const updateChat = await ChatRoom.findOneAndUpdate({ _id: post.chatroomId}, chat, { new: true })
-    //console.log(user);
-    res.json({updatedPost, message: "Your ride has been confirmed."})
+            const updatedPost = await PostMessage.findByIdAndUpdate({_id : id}, post, { new: true})
+            const updateUser = await User.findOneAndUpdate({ _id: userId }, user, { new: true })
+            const updateChat = await ChatRoom.findOneAndUpdate({ _id: post.chatroomId}, chat, { new: true })
+            //console.log(user);
+
+            const request = mailjet.post("send").request({
+                "Messages":[
+                  {
+                    "From": {
+                      "Email": "contact2sajib@gmail.com",
+                      "Name": "Abu"
+                    },
+                    "To": [
+                      {
+                        "Email": user.email,
+                        "Name": user.name
+                      }
+                    ],
+                    "Subject": "Last Spot Bd - Your ride has been confirmed.",
+                    "TextPart": "Your ride has been confirmed.",
+                    "HTMLPart": `<h3 align="center" style="color:green;" >You have confirmed a ride with ${post.name}. Your can go ${post.source} to ${post.destination} with ${post.name}.</h3>
+                                 <br /> <h3 align="center" >Remindar: ${post.name} leaving at: ${moment(post.leavingAt).format('YYYY-MM-DD hh:mm A')}. Make sure you don't miss the ride. 
+                                 And you are now in a chat group with ${post.name}. You can discuss picking points and so more.</h3>
+                                 <br />Have a nice journey.
+                                 <br />Have a nice day!`,
+                    "CustomID": "AppGettingStartedTest"
+                  }
+                ]
+              })
+              request.then((result) => { console.log(result.body)})
+                .catch((err) => {
+                  console.log(err.statusCode)
+                  console.log(err)
+                })
+
+
+            res.status(201).json({message: "Your ride has been confirmed. For sure please check your email."})
+        } else {
+            // dislike post
+            post.likes = post.likes.filter((id) => id !== String(userId));
+            user.meAsGuest = user.meAsGuest.filter((id) => id !== String(postId));
+            chat.user = chat.user.filter((id)=> id !== String(user._id));
+            chat.userName = chat.userName.filter((name)=> name !== String(user.name));
+            chat.userAvatar = chat.userAvatar.filter((avatar)=> avatar !== String(user.avatar));
+            //console.log(user.meAsGuest);
+            const updatedPost = await PostMessage.findByIdAndUpdate({_id : id}, post, { new: true})
+            const updateUser = await User.findOneAndUpdate({ _id: userId }, user, { new: true })
+            const updateChat = await ChatRoom.findOneAndUpdate({ _id: post.chatroomId}, chat, { new: true })
+            //console.log(user);
+            const request = mailjet.post("send").request({
+                "Messages":[
+                  {
+                    "From": {
+                      "Email": "contact2sajib@gmail.com",
+                      "Name": "Abu"
+                    },
+                    "To": [
+                      {
+                        "Email": user.email,
+                        "Name": user.name
+                      }
+                    ],
+                    "Subject": "Last Spot Bd - Your ride has been canceled.",
+                    "TextPart": "Your ride has been canceled.",
+                    "HTMLPart": `<h3 align="center" style="color:red;" >You have canceled a ride with ${post.name}. </h3>
+                                 <br /> <h3 align="center" >Hope we will see you soon on another ride.</h3>
+                                 <br />Have a nice day!`,
+                    "CustomID": "AppGettingStartedTest"
+                  }
+                ]
+              })
+              request.then((result) => { console.log(result.body)})
+                .catch((err) => {
+                  console.log(err.statusCode)
+                  console.log(err)
+                })
+
+
+            res.status(201).json({message: "Your ride has been canceled. For sure please check your email."})
+        }
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 const meAsGuest = async(req, res) => {
@@ -152,4 +235,19 @@ const reportPost = async(req, res) => {
     }
 }
 
-module.exports = { getPost, getPosts, createPost, updatePost, deletePost, likePost, reportPost, meAsGuest }
+ const getPostsBySearch = async (req, res) => {
+  const { searchQuery } = req.query;
+//console.log(serchQuery);
+  try {
+      const destination = new RegExp(searchQuery, "i");
+
+      const posts = await PostMessage.find({ destination });
+
+      res.json({ data: posts });
+  } catch (error) {    
+    console.log(error);
+      res.status(404).json({ message: error.message });
+  }
+}
+
+module.exports = { getPost, getPosts, getPostsBySearch, createPost, updatePost, deletePost, likePost, reportPost, meAsGuest }

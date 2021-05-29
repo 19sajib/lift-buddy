@@ -1,21 +1,28 @@
-import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE, REPORT } from '../constants/actionTypes'
+import { FETCH_ALL, FETCH_BY_SEARCH, CREATE, UPDATE, DELETE, LIKE, REPORT } from '../constants/actionTypes'
 // eslint-disable-next-line
-export default ( posts = [], action) => {
+export default ( state = [], action) => {
     switch(action.type) {
         case DELETE:
-            return posts.filter((post) => post._id !== action.payload);
+            return {...state, posts: state.posts.filter((post) => post._id !== action.payload)}
         case UPDATE:
         case LIKE:
-            return posts.map((post) => post._id === action.payload._id ? action.payload : post );
+            return {...state, posts: state.posts.map((post) => post._id === action.payload._id ? action.payload : post )};
         case REPORT:
             //console.log(action.payload);
-            return posts;    
+            return state;    
         case FETCH_ALL:
-            console.log(action.payload);
-            return action.payload;
+                return {
+                  ...state,
+                  posts: action.payload.data,
+                  currentPage: action.payload.currentPage,
+                  numberOfPages: action.payload.numberOfPages,
+                };
+        case FETCH_BY_SEARCH:    
+            //console.log(action.payload);
+            return { ...state, posts: action.payload.data };
         case CREATE:
-            return [...posts, action.payload];
+            return {...state, posts: [...state.posts, action.payload.data]};
             default:
-            return posts;
+            return state;
     }
 }
