@@ -11,7 +11,7 @@ export const postReport = ({ReportData, history}) => async (dispatch) => {
         
         dispatch({ type: REPORT, payload: data })
         dispatch({ type: INFO, data })
-        history.push('/')
+        history.push('/posts')
 
     } catch (error) {
         console.log(error);
@@ -33,10 +33,10 @@ export const getPosts= (page) => async (dispatch) => {
 
 export const getPostsBySearch = (searchQuery) => async (dispatch) => {
     try {
-        console.log(searchQuery);
+       // console.log(searchQuery);
      // dispatch({ type: START_LOADING });
       const { data: { data } } = await api.fetchPostsBySearch(searchQuery);
-     console.log(data);
+     //console.log(data);
      dispatch({ type: FETCH_BY_SEARCH, payload: { data }  });
     //   dispatch({ type: END_LOADING });
     } catch (error) {
@@ -47,12 +47,12 @@ export const getPostsBySearch = (searchQuery) => async (dispatch) => {
 export const createPost = (post, history) => async (dispatch) => {
     try {
         const { data: { data } } = await api.createPost(post)
-        console.log(data);
+       // console.log(data);
         dispatch({ type: CREATE, payload: {data}})
         history.push('/posts')
         dispatch({ type: CREATPOST})
     } catch (error) {
-        console.log(error);
+       // console.log(error);
         dispatch({ type: ERROR, error})
     }
 }
@@ -76,7 +76,7 @@ export const deletePost = (id) => async (dispatch) => {
         dispatch({ type: DELETE, payload: id})
         dispatch({ type: WARN})
     } catch (error) {
-        console.log(error);
+       // console.log(error);
         dispatch({ type: ERROR, error})
     }
 }
@@ -84,11 +84,11 @@ export const deletePost = (id) => async (dispatch) => {
 export const likePost = ({postId, userId}) => async (dispatch) => {
     try {
         const { data } = await api.likePost({postId, userId})
-        console.log(data);
+       // console.log(data);
         dispatch({ type: LIKE, payload: data})
         dispatch({ type: SUCCESS, data})
     } catch (error) {
-        console.log(error);
+       // console.log(error);
         dispatch({ type: ERROR, error})
     }
 }

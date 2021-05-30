@@ -55,7 +55,7 @@ const createPost = async (req, res) => {
     // Creating chatroom
     const user = await User.findById(post.creator);
     console.log(user);
-    const name = `${post.source} to ${post.destination} with ${post.name}`;
+    const name = `${post.source} to ${post.destination} with ${post.name} at ${moment(post.leavingAt).format('YYYY-MM-DD hh:mm A')}`;
     if (user) {
         const chatroom = new ChatRoom({
             name,user: user._id, userName: user.name, userAvatar: user.avatar, leavingAt: post.leavingTime, createdAt: new Date()
@@ -66,7 +66,7 @@ const createPost = async (req, res) => {
           const newPost = new PostMessage({...post,chatroomId: chatroom._id, hideAfter, createdAt: new Date().toISOString() })
           try {
               await newPost.save();
-              const admin = await Admin.findOneAndUpdate({ _id: "60b1137d2fe6ed3438de8ed0" }, { $inc: { totalPost: 1 }}, { new: true })
+              const admin = await Admin.findOneAndUpdate({ _id: "60b3129c1fa629b327a9c546" }, { $inc: { totalPost: 1 }}, { new: true })
               //console.log(newPost);
               res.status(201).json({data: newPost, message: "Your post created successfully"})
             } catch (error) {
@@ -139,7 +139,7 @@ const likePost = async (req, res) =>{
                         "Name": user.name
                       }
                     ],
-                    "Subject": "Last Spot Bd - Your ride has been confirmed.",
+                    "Subject": "Lift-Buddy - Your ride has been confirmed.",
                     "TextPart": "Your ride has been confirmed.",
                     "HTMLPart": `<h3 align="center" style="color:green;" >You have confirmed a ride with ${post.name}. Your can go ${post.source} to ${post.destination} with ${post.name}.</h3>
                                  <br /> <h3 align="center" >Remindar: ${post.name} leaving at: ${moment(post.leavingAt).format('YYYY-MM-DD hh:mm A')}. Make sure you don't miss the ride. 
@@ -183,7 +183,7 @@ const likePost = async (req, res) =>{
                         "Name": user.name
                       }
                     ],
-                    "Subject": "Last Spot Bd - Your ride has been canceled.",
+                    "Subject": "Lift-Buddy - Your ride has been canceled.",
                     "TextPart": "Your ride has been canceled.",
                     "HTMLPart": `<h3 align="center" style="color:red;" >You have canceled a ride with ${post.name}. </h3>
                                  <br /> <h3 align="center" >Hope we will see you soon on another ride.</h3>
@@ -226,7 +226,7 @@ const reportPost = async(req, res) => {
     try {
 
         const report = await Report.create({ reportedBy, reportedPost, reportedText, postOwner, createdAt: new Date() })
-        const admin = await Admin.findOneAndUpdate({ _id: "60b1137d2fe6ed3438de8ed0" }, { $inc: { totalReport: 1 }}, { new: true })
+        const admin = await Admin.findOneAndUpdate({ _id: "60b3129c1fa629b327a9c546" }, { $inc: { totalReport: 1 }}, { new: true })
         res.status(200).json({report, message: "We have captured your report, We will let you know further update via email. Thank You for your report."})
         
     } catch (error) {

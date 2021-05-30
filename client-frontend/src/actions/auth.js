@@ -8,7 +8,7 @@ export const signin = (formData, history) => async (dispatch) => {
 
         dispatch({ type: LOGIN, data})
         dispatch({ type: SUCCESS, data})
-        history.push('/')
+        history.push('/posts')
         //toast.success("Loged In Succesfully!");
     } catch (error) {
         console.log(error);
@@ -22,7 +22,7 @@ export const googleSignIn = ({result, token, history}) => async (dispatch) => {
 
         dispatch({ type: GOOGLE_LOGIN, data })
         dispatch({ type: SUCCESS, data})
-        history.push('/')
+        history.push('/posts')
 
     } catch (error) {
         console.log(error);
@@ -36,7 +36,7 @@ export const facebookSignIn = ({accessToken, userID, history}) => async (dispatc
 
         dispatch({ type: FACEBOOK_LOGIN, data })
         dispatch({ type: SUCCESS, data})
-        history.push('/')
+        history.push('/posts')
         
     } catch (error) {
         console.log(error);

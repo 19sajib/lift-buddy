@@ -8,20 +8,6 @@ import {Box,  Button,  Card,  CardContent,  CardHeader,
 import { isAuthenticated } from '../../auth/auth'
 import { updateProfile } from '../../actions/auth'
   
-const states = [
-  {
-    value: 'alabama',
-    label: 'Alabama'
-  },
-  {
-    value: 'new-york',
-    label: 'New York'
-  },
-  {
-    value: 'san-francisco',
-    label: 'San Francisco'
-  }
-];
 
 const useStyles = makeStyles(() => ({
   root: {}
@@ -159,21 +145,9 @@ const ProfileDetails = ({ className, ...rest }) => {
                 label="Select State"
                 name="state"
                 onChange={handleChange}
-                required
-                select
-                SelectProps={{ native: true }}
                 value={formData.state}
                 variant="outlined"
-              >
-                {states.map((option) => (
-                  <option
-                    key={option.value}
-                    value={option.value}
-                  >
-                    {option.label}
-                  </option>
-                ))}
-              </TextField>
+              />
             </Grid>
           </Grid>
         </CardContent>

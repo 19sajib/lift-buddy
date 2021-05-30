@@ -48,7 +48,7 @@ const mailjet = require ('node-mailjet')
             "Name": existingUser.name
           }
         ],
-        "Subject": "Sajib - Reset your password",
+        "Subject": "Lift-Buddy - Reset your password",
         "TextPart": "Change Password",
         "HTMLPart": `<h3 align="center" style="color:red;">Here is your reset password link.<br /> 
                      Simply click <a href="${process.env.CLIENT_URL}/reset-password/${token}">here</a> </h3>

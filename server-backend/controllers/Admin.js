@@ -35,7 +35,7 @@ const adminDashboardTrafic = async (req, res) => {
     if(tabletTrafic) traficData. tabletTrafic =  tabletTrafic;
     if(mobileTrafic) traficData. mobileTrafic =  mobileTrafic;
 
-      const admin = await Admin.findOneAndUpdate({ _id: "60b1137d2fe6ed3438de8ed0" }, { $set: traficData }, { new: true })
+      const admin = await Admin.findOneAndUpdate({ _id: "60b3129c1fa629b327a9c546" }, { $set: traficData }, { new: true })
       console.log(admin);
       res.status(200).json({admin, message: "Data updated & you can see it now."})
       
@@ -109,7 +109,7 @@ const adminDashboardVerificationResponse = async (req, res) => {
             "Name": name
           }
         ],
-        "Subject": "Last Spot Bd - We couldn't verify your account.",
+        "Subject": "Lift-Buddy - We couldn't verify your account.",
         "TextPart": "We couldn't verify your account.",
         "HTMLPart": `<h3 align="center" style="color:green;"> ${reject} </h3>
                      <br /> <h3 align="center">Please try again.</h3>
@@ -148,7 +148,7 @@ const adminDashboardVerificationResponse = async (req, res) => {
                         "Name": name
                       }
                     ],
-                    "Subject": "Last Spot Bd - Your account has been verified.",
+                    "Subject": "Lift-Buddy - Your account has been verified.",
                     "TextPart": "Your account has been verified.",
                     "HTMLPart": `<h3 align="center" style="color:green;"> You have successfully verified your accout. </h3>
                                  <br /> <h3 align="center">Now you can entaract with posts. And all the restriction has been removed.</h3>
@@ -213,7 +213,7 @@ const adminDashboardReportResponse = async (req, res) => {
                 "Name": name
               }
             ],
-            "Subject": "Last Spot Bd - We have checked your report.",
+            "Subject": "Lift-Buddy - We have checked your report.",
             "TextPart": "Your report has been resolved.",
             "HTMLPart": `<h3 align="center" > You had make a report on a post with id: ${postId} </h3>
                          <br /> <h3 align="center" style="color:green;">Here is our response: ${response}</h3>
@@ -257,7 +257,7 @@ const adminDashboardReportResponse = async (req, res) => {
                 "Name": name
               }
             ],
-            "Subject": "Last Spot Bd - We have checked your report & deleted the post.",
+            "Subject": "Lift-Buddy - We have checked your report & deleted the post.",
             "TextPart": "Your report has been resolved.",
             "HTMLPart": `<h3 align="center" > You had make a report on a post with id: ${postId} </h3>
                          <br /> <h3 align="center" style="color:green;">Here is our response: ${response}</h3>
@@ -318,7 +318,7 @@ const adminDashboardHelp = async (req, res) => {
         const { mail, message } = req.body;
   try {
       const help = await Help.create({ mail, message, createdAt: new Date()})
-      const admin = await Admin.findOneAndUpdate({ _id: "60b1137d2fe6ed3438de8ed0" }, { $inc: { totalHelp: 1 }}, { new: true })
+      const admin = await Admin.findOneAndUpdate({ _id: "60b3129c1fa629b327a9c546" }, { $inc: { totalHelp: 1 }}, { new: true })
 
       res.status(200).json({ message: 'We have recived your query. we will get back to you soon!' })
       
@@ -363,7 +363,7 @@ const adminDashboardHelpReply = async (req, res) => {
                 "Name": "Mr/Mrs"
               }
             ],
-            "Subject": "Last Spot Bd - Here is your answer.",
+            "Subject": "Lift-Buddy - Here is your answer.",
             "TextPart": "Your question has been answered.",
             "HTMLPart": `<h3 align="center" > Your question was: ${msg} </h3>
                          <br /> <h3 align="center" style="color:green;">Here is our response: ${replyMessage}</h3>

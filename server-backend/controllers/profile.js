@@ -69,7 +69,7 @@ const verifyProfile = async (req, res) => {
         }
 
         const verify = await Verification.create({ userId, file1, file2, file3, attempt: 1, createdAt: new Date()});
-        const admin = await Admin.findOneAndUpdate({ _id: "60b1137d2fe6ed3438de8ed0" }, { $inc: { pendingVerifiedUser: 1 }}, { new: true })
+        const admin = await Admin.findOneAndUpdate({ _id: "60b3129c1fa629b327a9c546" }, { $inc: { pendingVerifiedUser: 1 }}, { new: true })
         res.status(200).json({ verify, message: 'We have recived your response, we will notify you through email.' });
 
 

@@ -57,12 +57,13 @@ const Profile = ({ className, ...rest }) => {
           >
             {user.name}
           </Typography>
+          {(user.sate && user.country) &&
           <Typography
             color="textSecondary"
             variant="body1"
           >
-            {`${user.state} ${user.country}`}
-          </Typography>
+            {`${user?.state} ${user?.country}`}
+          </Typography>}
           <Typography
             className={classes.dateText}
             color="textSecondary"

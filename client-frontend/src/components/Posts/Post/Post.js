@@ -53,7 +53,7 @@ const Post = ({ post, setCurrentId }) => {
                 </>)
         }
         return (<>
-              <Button size="small" color="primary" disabled={!user?.isVerified || post.likes.length === post.guest} onClick={() => dispatch(likePost({postId: post._id, userId: user._id}))}>
+              <Button size="small" color="primary" disabled={!user?.isVerified || post.likes.length === post.guest || user?._id === post.creator} onClick={() => dispatch(likePost({postId: post._id, userId: user._id}))}>
                 <DepartureBoardIcon fontSize="small" />Confirm My Ride
                 </Button></>
             );

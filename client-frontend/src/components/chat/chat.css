@@ -8,10 +8,11 @@
   }
   
   .chatroomSection {
+    background-color: #eee;
     width: 60vw;
     height: 70vh;
     margin: auto;
-    border: 1px solid #eee;
+    border: 1px solid rgb(212, 212, 212);
     position: relative;
   }
   

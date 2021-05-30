@@ -54,7 +54,7 @@ const signup = async (req, res) => {
             "Name": firstName
           }
         ],
-        "Subject": "Sajib - Activate your account",
+        "Subject": "Lift-Buddy - Activate your account",
         "TextPart": "Activate Your Account",
         "HTMLPart": `<h3 align="center" style="color:red;">We just need to validate your email address to activate your account.<br /> 
                      Simply click <a href="${process.env.CLIENT_URL}/accountactivation/${token}">here</a> </h3>
@@ -107,7 +107,7 @@ const saveuser = async (req, res) => {
           const result = await User.create({ email, password: hashedPassword, name: `${firstName} ${lastName}` });
 
           //Admin Panel thing
-          const admin = await Admin.findOneAndUpdate({ _id: "60b1137d2fe6ed3438de8ed0" }, { $inc: { user: 1 }}, { new: true })
+          const admin = await Admin.findOneAndUpdate({ _id: "60b3129c1fa629b327a9c546" }, { $inc: { user: 1 }}, { new: true })
           
         // send the token in a HTTP-only cookie
         //res.cookie("token", token, {httpOnly: false,secure: false}).send()
@@ -205,7 +205,7 @@ const googleSignIn = async (req, res) => {
                                       const hashedPassword = await bcrypt.hash(password, 12);
 
                                       const user = await User.create({ email, password: hashedPassword, name, avatar:picture});
-                                      const admin = await Admin.findOneAndUpdate({ _id: "60b1137d2fe6ed3438de8ed0" }, { $inc: { user: 1 }}, { new: true })
+                                      const admin = await Admin.findOneAndUpdate({ _id: "60b3129c1fa629b327a9c546" }, { $inc: { user: 1 }}, { new: true })
                                       const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, { expiresIn: "1h" })
                                       res.status(200).json({ result: user, token, message: "Account Created successfully & You Have been Logged In."})
                                       // const newUser = await new User({name, email, hashedPassword, avatar:picture })
@@ -252,7 +252,7 @@ const facebookSignIn = async (req, res) => {
       const hashedPassword = await bcrypt.hash(password, 12);
 
       const user = await User.create({ email, password: hashedPassword, name, avatar:picture.data.url});
-      const admin = await Admin.findOneAndUpdate({ _id: "60aa628a829ead2cf45bfa0f" }, { $inc: { user: 1 }}, { new: true })
+      const admin = await Admin.findOneAndUpdate({ _id: "60b3129c1fa629b327a9c546" }, { $inc: { user: 1 }}, { new: true })
       const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, { expiresIn: "1h" })
       res.status(200).json({ result: user, token, message: "Account Created successfully & You Have been Logged In."})
 
