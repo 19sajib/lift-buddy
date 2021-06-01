@@ -9,6 +9,7 @@ const adminSchema = new mongoose.Schema ({
     totalHelp: { Number },
     activeHelp: { Number },
     totalPost: { Number },
+    totalFeedback: { Number },
     trafic: { Number },
     desktopTrafic: { Number },
     tabletTrafic: { Number },

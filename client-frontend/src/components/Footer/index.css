@@ -1,359 +1,398 @@
 .App {
-    text-align: center;
-  }
-  
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    height: 40vmin;
-    pointer-events: none;
+    animation: App-logo-spin infinite 20s linear;
   }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/*========================
+ Main Menu CSS
+=======================*/
+#main_menu{
+  width: 100%;
+  clear: both;
+}
+.inner_menu{
+  background: #333;
+  min-width: 30px;
+  padding: 15px 0;
+  border-radius: 10px;
+  position: relative;
+  z-index: 1;
+}
+.inner_menu::after{
+  position: absolute;
+  content: "";
+  background: #2b2b2b;
+  border-radius: 10px;
+  width: 100%;
+  height: 50%;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+
+}
+.inner_menu ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+}
+.inner_menu ul li {
+  display: inline-block;
+  margin: 0 5px;
+  position: relative;
+}
+.inner_menu ul li a{
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  display: block;
+  padding: 3px;
+}
+.inner_menu ul li a:hover{
+  color: #ba2e1f;
+}
+.inner_menu ul li:hover a{
+  color: #ba2e1f ;
+}
+.inner_menu ul li:hover ul li a{
+  color: #ffff ;
+}
+
+
+/*========================
+ Dropdown style
+=======================*/
+.inner_menu ul ul {
+	position: absolute;
+	left: -99999px;
+	top: 25px;
+	width: 180px;
+	background: #ba2e1f;
+	border-radius: 5px;
+}
+.inner_menu ul li:hover ul {
+	left: 0px;
+}
+.inner_menu ul  li:hover ul ul {
+	left: -99999px;
+}
+.inner_menu ul ul  li{
+ display: block;
+ margin: 0;
+ border-bottom: 1px solid #fff;
+ border-radius: 5px;
+
+}
+.inner_menu ul ul ul{
+  left: -99999px;
+  top: 0px;
+}
+.inner_menu ul ul ul li a{
+  transition: .5s;
+}
+.inner_menu ul ul  li a{
+  transition: .5s;
+}
+.inner_menu ul ul li:hover ul{
+  left: 180px;
+  top: 0px;
+  background: #000;
+}
+.inner_menu ul ul ul li a:hover  {
+  background: #ba2e1f;
+  border-radius: 5px;
+}
+.inner_menu ul ul  li a:hover  {
+  background: #333;
+  border-radius: 5px;
+}
+
+/*========================
+      Hero css
+=======================*/
+
+#hero_area{
+  background: #fff;
+  margin: 20px 0 0;
+  padding: 0;
+}
+.inner_hero{
+  overflow: hidden;
+}
+.alinegleft{
+  width: 400px;
+  float: left;
+}
+.inner_hero h2{
+  color: #000;
+  font-size: 86px;
+  font-weight: normal;
+  line-height: 1em;
+  margin-bottom: 10px;
+
+}
+.inner_hero p{
+  font-size: 16px;
+  font-weight: normal;
+  color: #666;
+
+}
+.inner_hero button{
+  padding: 8px 15px ;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 16px;
+  background-color: #3498db;
+  transition: .5s;
+  cursor: pointer;
+  border: 0px ;
+  border-radius: 10px;
+  text-align: center;
   
-  @media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-      animation: App-logo-spin infinite 20s linear;
-    }
-  }
+}
+.inner_hero button:hover{
+  background-color: #2980b9;
   
-  .App-header {
-    background-color: #282c34;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-  }
-  
-  .App-link {
-    color: #61dafb;
-  }
-  
-  @keyframes App-logo-spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  
-  /*========================
-   Main Menu CSS
-  =======================*/
-  #main_menu{
-    width: 100%;
-    clear: both;
-  }
-  .inner_menu{
-    background: #333;
-    min-width: 30px;
-    padding: 15px 0;
-    border-radius: 10px;
-    position: relative;
-    z-index: 1;
-  }
-  .inner_menu::after{
-    position: absolute;
-    content: "";
-    background: #2b2b2b;
-    border-radius: 10px;
-    width: 100%;
-    height: 50%;
-    bottom: 0;
-    left: 0;
-    z-index: -1;
-  
-  }
-  .inner_menu ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    text-align: center;
-  }
-  .inner_menu ul li {
-    display: inline-block;
-    margin: 0 5px;
-    position: relative;
-  }
-  .inner_menu ul li a{
-    color: #fff;
-    text-decoration: none;
-    text-transform: uppercase;
-    display: block;
-    padding: 3px;
-  }
-  .inner_menu ul li a:hover{
-    color: #ba2e1f;
-  }
-  .inner_menu ul li:hover a{
-    color: #ba2e1f ;
-  }
-  .inner_menu ul li:hover ul li a{
-    color: #ffff ;
-  }
-  
-  
-  /*========================
-   Dropdown style
-  =======================*/
-  .inner_menu ul ul {
-      position: absolute;
-      left: -99999px;
-      top: 25px;
-      width: 180px;
-      background: #ba2e1f;
-      border-radius: 5px;
-  }
-  .inner_menu ul li:hover ul {
-      left: 0px;
-  }
-  .inner_menu ul  li:hover ul ul {
-      left: -99999px;
-  }
-  .inner_menu ul ul  li{
-   display: block;
-   margin: 0;
-   border-bottom: 1px solid #fff;
-   border-radius: 5px;
-  
-  }
-  .inner_menu ul ul ul{
-    left: -99999px;
-    top: 0px;
-  }
-  .inner_menu ul ul ul li a{
-    transition: .5s;
-  }
-  .inner_menu ul ul  li a{
-    transition: .5s;
-  }
-  .inner_menu ul ul li:hover ul{
-    left: 180px;
-    top: 0px;
-    background: #000;
-  }
-  .inner_menu ul ul ul li a:hover  {
-    background: #ba2e1f;
-    border-radius: 5px;
-  }
-  .inner_menu ul ul  li a:hover  {
-    background: #333;
-    border-radius: 5px;
-  }
-  
-  /*========================
-        Hero css
-  =======================*/
-  
-  #hero_area{
-    background: #fff;
-    margin: 20px 0 0;
-    padding: 0;
-  }
-  .inner_hero{
-    overflow: hidden;
-  }
-  .alinegleft{
-    width: 400px;
-    float: left;
-  }
-  .inner_hero h2{
-    color: #000;
-    font-size: 86px;
+}
+
+/*========================
+      WORK css
+=======================*/
+#work_area{
+  background: #f2f2f2;
+  padding: 45px 0;
+}
+.inner_work{
+  overflow: hidden;
+}
+
+.child_work{
+  width: 31%;
+  float: left;
+  margin: 0 1% 10px;
+
+}
+.child_work h2{
+  font-size: 26px;
+  font-weight: normal;
+  color: #333;
+}
+.child_work p{
+  color: #878787;
+  font-size: 14px;
+  font-weight: normal;
+
+}
+.child_work a{
+  color: #b92d1f;
+    font-size: 14px;
     font-weight: normal;
-    line-height: 1em;
-    margin-bottom: 10px;
-  
-  }
-  .inner_hero p{
-    font-size: 16px;
-    font-weight: normal;
-    color: #666;
-  
-  }
-  .inner_hero a{
-    color: #ba2e1f;
     text-decoration: none;
-    text-transform: uppercase;
-    font-size: 16px;
+    text-transform: capitalize;
     float: right;
-  }
+}
+.about_area{margin-left: 0; }
+
+.service_area{
   
-  /*========================
-        WORK css
-  =======================*/
-  #work_area{
-    background: #f2f2f2;
-    padding: 45px 0;
-  }
-  .inner_work{
-    overflow: hidden;
-  }
+}
+.service_area .child_service{
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+.child_service .service_img{
+  width:25%;
+  float: left;
+}
+.child_service .service_text{
+  width:75%;
+  float: right;
+}
+.child_service .service_text h3{
+  font-size: 14px;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+.child_service .service_text p{
+  margin-top: 0;
+  line-height: 1.4em;
+}
+.testimonial_work{
+  margin-right: 0;
+}
+.child_testimonial{
+  width: 100%;
+  margin-bottom: 15px;
+  overflow: hidden;
+}
+
+.child_testimonial h3{
+  background: url(../../images/testimonial_bg.png);
+  background-repeat: no-repeat;
+  padding: 10px 0 10px 65px;
+  color: #989898;
+  font-size: 14px;
+  font-weight: bold;
+}
+.child_testimonial h3 span{
+  font-weight: normal;
+}
+
+
+
+
+/*================
+ footer
+================*/
+#footer_area{
+  width: 100%;
+  clear: both;
+  background: #fff;
+  padding: 45px 0;
+}
+.inner_footer{
+  overflow: hidden;
+}
+.child_footer{
+  width: 29%;
+  float: left;
+  padding: 1%;
+  margin: 0 1% 10px;
+}
+.child_footer h3{
+  color: #666666;
+  font-size: 16px;
+  font-weight: normal;
+  text-transform: uppercase;
+  border-top: 1px solid #666666 ;
+  margin-top: 0;
+  padding-top: 5px;
+}
+
+.child_footer p{
+  color: #666666;
+  font-size: 14px;
+  margin-top: 0;
   
-  .child_work{
-    width: 31%;
-    float: left;
-    margin: 0 1% 10px;
+}
+
+.child_footer p a{
+  color: #b92d1f;
+  text-decoration: none;
+}
+.child_footer p a:hover{
+    color: #4e2723;
+}
+
+.child_footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0; 
+}
+.child_footer ul li {
+  border-bottom: 1px solid #666;
+  display: block; 
+}
+.child_footer ul li:last-child {
+  border-bottom: 0px solid #666;
+}
+.child_footer ul li a{
+  color:#666666 ;
+  font-size: 14px;
+  text-decoration: none;
+  padding: 10px 0;
+  background: url(../../images/ulli.png);
+  background-repeat: no-repeat;
+  padding-left: 18px;
+  background-position: center left;
+}
+.child_footer ul li a:hover{
+  color:#b92d1f ;
+}
+
+/*========================
+      COPYRIGHT AREA CSS 
+=======================*/
+
+#copyright_area{
+  background: #f2f2f2;
+  margin: 20px 0;
+}
+.inner_copyright{
+  overflow: hidden;
+  color: #919191;
+  font-size: 14px;
+}
+.left_copyright{
+  float: left;
+  width: 60%;
+}
+.right_copyright{
+  float: right;
+  width: 40%;
+  text-align: right;
+}
+
+/*==========================
+      TABLET layout
+===========================*/
+@media only screen and (min-width:200px) and (max-width:991px) {
+  .social_area {max-width: 460px; padding-top: 14px;}
+  .inner_header {padding: 20px 0;}
+  .inner_hero h2 {font-size: 55px;}
+}
+
+/*==========================
+      MOBILE layout
+===========================*/
+@media only screen and (min-width:200px) and (max-width:480px) {
+  .mini_menu {width: 100%;margin-bottom: 10px;}
+  .mini_menu ul, .social_area ul {text-align: center;}
+  .search_area, .logo_area {width: 250px;float: none;margin: 0 auto;text-align: center}
+  .social_area ul li{margin: 0 5px}
+  .alinegleft {width: 100%;}
+  .inner_hero h2 {font-size: 25px;}
+  .inner_hero {padding-bottom: 20px;}
+  #work_area , #footer_area{padding: 20px 0;}
+  .child_work {width: 98%;}
+  .child_footer {width: 96%;}
+  .left_copyright {width: 100%; margin-bottom: 10px;}
+  .right_copyright {width: 100%;text-align: left;}
   
-  }
-  .child_work h2{
-    font-size: 26px;
-    font-weight: normal;
-    color: #333;
-  }
-  .child_work p{
-    color: #878787;
-    font-size: 14px;
-    font-weight: normal;
-  
-  }
-  .child_work a{
-    color: #b92d1f;
-      font-size: 14px;
-      font-weight: normal;
-      text-decoration: none;
-      float: right;
-      text-transform: capitalize;
-  }
-  .about_area{margin-left: 0; }
-  
-  .service_area{
-    
-  }
-  .service_area .child_service{
-    width: 100%;
-    overflow: hidden;
-    margin-bottom: 15px;
-  }
-  .child_service .service_img{
-    width:25%;
-    float: left;
-  }
-  .child_service .service_text{
-    width:75%;
-    float: right;
-  }
-  .child_service .service_text h3{
-    font-size: 14px;
-    margin-bottom: 0;
-    margin-top: 0;
-  }
-  .child_service .service_text p{
-    margin-top: 0;
-    line-height: 1.4em;
-  }
-  .testimonial_work{
-    margin-right: 0;
-  }
-  .child_testimonial{
-    width: 100%;
-    margin-bottom: 15px;
-    overflow: hidden;
-  }
-  
-  .child_testimonial h3{
-    background: url(../../images/testimonial_bg.png);
-    background-repeat: no-repeat;
-    padding: 10px 0 10px 65px;
-    color: #989898;
-    font-size: 14px;
-    font-weight: bold;
-  }
-  .child_testimonial h3 span{
-    font-weight: normal;
-  }
-  
-  
-  
-  
-  /*================
-   footer
-  ================*/
-  #footer_area{
-    width: 100%;
-    clear: both;
-    background: #fff;
-    padding: 45px 0;
-  }
-  .inner_footer{
-    overflow: hidden;
-  }
-  .child_footer{
-    width: 29%;
-    float: left;
-    padding: 1%;
-    margin: 0 1% 10px;
-  }
-  .child_footer h3{
-    color: #666666;
-    font-size: 16px;
-    font-weight: normal;
-    text-transform: uppercase;
-    border-top: 1px solid #666666 ;
-    margin-top: 0;
-    padding-top: 5px;
-  }
-  
-  .child_footer p{
-    color: #666666;
-    font-size: 14px;
-    margin-top: 0;
-    
-  }
-  
-  .child_footer p a{
-    color: #b92d1f;
-    text-decoration: none;
-  }
-  .child_footer p a:hover{
-      color: #4e2723;
-  }
-  
-  .child_footer ul {
-    list-style: none;
-    margin: 0;
-    padding: 0; 
-  }
-  .child_footer ul li {
-    border-bottom: 1px solid #666;
-    display: block; 
-  }
-  .child_footer ul li:last-child {
-    border-bottom: 0px solid #666;
-  }
-  .child_footer ul li a{
-    color:#666666 ;
-    font-size: 14px;
-    text-decoration: none;
-    padding: 10px 0;
-    background: url(../../images/ulli.png);
-    background-repeat: no-repeat;
-    padding-left: 18px;
-    background-position: center left;
-  }
-  .child_footer ul li a:hover{
-    color:#b92d1f ;
-  }
-  
-  /*========================
-        COPYRIGHT AREA CSS 
-  =======================*/
-  
-  #copyright_area{
-    background: #f2f2f2;
-    margin: 20px 0;
-  }
-  .inner_copyright{
-    overflow: hidden;
-    color: #919191;
-    font-size: 14px;
-  }
-  .left_copyright{
-    float: left;
-    width: 60%;
-  }
-  .right_copyright{
-    float: right;
-    width: 40%;
-    text-align: right;
-  }
+}

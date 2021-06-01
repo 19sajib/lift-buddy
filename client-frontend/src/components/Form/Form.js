@@ -68,7 +68,17 @@ const Form = ({ currentId, setCurrentId }) => {
 
 
 
-    if(!user?.isVerified) {
+    if(!user) {
+        return (
+            <Paper className={classes.paper}>
+                <Typography variant="h6" align="center">
+                    Please Sign In / Up to interact more.
+                </Typography>
+            </Paper>
+        )
+    }
+
+    if(user && !user?.isVerified) {
         return (
             <Paper className={classes.paper}>
                 <Link to="/verification"> <Typography variant="h6" align="center">

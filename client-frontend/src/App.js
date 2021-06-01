@@ -19,12 +19,14 @@ import Verify from './components/Verification/ImageUpload'
 import ContactUs from './components/Contact-Us/Index'
 import ContactUsHelp from './views/ContactHelp/Index'
 import Terms from './legal/terms'
+import Privacy from './legal/privacy'
 import AdminPanel from './views/Admin/Index'
 import UserVerification from './views/UserVerification/Index'
 import ReportResponse from './views/ReportResponse/Index'
 import Trafic from './views/trafic/Index'
 import Main from './components/Main/Index'
 import Footer from './components/Footer/Index'
+import Feedback from './components/Feedback/Index'
  
 
 import { isAuthenticated } from './auth/auth'
@@ -78,11 +80,13 @@ function App () {
               <Route path="/posts" exact component={Home}/>
               <Route path="/posts/search" exact component={Home} />
               <Route path="/terms-and-conditions" exact component={Terms}/>
+              <Route path="/privacy-policy" exact component={Privacy}/>
               <Route path="/proHome" exact component={proHome}/>
               <Route path="/auth" exact component={Auth}/>
               <Route path="/trafic/update" exact component={Trafic}/>
               <Route path="/verification" exact component={Verify}/>
               <Route path="/contact-us" exact component={ContactUs}/>
+              <Route path="/feedback-report-issue" exact component={Feedback}/>
               <Route path="/contact-us/view" exact component={ContactUsHelp}/>
               <Route path="/admin-dashboard" render={() => <AdminPanel />} exact />
               <Route path="/user-verification" render={() => <UserVerification />} exact />

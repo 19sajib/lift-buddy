@@ -21,9 +21,12 @@ const ActiveAccount = () => {
     }
 
     return (
-            <Button align="center"  variant="contained" color="primary" onClick={confirmEmail}>
+        <div align="center">
+
+            <Button   variant="contained" color="primary" onClick={confirmEmail}>
                Active Your Account
             </Button>
+        </div>
     )
 }
 

@@ -16,20 +16,21 @@ const Index = () => {
 <div className="child_footer">
   <h3>IMPORTANT LINKS</h3>
   <ul>
-    <li><a href="/">Home Page</a></li>
-    <li><a href="/posts">All Posts</a></li>
-    <li><a href="/profile">Profile</a></li>
     <li><a href="/chat-dashboard">Inbox</a></li>
+    <li><a href="/profile">Profile</a></li>
+    <li><a href="/posts">All Posts</a></li>
+    <li><a href="/">Home Page</a></li>
     <li><a href="/auth">Sign In / Up</a></li>
   </ul>
 </div>
 <div className="child_footer">
   <h3>QUICK LINKS</h3>
   <ul>
+    <li><a href="/about-us">About Me</a></li>
     <li><a href="/contact-us">Contact Us</a></li>
-    <li><a href="/about-us">About Us</a></li>
+    <li><a href="/privacy-policy">Privacy Policy</a></li>
     <li><a href="/terms-and-conditions">Terms and Conditions</a></li>
-    <li><a href="/">Privacy Policy</a></li>
+    <li><a href="/privacy-policy">Report a Issue or Leave Feedback</a></li>
   </ul>
 </div>
 </div>
@@ -37,10 +38,10 @@ const Index = () => {
 <section id="copyright_area">
           <div className="inner_copyright container">
               <div className="left_copyright">
-                   <p>Copyright © 2021 Lift-Buddy - All Rights Reserved</p>
+                   <p>Copyright © 2021 Sajib Ltd - All Rights Reserved</p>
               </div>
               <div className="right_copyright">
-                   <p>MERN Project by Sajib</p>
+                   <p>Lift-Budy MERN Project by Sajib</p>
               </div>
           </div>
   </section>

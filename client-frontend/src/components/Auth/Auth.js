@@ -121,7 +121,7 @@ const Auth = () => {
                           clientId={GOOGLE_CLIENT_ID}
                           render={(renderProps) => (
                               <Button className={classes.googleButton} color="secondary" fullWidth  onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon />} variant="contained" >
-                                Google Sign In
+                                Google {isSignup ? 'Sign Up' : 'Sign In'}
                               </Button>
                           )}
                           onSuccess={googleSuccess}
@@ -135,7 +135,7 @@ const Auth = () => {
                                 callback={responseFacebook} 
                                 render={(renderProps) => (
                                     <Button className={classes.facebookButton} color="primary" fullWidth  onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<FacebookIcon />} variant="contained" >
-                                      Facebook Sign In
+                                      Facebook {isSignup ? 'Sign Up' : 'Sign In'}
                                     </Button>
                                 )}
                             />

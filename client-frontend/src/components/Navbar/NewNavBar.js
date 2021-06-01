@@ -15,11 +15,8 @@ import { Avatar, Button } from '@material-ui/core';
 import MailIcon from '@material-ui/icons/Mail';
 import PostAddIcon from '@material-ui/icons/PostAdd';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Fab from '@material-ui/core/Fab';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import LiveHelpIcon from '@material-ui/icons/LiveHelp';
 
-import BackToTop from "./BackToTop"
 
 import logo from '../../images/logo.png'
 import { isAuthenticated, logout } from '../../auth/auth'
@@ -330,11 +327,6 @@ export default function NewNavbar () {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
-      <BackToTop>
-        <Fab color="secondary" size="small" aria-label="scroll back to top">
-          <KeyboardArrowUpIcon />
-        </Fab>
-      </BackToTop>
     </div>
   );
 }

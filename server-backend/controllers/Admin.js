@@ -4,6 +4,7 @@ const Report = require('../models/Report')
 const Post = require('../models/postMessage')
 const Admin = require('../models/Admin.js')
 const Help = require('../models/Help.js')
+const Feedback = require('../models/Feedback')
 
 const { MJ_APIKEY_PRIVATE, MJ_APIKEY_PUBLIC } = require('../config/keys.js')
 
@@ -390,8 +391,25 @@ const adminDashboardHelpReply = async (req, res) => {
 
 }
 
+const adminDashboardFeedback = async (req, res) => {
+        const { mail, type, message } = req.body;
+  try {
+    try {
+      const feedback = await Feedback.create({ mail, type, message, reportedAt: new Date()})
+      const admin = await Admin.findOneAndUpdate({ _id: "60b3129c1fa629b327a9c546" }, { $inc: { totalFeedback: 1 }}, { new: true })
+
+      res.status(200).json({ message: 'We have recived your message. we will get back to you if nessesary!' })
+      
+  } catch (error) {
+      res.status(500).json({message: "Internal Server Error. Please, try again later!"})
+  }
+  } catch (error) {
+    
+  }
+}
+
 
 module.exports = { adminDashboard, adminDashboardPost, adminDashboardUser, 
     adminDashboardVerification, adminDashboardReport, adminDashboardVerificationResponse,
     adminDashboardHelp, adminDashboardHelpView, adminDashboardHelpReply , adminDashboardReportResponse,
-    adminDashboardTrafic }
+    adminDashboardTrafic, adminDashboardFeedback }

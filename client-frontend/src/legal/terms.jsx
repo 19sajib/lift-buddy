@@ -6,14 +6,14 @@ const terms = () => {
             <h3 align="center">TERMS AND CONDITIONS</h3>
             <p>
             <hr />
-Last updated: 2021-01-07
+Last updated: 2021-02-19
 <br />
 
 1. Introduction
 <br />
 Welcome to Sajib Ltd (“Company”, “we”, “our”, “us”)!
 <br />
-These Terms of Service (“Terms”, “Terms of Service”) govern your use of our website located at lastspotbd.com (together or individually “Service”) operated by Sajib Ltd.
+These Terms of Service (“Terms”, “Terms of Service”) govern your use of our website located at lift-buddy.com (together or individually “Service”) operated by Sajib Ltd.
 
 Our Privacy Policy also governs your use of our Service and explains how we collect, safeguard and disclose information that results from your use of our web pages.
 

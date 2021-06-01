@@ -17,6 +17,7 @@ const Index = () => {
                 <img src={im} alt="HERO" className="alinegleft"/>
                 <h2>Lift-Buddy</h2>
                 <p>Your Ride Hacker</p>
+                <button><a href="/auth">Sign Up Now</a></button>
                 {/* <a href="#">read more  	&gt;</a> */}
             </div>
     </section>
