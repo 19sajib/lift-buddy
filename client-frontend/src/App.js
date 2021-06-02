@@ -27,6 +27,7 @@ import Trafic from './views/trafic/Index'
 import Main from './components/Main/Index'
 import Footer from './components/Footer/Index'
 import Feedback from './components/Feedback/Index'
+import FeedbackView from './views/Feedback/Index'
  
 
 import { isAuthenticated } from './auth/auth'
@@ -87,6 +88,7 @@ function App () {
               <Route path="/verification" exact component={Verify}/>
               <Route path="/contact-us" exact component={ContactUs}/>
               <Route path="/feedback-report-issue" exact component={Feedback}/>
+              <Route path="/feedback-report-issue-view" exact component={FeedbackView}/>
               <Route path="/contact-us/view" exact component={ContactUsHelp}/>
               <Route path="/admin-dashboard" render={() => <AdminPanel />} exact />
               <Route path="/user-verification" render={() => <UserVerification />} exact />

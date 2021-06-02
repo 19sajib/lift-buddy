@@ -394,7 +394,6 @@ const adminDashboardHelpReply = async (req, res) => {
 const adminDashboardFeedback = async (req, res) => {
         const { mail, type, message } = req.body;
   try {
-    try {
       const feedback = await Feedback.create({ mail, type, message, reportedAt: new Date()})
       const admin = await Admin.findOneAndUpdate({ _id: "60b3129c1fa629b327a9c546" }, { $inc: { totalFeedback: 1 }}, { new: true })
 
@@ -403,13 +402,36 @@ const adminDashboardFeedback = async (req, res) => {
   } catch (error) {
       res.status(500).json({message: "Internal Server Error. Please, try again later!"})
   }
-  } catch (error) {
-    
-  }
+
 }
 
+const adminDashboardFeedbackView = async (req, res) => {
+
+  try {
+    const feedback = await Feedback.find({isSolved: false}).sort({reportedAt: -1})
+
+    res.status(200).json({ feedback })
+    
+} catch (error) {
+    console.log(error);
+    res.status(500).json({message: "Internal Server Error"})
+}
+
+}
+
+const adminDashboardFeedbackReply = async (req, res) => {
+  const { id, reply } = req.body;
+
+  try {
+    const feedback = await Feedback.findByIdAndUpdate({_id: id},{ isSolved: reply, solvedAt: new Date() }, {new: true})
+    
+    res.status(200).json({ message: "Your response saved." })     
+  } catch (error) {
+      res.status(500).json({message: "Internal Server Error. Please, try again later."})
+  }
+}
 
 module.exports = { adminDashboard, adminDashboardPost, adminDashboardUser, 
     adminDashboardVerification, adminDashboardReport, adminDashboardVerificationResponse,
     adminDashboardHelp, adminDashboardHelpView, adminDashboardHelpReply , adminDashboardReportResponse,
-    adminDashboardTrafic, adminDashboardFeedback }
+    adminDashboardTrafic, adminDashboardFeedback, adminDashboardFeedbackView, adminDashboardFeedbackReply }

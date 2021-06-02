@@ -3,11 +3,14 @@ const router = require('express').Router()
 const { adminDashboard, adminDashboardPost, adminDashboardUser,
         adminDashboardVerification, adminDashboardReport, adminDashboardVerificationResponse,
         adminDashboardHelp, adminDashboardHelpView, adminDashboardHelpReply,
-        adminDashboardReportResponse, adminDashboardTrafic, adminDashboardFeedback } = require('../controllers/Admin.js')
+        adminDashboardReportResponse, adminDashboardTrafic, adminDashboardFeedback,
+        adminDashboardFeedbackView, adminDashboardFeedbackReply } = require('../controllers/Admin.js')
 
 
 router.post('/dashboard', adminDashboard)
 router.post('/dashboard/feedback', adminDashboardFeedback)
+router.post('/dashboard/feedback-view', adminDashboardFeedbackView)
+router.post('/dashboard/feedback-reply', adminDashboardFeedbackReply)
 router.post('/dashboard/trafic', adminDashboardTrafic)
 router.post('/dashboard/post', adminDashboardPost)
 router.post('/dashboard/user', adminDashboardUser)

@@ -7,9 +7,11 @@ import ReportIcon from '@material-ui/icons/Report';
 import ContactSupportIcon from '@material-ui/icons/ContactSupport';
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import ReportProblemIcon from '@material-ui/icons/ReportProblem';
+import FeedbackIcon from '@material-ui/icons/Feedback';
 import EqualizerIcon from '@material-ui/icons/Equalizer';
 import Warning from "@material-ui/icons/Warning";
 import Update from "@material-ui/icons/Update";
+import ListAltIcon from '@material-ui/icons/ListAlt';
 // core components
 import GridItem from "../../components/Admin/Grid/GridItem.js";
 import GridContainer from "../../components/Admin/Grid/GridContainer.js";
@@ -37,7 +39,7 @@ export default function Dashboard(admin) {
   return (
     <div>
       <GridContainer>
-        <GridItem xs={12} sm={6} md={3}>
+        <GridItem xs={12} sm={6} md={4}>
           <Card>
             <CardHeader color="warning" stats icon>
               <CardIcon color="warning">
@@ -60,13 +62,13 @@ export default function Dashboard(admin) {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={6} md={3}>
+        <GridItem xs={12} sm={6} md={4}>
           <Card>
             <CardHeader color="danger" stats icon>
               <CardIcon color="danger">
                 <ReportIcon />
               </CardIcon>
-              <p className={classes.cardCategory}>Total Report</p>
+              <p className={classes.cardCategory}>Total Post Report</p>
               <h3 className={classes.cardTitle}>
               {!admin ? <LinearProgress/> : <Typography>{admin.admin?.totalReport}</Typography> }
               </h3>
@@ -81,7 +83,7 @@ export default function Dashboard(admin) {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={6} md={3}>
+        <GridItem xs={12} sm={6} md={4}>
           <Card>
             <CardHeader color="warning" stats icon>
               <CardIcon color="warning">
@@ -104,7 +106,30 @@ export default function Dashboard(admin) {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={6} md={3}>
+        <GridItem xs={12} sm={6} md={4}>
+          <Card>
+            <CardHeader color="danger" stats icon>
+              <CardIcon color="danger">
+                <FeedbackIcon />
+              </CardIcon>
+              <p className={classes.cardCategory}>Total Feedback and Issues</p>
+              <h3 className={classes.cardTitle}>
+              {!admin ? <LinearProgress/> : <Typography>{admin.admin?.totalFeedback} <small></small> </Typography> }
+              </h3>
+            </CardHeader>
+            <CardFooter stats>
+              <div className={classes.stats}>
+                
+                  <ListAltIcon color="warning" />
+                
+                <a href="/feedback-report-issue-view">
+                  See Latest Feedback and Issues Here!
+                </a>
+              </div>
+            </CardFooter>
+          </Card>
+        </GridItem>
+        <GridItem xs={12} sm={6} md={4}>
           <Card>
             <CardHeader color="rose" stats icon>
               <CardIcon color="rose">

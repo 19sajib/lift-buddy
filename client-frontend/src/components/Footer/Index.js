@@ -30,7 +30,7 @@ const Index = () => {
     <li><a href="/contact-us">Contact Us</a></li>
     <li><a href="/privacy-policy">Privacy Policy</a></li>
     <li><a href="/terms-and-conditions">Terms and Conditions</a></li>
-    <li><a href="/privacy-policy">Report a Issue or Leave Feedback</a></li>
+    <li><a href="/feedback-report-issue">Report a Issue or Leave Feedback</a></li>
   </ul>
 </div>
 </div>
