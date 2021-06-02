@@ -41,7 +41,7 @@ const Index = () => {
                    <p>Copyright © 2021 Sajib Ltd - All Rights Reserved</p>
               </div>
               <div className="right_copyright">
-                   <p>Lift-Budy MERN Project by Sajib</p>
+                   <p>Lift-Buddy MERN Project by Sajib</p>
               </div>
           </div>
   </section>

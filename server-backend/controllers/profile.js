@@ -15,7 +15,7 @@ const getProfile = async (req, res) => {
         if(!id )
         return res.status(400).json({message: "Please Log in First."})
 
-        const user = User.findOne({ id })
+        const user = await User.findOne({ id })
 
         if(!user) return res.status(404).json({ message: "User doesn't exist."});
 
@@ -80,4 +80,27 @@ const verifyProfile = async (req, res) => {
     }
 }
 
-module.exports = { getProfile, updateProfile, verifyProfile}
+
+const veiwProfile = async (req, res) => {
+
+    const {id} = req.body;
+    console.log(id)
+
+    try {
+        if(!id )
+        return res.status(400).json({message: "Please Log in First."})
+
+        const user = await User.findOne({_id: id })
+
+        if(!user) return res.status(404).json({ message: "User doesn't exist."});
+
+
+        res.status(200).json({ user })
+        
+    } catch (error) {
+        console.log(error);
+    }
+
+}
+
+module.exports = { getProfile, updateProfile, verifyProfile, veiwProfile}

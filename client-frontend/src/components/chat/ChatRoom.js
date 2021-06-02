@@ -1,10 +1,10 @@
 import React from "react";
 import Axios from "axios";
-import { withRouter, useHistory } from "react-router-dom";
+import { withRouter, useHistory, Link } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import moment from 'moment'
 import ReactEmoji from 'react-emoji';
-import { Button,  Card,  CardContent,  CardHeader,
+import { Button,  Card,  CardContent,
     Divider, Grid, Container , Typography } from '@material-ui/core';
 import TelegramIcon from '@material-ui/icons/Telegram';
 import { isAuthenticated } from '../../auth/auth'
@@ -136,7 +136,9 @@ const ChatRoom = ({ match, socket }) => {
           {messages.map((message, i) => (
               userId === message.user ? (
                 <div key={i} className="messageContainer justifyEnd">
-                <p className="sentText pr-10">{message.name}</p>
+                <Link style={{ textDecoration: 'none' }} to={"/profile/" + message.user} >
+                  <p className="sentText pr-10">{message.name}</p>
+                  </Link>
                 <div className="messageBox backgroundBlue">
                   <p className="messageText colorDark">{ReactEmoji.emojify(message.message)}</p>
                   <p >{moment(message.createdAt).format('YYYY-MM-DD hh:mm A')}</p>
@@ -147,7 +149,9 @@ const ChatRoom = ({ match, socket }) => {
                   <p className="messageText colorDark">{ReactEmoji.emojify(message.message)}</p>
                   <p >{moment(message.createdAt).format('YYYY-MM-DD hh:mm A')}</p>
                 </div>
-                <p className="sentText pl-10 ">{message.name}</p>
+                <Link style={{ textDecoration: 'none' }} to={"/profile/" + message.user} >
+                  <p className="sentText pl-10 ">{message.name}</p>
+                  </Link>
               </div>
             )
           ))}

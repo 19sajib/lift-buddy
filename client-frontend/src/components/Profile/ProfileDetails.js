@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { useHistory,Link } from 'react-router-dom'
 import clsx from 'clsx';
 import {Box,  Button,  Card,  CardContent,  CardHeader,
   Divider, Grid,  TextField,  makeStyles } from '@material-ui/core';
@@ -10,7 +10,15 @@ import { updateProfile } from '../../actions/auth'
   
 
 const useStyles = makeStyles(() => ({
-  root: {}
+  root: {},
+  box: {
+    display: "flex",
+    padding: 3
+  },
+  spreadBox: {
+    justifyContent: "space-around",
+    alignItems: "center"
+  }
 }));
 
 const ProfileDetails = ({ className, ...rest }) => {
@@ -184,10 +192,18 @@ const ProfileDetails = ({ className, ...rest }) => {
         </CardContent>
         <Divider />
         <Box
-          display="flex"
-          justifyContent="flex-end"
-          p={2}
+             component="span"
+             m={2}
+             className={`${classes.spreadBox} ${classes.box}`}
         >
+          <Button
+            color="primary"
+            variant="outlined"
+            component={Link}
+            to={"/profile/" + user._id}
+          >
+            Preview Profile
+          </Button>
           <Button
             color="primary"
             variant="contained"

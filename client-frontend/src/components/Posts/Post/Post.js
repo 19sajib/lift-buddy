@@ -63,7 +63,10 @@ const Post = ({ post, setCurrentId }) => {
         <Card className={classes.card} >
               <CardMedia className={classes.media} image={post?.selectedFile} title={post.title} />
             <div className={classes.overlay}>
-                <Typography variant="h6">{post.name}</Typography>
+                <Typography variant="h6"
+                style={{textDecoration: "none"}} color="inherit"
+                component={Link} 
+                to={"/profile/"+ post.creator} >{post.name}</Typography>
                 <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
             </div>
             {(user?._id === post.creator) 

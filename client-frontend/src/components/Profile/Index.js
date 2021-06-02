@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card, Container, Grid, Typography } from '@material-ui/core';
+import { Button, Card, Container, Grid } from '@material-ui/core';
 import {useHistory, Link} from 'react-router-dom'
 
 import Profile from './Profile';
