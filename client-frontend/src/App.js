@@ -28,6 +28,7 @@ import Main from './components/Main/Index'
 import Footer from './components/Footer/Index'
 import Feedback from './components/Feedback/Index'
 import FeedbackView from './views/Feedback/Index'
+import ViewProfile from './views/ProfileView/View'
  
 
 import { isAuthenticated } from './auth/auth'
@@ -93,6 +94,7 @@ function App () {
               <Route path="/admin-dashboard" render={() => <AdminPanel />} exact />
               <Route path="/user-verification" render={() => <UserVerification />} exact />
               <Route path="/profile" exact component={Account}/>
+              <Route path="/profile/:id" exact component={ViewProfile}/>
               <Route path="/accountactivation/:token" component={AccountActivation}/>
               <Route path="/forget-password" exact component={ForgetPassword}/>
               <Route path="/reset-password/:token" component={ResetPassword}/>

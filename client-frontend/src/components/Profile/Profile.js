@@ -11,11 +11,13 @@ import { isAuthenticated } from '../../auth/auth'
 import { updateProfile } from '../../actions/auth'
 
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {},
   avatar: {
     height: 300,
-    width: 300
+    width: 300,
+    boxShadow: theme.shadows[7],
+    marginBottom: '10px'
   }
 }));
 
@@ -37,11 +39,13 @@ const Profile = ({ className, ...rest }) => {
 
   return (
     <Card
+    overflow="visible"
       className={clsx(classes.root, className)}
       {...rest}
     >
-      <CardContent>
+      <CardContent >
         <Box
+         
           alignItems="center"
           display="flex"
           flexDirection="column"

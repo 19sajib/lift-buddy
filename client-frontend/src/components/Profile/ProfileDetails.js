@@ -173,6 +173,7 @@ const ProfileDetails = ({ className, ...rest }) => {
               <TextField
                 fullWidth
                 label="Something About You!"
+                placeholder="Or Any Quote"
                 name="aboutMe"
                 onChange={handleChange}
                 value={formData.aboutMe}
