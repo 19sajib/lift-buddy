@@ -28,7 +28,9 @@ const ProfileDetails = ({ className, ...rest }) => {
     email: user.email,
     phoneNumber: user.phoneNumber,
     state: user.state,
-    country: user.country
+    country: user.country,
+    job: user.job,
+    aboutMe: user.aboutMe
   });
 
   const handleChange = (event) => {
@@ -128,6 +130,20 @@ const ProfileDetails = ({ className, ...rest }) => {
             >
               <TextField
                 fullWidth
+                label="Enter Your State"
+                name="state"
+                onChange={handleChange}
+                value={formData.state}
+                variant="outlined"
+              />
+            </Grid>
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
+                fullWidth
                 label="Country"
                 name="country"
                 onChange={handleChange}
@@ -142,10 +158,24 @@ const ProfileDetails = ({ className, ...rest }) => {
             >
               <TextField
                 fullWidth
-                label="Select State"
-                name="state"
+                label="Enter Your Occupation"
+                name="job"
+                value={formData.job}
                 onChange={handleChange}
-                value={formData.state}
+                variant="outlined"
+              />
+            </Grid>
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                label="Something About You!"
+                name="aboutMe"
+                onChange={handleChange}
+                value={formData.aboutMe}
                 variant="outlined"
               />
             </Grid>

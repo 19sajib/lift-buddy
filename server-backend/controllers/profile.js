@@ -30,7 +30,7 @@ const getProfile = async (req, res) => {
 }
 
 const updateProfile = async (req, res) => {
-    const { id, name, email, password, phoneNumber, country, state, avatar } = req.body;
+    const { id, name, email, password, phoneNumber, country, state, avatar, job, aboutMe } = req.body;
     //console.log(req.body);
 
     const profileData = {};
@@ -43,6 +43,8 @@ const updateProfile = async (req, res) => {
     if(country) profileData.country = country;
     if(state) profileData.state = state;
     if(avatar) profileData.avatar = avatar;
+    if(job) profileData.job = job;
+    if(aboutMe) profileData.aboutMe = aboutMe;
 
     const user = await User.findOneAndUpdate({ _id: id }, { $set: profileData }, { new: true })
 

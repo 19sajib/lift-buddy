@@ -14,8 +14,8 @@ import { updateProfile } from '../../actions/auth'
 const useStyles = makeStyles(() => ({
   root: {},
   avatar: {
-    height: 220,
-    width: 220
+    height: 300,
+    width: 300
   }
 }));
 
@@ -57,12 +57,12 @@ const Profile = ({ className, ...rest }) => {
           >
             {user.name}
           </Typography>
-          {(user.sate && user.country) &&
+          { (user.state && user.country) &&
           <Typography
             color="textSecondary"
             variant="body1"
           >
-            {`${user?.state} ${user?.country}`}
+            {`${user.state} ${user.country}`} 
           </Typography>}
           <Typography
             className={classes.dateText}

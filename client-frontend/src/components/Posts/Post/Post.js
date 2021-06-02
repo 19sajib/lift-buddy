@@ -69,7 +69,7 @@ const Post = ({ post, setCurrentId }) => {
             {(user?._id === post.creator) 
                  &&
                 (<div className={classes.overlay2}>
-               <Button style={{color: 'white'}} size="small" onClick={() => setCurrentId(post._id)}>
+               <Button disabled={post.likes.length} style={{color: 'white'}} size="small" onClick={() => setCurrentId(post._id)}>
                    <MoreHorizIcon fontSize="default" color="secondary"/>
                </Button>
             </div>)}
