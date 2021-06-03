@@ -68,19 +68,17 @@ const Response = ({data, newValue}) => {
                         if (!response) {
                             setResponseError("Enter your reponse here")
                         } else {
-                            console.log('ok1');
-                            newValue(data._id)
-                            // Axios.post('http://localhost:8080/admin/dashboard/report-response', { 
-                            //      reporterId, banProfile, response
-                            //  })
-                            //     .then(function (response) {
-                            //     console.log(response.data);
-                            //     newValue(data._id)
-                            //     toast.success(response.data.message);
-                            //     })
-                            //     .catch(function (error) {
-                            //         toast.error("Internal Server Error. Please, try again later. or Check you input again!");
-                            //     });
+                            Axios.post('http://localhost:8080/admin/dashboard/reported-profile-action', { 
+                                 reporterId, banProfile, response, id: data._id
+                             })
+                                .then(function (response) {
+                                console.log(response.data);
+                                newValue(data._id)
+                                toast.success(response.data.message);
+                                })
+                                .catch(function (error) {
+                                    toast.error("Internal Server Error. Please, try again later. or Check you input again!");
+                                });
                         }
                     }
                 }
@@ -91,8 +89,8 @@ const Response = ({data, newValue}) => {
                     if (!response) {
                         setResponseError("Enter your reponse here")
                     } else {
-                        Axios.post('http://localhost:8080/admin/dashboard/report-response', { 
-                        userId, banProfile, response
+                        Axios.post('http://localhost:8080/admin/dashboard/reported-profile-action', { 
+                        userId, banProfile, response, id: data._id
                      })
                         .then(function (response) {
                         console.log(response.data);
@@ -149,8 +147,8 @@ const Response = ({data, newValue}) => {
               >
                 <option value=""></option>
                 <option value="no">No</option>
-                <option value="warn">Warn User</option>
-                <option value="ban">Ban User</option>
+                <option value="warnned">Warn User</option>
+                <option value="banned">Ban User</option>
               </TextField>
               <FormHelperText className={classes.error} >{banProfileError}</FormHelperText>
               { banProfile && <>

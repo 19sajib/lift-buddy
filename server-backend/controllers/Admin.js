@@ -446,7 +446,97 @@ const adminDashboardReportedProfileView = async (req, res) => {
 
 }
 
+const adminDashboardReportProfileAction = async (req, res) => {
+  const { userId, reporterId, banProfile, response, id } = req.body;
 
+  try {
+    if(banProfile === "no") {
+    const report= await ReportProfile.findByIdAndUpdate({_id: id},{ isSolved: true, 
+                                             reponseType: banProfile, reponseText: response, reponsedAt: new Date() }, {new: true})
+      
+
+      const reporter = await User.findById({_id: reporterId})
+     // console.log(reporter);
+      const mail = reporter.email
+      const name = reporter.name
+
+      const request = mailjet.post("send").request({
+        "Messages":[
+          {
+            "From": {
+              "Email": "contact2sajib@gmail.com",
+              "Name": "Abu"
+            },
+            "To": [
+              {
+                "Email": mail,
+                "Name": name
+              }
+            ],
+            "Subject": "Lift-Buddy - We have checked your report.",
+            "TextPart": "Your report has been resolved.",
+            "HTMLPart": `<h3 align="center" > You had make a report on a user. </h3>
+                         <br /> <h3 align="center" style="color:green;">Here is our response: ${response}</h3>
+                         <br />Still Need help? Then reply in this mail.
+                         <br />Have a nice day!`,
+            "CustomID": "AppGettingStartedTest"
+          }
+        ]
+      })
+      request.then((result) => { console.log(result.body)})
+        .catch((err) => {
+          console.log(err.statusCode)
+          console.log(err)
+        })
+
+      res.status(200).json({ message: "We have sent an email to the reporter with your response." })     
+      }
+       else {
+        const report= await ReportProfile.findByIdAndUpdate({_id: id},{ isSolved: true, 
+                               reponseType: banProfile, reponseText: response, reponsedAt: new Date() }, {new: true})
+
+
+            const user = await User.findById({_id: userId})
+            //console.log(user);
+            const mail = user.email
+            const name = user.name
+
+            const request = mailjet.post("send").request({
+            "Messages":[
+            {
+            "From": {
+            "Email": "contact2sajib@gmail.com",
+            "Name": "Abu"
+            },
+            "To": [
+            {
+            "Email": mail,
+            "Name": name
+            }
+            ],
+            "Subject": "Lift-Buddy - We had a report against your profile.",
+            "TextPart": "A report against your profile.",
+            "HTMLPart": `<h3 align="center" style="color:red;"> You have been ${banProfile}. </h3>
+            <br /> <h3 align="center" >Here is the response from admin: ${response}</h3>
+            <br />Still Need help? Then reply in this mail.
+            <br />Have a nice day!`,
+            "CustomID": "AppGettingStartedTest"
+            }
+            ]
+            })
+            request.then((result) => { console.log(result.body)})
+            .catch((err) => {
+            console.log(err.statusCode)
+            console.log(err)
+            })
+
+            res.status(200).json({ message: "We have sent an email to the user with your response." })     
+                  }
+    
+  } catch (error) {
+      res.status(500).json({message: "Internal Server Error. Please, try again later."})
+  }
+}
 
 
 
@@ -454,4 +544,4 @@ module.exports = { adminDashboard, adminDashboardPost, adminDashboardUser,
     adminDashboardVerification, adminDashboardReport, adminDashboardVerificationResponse,
     adminDashboardHelp, adminDashboardHelpView, adminDashboardHelpReply , adminDashboardReportResponse,
     adminDashboardTrafic, adminDashboardFeedback, adminDashboardFeedbackView, adminDashboardFeedbackReply,
-    adminDashboardReportedProfileView }
+    adminDashboardReportedProfileView, adminDashboardReportProfileAction }
