@@ -5,8 +5,10 @@ import Axios from 'axios'
 import HomeIcon from '@material-ui/icons/Home';
 import MailIcon from '@material-ui/icons/Mail';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
-import {Avatar, Box, Button,  CardActions,   
-    Divider,  Typography,  makeStyles, Grid, CircularProgress } from '@material-ui/core';
+import {Avatar, Box, Button,  CardActions, Dialog, DialogContent, DialogContentText, DialogActions,  
+       DialogTitle, Divider,  Typography,  makeStyles, Grid, CircularProgress, TextField, FormHelperText } from '@material-ui/core';
+import red from "@material-ui/core/colors/red";
+import { toast } from "react-toastify";
 
 import { isAuthenticated } from '../../auth/auth'
 
@@ -26,6 +28,10 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '-120px',
     boxShadow: theme.shadows[13],
     marginBottom: '20px'
+},
+error: {
+  color: red[600],
+  marginLeft: '26px'
 }
 }));
 
@@ -37,22 +43,60 @@ const Profile = ({ className, ...rest }) => {
   const { user } = isAuthenticated()
   const classes = useStyles();
   const [formData, setFormData] = useState()
+  const [message, setMessage] = React.useState()
+  const [messageError, setMessageError] = React.useState()
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
     React.useEffect(() => {
         Axios.post('http://localhost:8080/users/view-profile',{ id })
           .then(function (response) {
             setFormData(response.data.user);
-            console.log(response.data);
+            //console.log(response.data);
           })
           .catch(function (error) {
             console.log(error);
           });
-        }, [])
+        }, [id])
 
-    const handleSubmit = (e) => {
+    
+    const handleChange = (e) => {
       e.preventDefault();
-  
+      setMessage(e.target.value)
+      setMessageError("")
     }
+    
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      if (!user._id) {
+        history.push('/auth')
+        toast.warn('Please Log In First!')
+      }
+      if (!message) {
+        setMessageError("You must have to give the reason")
+      } else {
+        await Axios.post('http://localhost:8080/users/report-profile', {
+          reportedId: id, reportedText: message, reportedBy: user._id
+           })
+              .then(function (response) {
+                console.log(response.data);
+                history.push('/')
+                toast.success(response.data.message)
+              })
+              .catch(function (error) {
+                //console.log(error);
+                toast.error(error)
+              });
+             }
+      }
+  
 
   return (
     !formData ? <div align="center"> <CircularProgress /> <CircularProgress color="secondary" /> </div>: 
@@ -146,14 +190,43 @@ const Profile = ({ className, ...rest }) => {
           Edit Profile
         </Button> 
         : 
+        <>
         <Button style={{borderRadius: '25px'}}
         color="secondary"
         fullWidth
         variant="outlined"
-        onClick={handleSubmit}
+        onClick={handleClickOpen}
       >
         Report This Profile
       </Button>
+      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title" color="secondary" >Profile Report</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+          Write your reason in detail, why are you reporting this profile!
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Your Reason Here..."
+            multiline={true}
+            rowsMax="17"
+            fullWidth
+            onChange={handleChange}
+          />
+          <FormHelperText className={classes.error} >{messageError}</FormHelperText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleSubmit} color="primary">
+            Submit
+          </Button>
+        </DialogActions>
+      </Dialog>
+      </>
         }
       </CardActions>
     </Grid>

@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user.js')
 const Verification = require('../models/Verification')
 const Admin = require('../models/Admin.js')
+const ReportProfile = require('../models/ReportProfile.js')
 const auth = require('../middleware/auth.js')
 
 const getProfile = async (req, res) => {
@@ -103,4 +104,18 @@ const veiwProfile = async (req, res) => {
 
 }
 
-module.exports = { getProfile, updateProfile, verifyProfile, veiwProfile}
+const reportProfile = async (req, res) => {
+        const { reportedId, reportedText, reportedBy} = req.body;
+
+    try {
+      const feedback = await ReportProfile.create({ reportedId, reportedText, reportedBy, reportedAt: new Date()})
+      const admin = await Admin.findOneAndUpdate({ _id: "60b3129c1fa629b327a9c546" }, { $inc: { reportedUser: 1 }}, { new: true })
+
+      res.status(200).json({ message: 'We have recived your report. we will get back to you if nessesary!' })
+      
+  } catch (error) {
+      res.status(500).json({message: "Internal Server Error. Please, try again later!"})
+  }
+}
+
+module.exports = { getProfile, updateProfile, verifyProfile, veiwProfile, reportProfile}

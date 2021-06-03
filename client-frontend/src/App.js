@@ -93,8 +93,8 @@ function App () {
               <Route path="/contact-us/view" exact component={ContactUsHelp}/>
               <Route path="/admin-dashboard" render={() => <AdminPanel />} exact />
               <Route path="/user-verification" render={() => <UserVerification />} exact />
-              <Route path="/profile" exact component={Account}/>
-              <Route path="/profile/:id" exact component={ViewProfile}/>
+              <Route path="/profile" exact component={() => (user ? <Account /> : <Redirect to="/auth" />)}/>
+              <Route path="/profile/:id" exact component={() => (user ? <ViewProfile /> : <Redirect to="/auth" />)}/>
               <Route path="/accountactivation/:token" component={AccountActivation}/>
               <Route path="/forget-password" exact component={ForgetPassword}/>
               <Route path="/reset-password/:token" component={ResetPassword}/>

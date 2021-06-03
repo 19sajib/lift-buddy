@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const adminSchema = new mongoose.Schema ({
     user: { Number },
     verifiedUser: { Number },
+    reportedUser: { Number },
     pendingVerifiedUser: { Number },
     totalReport: { Number },
     activeReport: { Number },
