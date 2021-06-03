@@ -29,6 +29,7 @@ import Footer from './components/Footer/Index'
 import Feedback from './components/Feedback/Index'
 import FeedbackView from './views/Feedback/Index'
 import ViewProfile from './views/ProfileView/View'
+import ReportProfileView from './views/Report-Profile-View/Index'
  
 
 import { isAuthenticated } from './auth/auth'
@@ -92,6 +93,7 @@ function App () {
               <Route path="/feedback-report-issue-view" exact component={FeedbackView}/>
               <Route path="/contact-us/view" exact component={ContactUsHelp}/>
               <Route path="/admin-dashboard" render={() => <AdminPanel />} exact />
+              <Route path="/reported-profile-view" render={() => <ReportProfileView />} exact />
               <Route path="/user-verification" render={() => <UserVerification />} exact />
               <Route path="/profile" exact component={() => (user ? <Account /> : <Redirect to="/auth" />)}/>
               <Route path="/profile/:id" exact component={() => (user ? <ViewProfile /> : <Redirect to="/auth" />)}/>

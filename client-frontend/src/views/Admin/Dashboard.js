@@ -12,6 +12,7 @@ import EqualizerIcon from '@material-ui/icons/Equalizer';
 import Warning from "@material-ui/icons/Warning";
 import Update from "@material-ui/icons/Update";
 import ListAltIcon from '@material-ui/icons/ListAlt';
+import PersonAddDisabledIcon from '@material-ui/icons/PersonAddDisabled';
 // core components
 import GridItem from "../../components/Admin/Grid/GridItem.js";
 import GridContainer from "../../components/Admin/Grid/GridContainer.js";
@@ -110,6 +111,29 @@ export default function Dashboard(admin) {
           <Card>
             <CardHeader color="danger" stats icon>
               <CardIcon color="danger">
+                <PersonAddDisabledIcon />
+              </CardIcon>
+              <p className={classes.cardCategory}>Total Reported Profile</p>
+              <h3 className={classes.cardTitle}>
+              {!admin ? <LinearProgress/> : <Typography>{admin.admin?.reportedUser} <small></small> </Typography> }
+              </h3>
+            </CardHeader>
+            <CardFooter stats>
+              <div className={classes.stats}>
+                
+              <Warning color="error" />
+                
+                <a href="/reported-profile-view">
+                  Check Reported Profile Here!
+                </a>
+              </div>
+            </CardFooter>
+          </Card>
+        </GridItem>
+        <GridItem xs={12} sm={6} md={4}>
+          <Card>
+            <CardHeader color="info" stats icon>
+              <CardIcon color="info">
                 <FeedbackIcon />
               </CardIcon>
               <p className={classes.cardCategory}>Total Feedback and Issues</p>
@@ -120,7 +144,7 @@ export default function Dashboard(admin) {
             <CardFooter stats>
               <div className={classes.stats}>
                 
-                  <ListAltIcon color="warning" />
+                  <ListAltIcon />
                 
                 <a href="/feedback-report-issue-view">
                   See Latest Feedback and Issues Here!
@@ -131,13 +155,13 @@ export default function Dashboard(admin) {
         </GridItem>
         <GridItem xs={12} sm={6} md={4}>
           <Card>
-            <CardHeader color="rose" stats icon>
-              <CardIcon color="rose">
+            <CardHeader color="primary" stats icon>
+              <CardIcon color="primary">
                 <EqualizerIcon />
               </CardIcon>
               <p className={classes.cardCategory}>Traffic</p>
               <h3 className={classes.cardTitle}>
-              {!admin ? <LinearProgress/> : <Typography>{admin.admin?.trafic}</Typography> }
+              {!admin ? <LinearProgress/> : <Typography>+{admin.admin?.trafic}</Typography> }
               </h3>
             </CardHeader>
             <CardFooter stats>

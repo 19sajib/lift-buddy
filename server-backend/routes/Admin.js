@@ -4,7 +4,8 @@ const { adminDashboard, adminDashboardPost, adminDashboardUser,
         adminDashboardVerification, adminDashboardReport, adminDashboardVerificationResponse,
         adminDashboardHelp, adminDashboardHelpView, adminDashboardHelpReply,
         adminDashboardReportResponse, adminDashboardTrafic, adminDashboardFeedback,
-        adminDashboardFeedbackView, adminDashboardFeedbackReply } = require('../controllers/Admin.js')
+        adminDashboardFeedbackView, adminDashboardFeedbackReply, adminDashboardReportedProfileView,
+         } = require('../controllers/Admin.js')
 
 
 router.post('/dashboard', adminDashboard)
@@ -21,5 +22,6 @@ router.post('/dashboard/verify-response', adminDashboardVerificationResponse)
 router.post('/dashboard/contact-us', adminDashboardHelp)
 router.post('/dashboard/contact-us/view', adminDashboardHelpView)
 router.post('/dashboard/contact-us/reply', adminDashboardHelpReply)
+router.post('/dashboard/reported-profile-view', adminDashboardReportedProfileView)
 
 module.exports = router;

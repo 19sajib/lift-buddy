@@ -4,7 +4,8 @@ const Report = require('../models/Report')
 const Post = require('../models/postMessage')
 const Admin = require('../models/Admin.js')
 const Help = require('../models/Help.js')
-const Feedback = require('../models/Feedback')
+const Feedback = require('../models/Feedback.js')
+const ReportProfile = require('../models/ReportProfile.js')
 
 const { MJ_APIKEY_PRIVATE, MJ_APIKEY_PUBLIC } = require('../config/keys.js')
 
@@ -431,7 +432,26 @@ const adminDashboardFeedbackReply = async (req, res) => {
   }
 }
 
+const adminDashboardReportedProfileView = async (req, res) => {
+
+  try {
+    const profile = await ReportProfile.find({isSolved: false}).sort({reportedAt: -1})
+
+    res.status(200).json({ profile })
+    
+} catch (error) {
+    console.log(error);
+    res.status(500).json({message: "Internal Server Error"})
+}
+
+}
+
+
+
+
+
 module.exports = { adminDashboard, adminDashboardPost, adminDashboardUser, 
     adminDashboardVerification, adminDashboardReport, adminDashboardVerificationResponse,
     adminDashboardHelp, adminDashboardHelpView, adminDashboardHelpReply , adminDashboardReportResponse,
-    adminDashboardTrafic, adminDashboardFeedback, adminDashboardFeedbackView, adminDashboardFeedbackReply }
+    adminDashboardTrafic, adminDashboardFeedback, adminDashboardFeedbackView, adminDashboardFeedbackReply,
+    adminDashboardReportedProfileView }
