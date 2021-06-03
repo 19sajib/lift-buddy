@@ -538,10 +538,22 @@ const adminDashboardReportProfileAction = async (req, res) => {
   }
 }
 
+const banUser = async (req, res) => {
+      const { id } = req.body;
+  try {
+       const user = await User.findByIdAndUpdate({_id: id}, { isBanned: true}, {new: true})
+
+       res.status(200).json({message: "We have banned this user."})
+  } catch (error) {
+    //console.log(error);
+    res.status(500).json({message: "Internal Server Error"})
+  }
+}
+
 
 
 module.exports = { adminDashboard, adminDashboardPost, adminDashboardUser, 
     adminDashboardVerification, adminDashboardReport, adminDashboardVerificationResponse,
     adminDashboardHelp, adminDashboardHelpView, adminDashboardHelpReply , adminDashboardReportResponse,
     adminDashboardTrafic, adminDashboardFeedback, adminDashboardFeedbackView, adminDashboardFeedbackReply,
-    adminDashboardReportedProfileView, adminDashboardReportProfileAction }
+    adminDashboardReportedProfileView, adminDashboardReportProfileAction, banUser }

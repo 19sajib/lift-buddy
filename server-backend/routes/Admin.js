@@ -5,7 +5,7 @@ const { adminDashboard, adminDashboardPost, adminDashboardUser,
         adminDashboardHelp, adminDashboardHelpView, adminDashboardHelpReply,
         adminDashboardReportResponse, adminDashboardTrafic, adminDashboardFeedback,
         adminDashboardFeedbackView, adminDashboardFeedbackReply, adminDashboardReportedProfileView,
-        adminDashboardReportProfileAction,  } = require('../controllers/Admin.js')
+        adminDashboardReportProfileAction, banUser  } = require('../controllers/Admin.js')
 
 
 router.post('/dashboard', adminDashboard)
@@ -25,5 +25,6 @@ router.post('/dashboard/contact-us/reply', adminDashboardHelpReply)
 router.post('/dashboard/reported-profile-view', adminDashboardReportedProfileView)
 router.post('/dashboard/reported-profile-view', adminDashboardReportedProfileView)
 router.post('/dashboard/reported-profile-action', adminDashboardReportProfileAction)
+router.post('/dashboard/ban-user', banUser)
 
 module.exports = router;

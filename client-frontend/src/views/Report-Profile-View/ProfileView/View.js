@@ -9,8 +9,6 @@ import {Avatar, Box, Button,  CardActions, Divider,  Typography,  makeStyles, Gr
 import red from "@material-ui/core/colors/red";
 import { toast } from "react-toastify";
 
-import { isAuthenticated } from "../../../auth/auth"
-
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -36,27 +34,22 @@ error: {
 
 const Profile = ({ profile, className, ...rest }) => {
 
-  const { id } = useParams()
-  console.log(id);
   const history = useHistory()
   const classes = useStyles();
-  const user = isAuthenticated()
-  const [formData, setFormData] = useState()
 
 
     
     const handleSubmit = async (e) => {
       e.preventDefault();
-      if (!user._id) {
+      if (!profile) {
         history.push('/auth')
         toast.warn('Please Log In First!')
       } else {
-        await Axios.post('http://localhost:8080/users/get-profile', {
-          id
+        await Axios.post('http://localhost:8080/admin/dashboard/ban-user', {
+          id: profile._id
            })
               .then(function (response) {
-                console.log(response.data);
-                history.push('/')
+                //console.log(response.data);
                 toast.success(response.data.message)
               })
               .catch(function (error) {
