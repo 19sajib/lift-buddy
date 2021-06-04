@@ -30,6 +30,7 @@ import Feedback from './components/Feedback/Index'
 import FeedbackView from './views/Feedback/Index'
 import ViewProfile from './views/ProfileView/View'
 import ReportProfileView from './views/Report-Profile-View/Index'
+import AboutMe from './components/About-Me/Index'
  
 
 import { isAuthenticated } from './auth/auth'
@@ -80,7 +81,7 @@ function App () {
           <NewNavbar />
           <Switch>
               <Route path="/" exact component={Main }/>
-              <Route path="/posts" exact component={Home}/>
+              <Route path="/posts" exact component={() => (user ? <Home /> : <Redirect to="/auth" />)}/>
               <Route path="/posts/search" exact component={Home} />
               <Route path="/terms-and-conditions" exact component={Terms}/>
               <Route path="/privacy-policy" exact component={Privacy}/>
@@ -104,6 +105,7 @@ function App () {
               <Route path="/report-response" exact component={ReportResponse}/>
               <Route path="/chat-dashboard" render={() => <ChatDashboard socket={socket} />} exact />
               <Route path="/chatroom/:id" render={() => <ChatRoom socket={socket} />} exact />
+              <Route path="/about-me" exact component={AboutMe}/>
           </Switch>
           <Footer />
           <ToastContainer autoClose={3000} transition={Bounce}/>

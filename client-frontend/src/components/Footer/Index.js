@@ -8,13 +8,13 @@ const Index = () => {
 
 <div className="child_footer">
 <h3>LIFT-BUDDY</h3>
-<p> Your ride hacker</p>
+<p> Your long distance ride hacker</p>
 <p>We are here for you 24/7.</p>
 
 </div>
 
 <div className="child_footer">
-  <h3>IMPORTANT LINKS</h3>
+  <h3>QUICK LINKS</h3>
   <ul>
     <li><a href="/chat-dashboard">Inbox</a></li>
     <li><a href="/profile">Profile</a></li>
@@ -24,9 +24,9 @@ const Index = () => {
   </ul>
 </div>
 <div className="child_footer">
-  <h3>QUICK LINKS</h3>
+  <h3>IMPORTANT LINKS</h3>
   <ul>
-    <li><a href="/about-us">About Me</a></li>
+    <li><a href="/about-me">About Me</a></li>
     <li><a href="/contact-us">Contact Us</a></li>
     <li><a href="/privacy-policy">Privacy Policy</a></li>
     <li><a href="/terms-and-conditions">Terms and Conditions</a></li>

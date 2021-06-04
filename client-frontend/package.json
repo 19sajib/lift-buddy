@@ -24,6 +24,7 @@
     "lodash": "^4.17.21",
     "material-ui-chip-input": "^1.1.0",
     "moment": "^2.29.1",
+    "perfect-scrollbar": "^1.5.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-chartist": "^0.14.4",
