@@ -16,9 +16,9 @@ const Index = () => {
 <div className="child_footer">
   <h3>QUICK LINKS</h3>
   <ul>
-    <li><a href="/chat-dashboard">Inbox</a></li>
     <li><a href="/profile">Profile</a></li>
-    <li><a href="/posts">All Posts</a></li>
+    <li><a href="/shoutbox">Shoutbox</a></li>
+    <li><a href="/posts">Post Feed</a></li>
     <li><a href="/">Home Page</a></li>
     <li><a href="/auth">Sign In / Up</a></li>
   </ul>

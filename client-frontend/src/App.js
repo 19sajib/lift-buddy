@@ -14,6 +14,7 @@ import ForgetPassword from './components/Auth/ForgetPassword'
 import ResetPassword from './components/Auth/ResetPassword'
 import ChatDashboard from './components/chat/ChatDashboard'
 import ChatRoom from './components/chat/ChatRoom'
+import Shoutbox from './views/Shoutbox/Shoutbox'
 import Report from './components/Report/Report'
 import Verify from './components/Verification/ImageUpload'
 import ContactUs from './components/Contact-Us/Index'
@@ -105,6 +106,7 @@ function App () {
               <Route path="/report-response" exact component={ReportResponse}/>
               <Route path="/chat-dashboard" render={() => <ChatDashboard socket={socket} />} exact />
               <Route path="/chatroom/:id" render={() => <ChatRoom socket={socket} />} exact />
+              <Route path="/shoutbox" render={() => (user ? <Shoutbox socket={socket} /> : <Redirect to="/auth" />) } exact />
               <Route path="/about-me" exact component={AboutMe}/>
           </Switch>
           <Footer />

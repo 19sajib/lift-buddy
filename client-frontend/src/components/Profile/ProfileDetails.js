@@ -197,6 +197,7 @@ const ProfileDetails = ({ className, ...rest }) => {
              className={`${classes.spreadBox} ${classes.box}`}
         >
           <Button
+            align="center"
             color="primary"
             variant="outlined"
             component={Link}
