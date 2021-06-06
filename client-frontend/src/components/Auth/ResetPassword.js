@@ -1,5 +1,5 @@
 import React,{ useState } from 'react'
-import { Button, Container, Paper } from '@material-ui/core'
+import { Button, Container, Paper, Typography } from '@material-ui/core'
 import { useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
@@ -37,9 +37,10 @@ const ResetPassword = () => {
     return (
         <Container component="main" maxWidth="xs">
         <Paper className={classes.paper} elevation={3} variant="outlined" >
-        <form className={classes.form} >
+            <Typography variant="h5" color="secondary" gutterBottom align="center" >🔑Enter New Password</Typography>
+        <form align="center" className={classes.form} >
         <Input required="true" name="password" label="Password" handleChange={handleChange} type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword} />
-        <Button  variant="contained" color="primary" onClick={newpass} className={classes.submit}>
+        <Button fullWidth variant="contained" color="primary" onClick={newpass} className={classes.submit}>
          Change Password
         </Button>
           </form>

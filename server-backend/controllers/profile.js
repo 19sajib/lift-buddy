@@ -72,7 +72,7 @@ const verifyProfile = async (req, res) => {
         }
 
         const verify = await Verification.create({ userId, file1, file2, file3, attempt: 1, createdAt: new Date()});
-        const admin = await Admin.findOneAndUpdate({ _id: "60b3129c1fa629b327a9c546" }, { $inc: { pendingVerifiedUser: 1 }}, { new: true })
+        const admin = await Admin.findOneAndUpdate({ _id: process.env.Admin_Id }, { $inc: { pendingVerifiedUser: 1 }}, { new: true })
         res.status(200).json({ verify, message: 'We have recived your response, we will notify you through email.' });
 
 
@@ -109,7 +109,7 @@ const reportProfile = async (req, res) => {
 
     try {
       const feedback = await ReportProfile.create({ reportedId, reportedText, reportedBy, reportedAt: new Date()})
-      const admin = await Admin.findOneAndUpdate({ _id: "60b3129c1fa629b327a9c546" }, { $inc: { reportedUser: 1 }}, { new: true })
+      const admin = await Admin.findOneAndUpdate({ _id: process.env.Admin_Id }, { $inc: { reportedUser: 1 }}, { new: true })
 
       res.status(200).json({ message: 'We have recived your report. we will get back to you if nessesary!' })
       

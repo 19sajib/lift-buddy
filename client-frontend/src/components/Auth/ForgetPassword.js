@@ -1,5 +1,5 @@
 import React,{ useState } from 'react'
-import { Button, Container, Paper } from '@material-ui/core'
+import { Button, Container, Paper, Typography } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
@@ -32,9 +32,11 @@ const ForgetPassword = () => {
     return (
         <Container component="main" maxWidth="xs">
             <Paper className={classes.paper} elevation={3} variant="outlined" >
-            <form className={classes.form} >
+            <Typography color="secondary" variant="h4" align="center" gutterBottom>🔒Forgot Password?</Typography>
+            <Typography variant="body1" align="center">You can reset your password from here.</Typography>
+            <form align="center" className={classes.form} >
               <Input name="email" label="Email Address" handleChange={handleChange} type="email"/>
-               <Button  variant="contained" color="primary" onClick={getEmail} className={classes.submit}>
+               <Button  variant="contained" fullWidth color="primary" onClick={getEmail} className={classes.submit}>
                     Send Password Reset Link
                 </Button>
                 </form>

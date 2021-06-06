@@ -5,10 +5,12 @@ import { useHistory, useLocation } from 'react-router-dom';
 
 
 import { getPostsBySearch } from '../../actions/posts'
+import { isAuthenticated } from '../../auth/auth'
 import Pagination from '../Pagination/Pagination'
 import Posts from '../Posts/Posts'
 import Form from '../Form/Form'
 import useStyles from './styles'
+
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -17,6 +19,7 @@ function useQuery() {
 const Home = () => {
 
     const classes = useStyles();
+    const { user } = isAuthenticated();
     const query = useQuery();
     const page = query.get('page') || 1;
     const searchQuery = query.get('searchQuery');
@@ -27,7 +30,9 @@ const Home = () => {
     const dispatch = useDispatch();
     
     const [currentId, setCurrentId] = useState(null);
-
+    if(!user) {
+      history.push('/auth')
+    }
 
 
     const searchPost = () => {

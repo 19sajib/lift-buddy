@@ -17,7 +17,7 @@ const adminDashboard = async (req, res) => {
 
     try {
 
-        const admin = await Admin.find()
+        const admin = await Admin.findById({ _id: process.env.Admin_Id })
         console.log(admin);
         res.status(200).json({admin})
         
@@ -37,7 +37,7 @@ const adminDashboardTrafic = async (req, res) => {
     if(tabletTrafic) traficData. tabletTrafic =  tabletTrafic;
     if(mobileTrafic) traficData. mobileTrafic =  mobileTrafic;
 
-      const admin = await Admin.findOneAndUpdate({ _id: "60b3129c1fa629b327a9c546" }, { $set: traficData }, { new: true })
+      const admin = await Admin.findOneAndUpdate({ _id: process.env.Admin_Id }, { $set: traficData }, { new: true })
       console.log(admin);
       res.status(200).json({admin, message: "Data updated & you can see it now."})
       
@@ -135,7 +135,7 @@ const adminDashboardVerificationResponse = async (req, res) => {
             console.log(mail)
             const name = user[0].name ;
             const verify = await Verification.findOneAndUpdate({userId: userId}, { isSolved: true, idType, idValue}, { new: true })
-            const admin = await Admin.findOneAndUpdate({ _id: "60b1137d2fe6ed3438de8ed0" }, { $inc: { verifiedUser: 1 }}, { new: true })
+            const admin = await Admin.findOneAndUpdate({ _id: process.env.Admin_Id }, { $inc: { verifiedUser: 1 }}, { new: true })
 
             const request = mailjet.post("send").request({
                 "Messages":[
@@ -320,7 +320,7 @@ const adminDashboardHelp = async (req, res) => {
         const { mail, message } = req.body;
   try {
       const help = await Help.create({ mail, message, createdAt: new Date()})
-      const admin = await Admin.findOneAndUpdate({ _id: "60b3129c1fa629b327a9c546" }, { $inc: { totalHelp: 1 }}, { new: true })
+      const admin = await Admin.findOneAndUpdate({ _id: process.env.Admin_Id }, { $inc: { totalHelp: 1 }}, { new: true })
 
       res.status(200).json({ message: 'We have recived your query. we will get back to you soon!' })
       
@@ -396,7 +396,7 @@ const adminDashboardFeedback = async (req, res) => {
         const { mail, type, message } = req.body;
   try {
       const feedback = await Feedback.create({ mail, type, message, reportedAt: new Date()})
-      const admin = await Admin.findOneAndUpdate({ _id: "60b3129c1fa629b327a9c546" }, { $inc: { totalFeedback: 1 }}, { new: true })
+      const admin = await Admin.findOneAndUpdate({ _id: process.env.Admin_Id }, { $inc: { totalFeedback: 1 }}, { new: true })
 
       res.status(200).json({ message: 'We have recived your message. we will get back to you if nessesary!' })
       

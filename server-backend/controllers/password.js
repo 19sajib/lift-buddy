@@ -90,7 +90,7 @@ const mailjet = require ('node-mailjet')
               rightUser.resetToken = undefined
               rightUser.expireToken = undefined
               rightUser.save()
-        res.status(200).json({message: 'Password Changed Successfully.'})
+        res.status(200).json({message: 'Password Changed Successfully. Plase Log In.'})
     } catch (error) {
         console.log(error);
     }

@@ -169,7 +169,6 @@
   font-size: 16px;
   font-weight: normal;
   color: #666;
-
 }
 .inner_hero button{
   padding: 8px 15px ;
@@ -177,7 +176,7 @@
   text-decoration: none;
   text-transform: uppercase;
   font-size: 16px;
-  background-color: #3498db;
+  background-color: #002984;
   transition: .5s;
   cursor: pointer;
   border: 0px ;
@@ -275,99 +274,6 @@
 }
 
 
-
-
-/*================
- footer
-================*/
-#footer_area{
-  width: 100%;
-  clear: both;
-  background: #fff;
-  padding: 45px 0;
-}
-.inner_footer{
-  overflow: hidden;
-}
-.child_footer{
-  width: 29%;
-  float: left;
-  padding: 1%;
-  margin: 0 1% 10px;
-}
-.child_footer h3{
-  color: #666666;
-  font-size: 16px;
-  font-weight: normal;
-  text-transform: uppercase;
-  border-top: 1px solid #666666 ;
-  margin-top: 0;
-  padding-top: 5px;
-}
-
-.child_footer p{
-  color: #666666;
-  font-size: 14px;
-  margin-top: 0;
-  
-}
-
-.child_footer p a{
-  color: #b92d1f;
-  text-decoration: none;
-}
-.child_footer p a:hover{
-    color: #4e2723;
-}
-
-.child_footer ul {
-  list-style: none;
-  margin: 0;
-  padding: 0; 
-}
-.child_footer ul li {
-  border-bottom: 1px solid #666;
-  display: block; 
-}
-.child_footer ul li:last-child {
-  border-bottom: 0px solid #666;
-}
-.child_footer ul li a{
-  color:#666666 ;
-  font-size: 14px;
-  text-decoration: none;
-  padding: 10px 0;
-  background: url(../../images/ulli.png);
-  background-repeat: no-repeat;
-  padding-left: 18px;
-  background-position: center left;
-}
-.child_footer ul li a:hover{
-  color:#b92d1f ;
-}
-
-/*========================
-      COPYRIGHT AREA CSS 
-=======================*/
-
-#copyright_area{
-  background: #f2f2f2;
-  margin: 20px 0;
-}
-.inner_copyright{
-  overflow: hidden;
-  color: #919191;
-  font-size: 14px;
-}
-.left_copyright{
-  float: left;
-  width: 60%;
-}
-.right_copyright{
-  float: right;
-  width: 40%;
-  text-align: right;
-}
 
 /*==========================
       TABLET layout

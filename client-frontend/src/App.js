@@ -82,7 +82,7 @@ function App () {
           <NewNavbar />
           <Switch>
               <Route path="/" exact component={Main }/>
-              <Route path="/posts" exact component={() => (user ? <Home /> : <Redirect to="/auth" />)}/>
+              <Route path="/posts" exact component={Home}/>
               <Route path="/posts/search" exact component={Home} />
               <Route path="/terms-and-conditions" exact component={Terms}/>
               <Route path="/privacy-policy" exact component={Privacy}/>

@@ -6,6 +6,7 @@ import { Button, Typography,
      Card, CardMedia, Grid, Divider, TextField, FormHelperText } from '@material-ui/core/';
 import Paper from '@material-ui/core/Paper';
 import red from "@material-ui/core/colors/red";
+import { toast } from "react-toastify";
 
 const useStyles = makeStyles({
   table: {
@@ -86,12 +87,12 @@ const Verify = ({data, newValue}) => {
               verified, idType, idValue, userId
              })
                 .then(function (response) {
-                  console.log(response.data.message);
+                  toast.success(response.data.message);
                 })
                 .catch(function (error) {
-                  console.log(error);
+                  toast.error(error);
                 });
-              setVerified("")
+                setVerified("")
               setIdType("")
               setIdValue("")
               newValue(userId);
@@ -105,12 +106,12 @@ const Verify = ({data, newValue}) => {
               verified, reject, userId
              })
                 .then(function (response) {
-                  console.log(response.data.message);
+                  toast.success(response.data.message);
                 })
                 .catch(function (error) {
-                  console.log(error);
+                  toast.error(error);
                 });
-            setVerified("")
+                setVerified("")
             setReject("")
             newValue(userId)
           }
@@ -178,6 +179,7 @@ const Verify = ({data, newValue}) => {
                 className={classes.fileInput}
                 variant="outlined"
               >
+                <option value=""></option>
                 <option value="nid">National Identity Card</option>
                 <option value="passport">Passport</option>
                 <option value="dl">Driving Licenes</option>

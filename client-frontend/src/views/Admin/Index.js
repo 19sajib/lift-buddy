@@ -15,8 +15,8 @@ const Index = (result) => {
     React.useEffect(() => {
       Axios.post('http://localhost:8080/admin/dashboard')
         .then(function (response) {
-          setAdmin(response.data.admin[0]);
-          console.log(response.data.admin[0]);
+          setAdmin(response.data.admin);
+          console.log(response.data.admin);
         })
         .catch(function (error) {
           console.log(error);

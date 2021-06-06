@@ -151,19 +151,21 @@ const Profile = ({ className, ...rest }) => {
                     </Typography>
             </div> 
 
+            { (formData.state && formData.country) &&
             <div style={{
                 display: 'flex',
                 alignItems: 'center',
                 flexWrap: 'wrap',
             }}>
                 <HomeIcon />
-                    { (formData.state && formData.country) &&
+                    
                     <Typography
                         variant="subtitle1"
                     >
                         {`${formData.state}, ${formData.country}`} 
-                    </Typography>}
-            </div> 
+                    </Typography>
+            </div> }
+            
           <div style={{
                 display: 'flex',
                 alignItems: 'center',

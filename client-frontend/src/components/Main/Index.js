@@ -17,6 +17,7 @@ const Index = () => {
                 <img src={im} alt="HERO" className="alinegleft"/>
                 <h2>Lift-Buddy</h2>
                 <p>Your Long Distance Ride Hacker</p>
+                <p>If you have extra space in your car, please share it with other people. By posting your travel route, available seats, and rent per head. That’s it.</p>
                 <button><a href="/posts">Check Now</a></button>
                 {/* <a href="#">read more  	&gt;</a> */}
             </div>
