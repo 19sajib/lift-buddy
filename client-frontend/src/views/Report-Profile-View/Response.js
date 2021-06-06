@@ -1,9 +1,9 @@
 import React from 'react'
 import Axios from 'axios'
-
+import moment from 'moment'
 import Prfile from './ProfileView/View'
 import useStyles from './style'
-import { CircularProgress, Paper, Typography, Divider, Grid, TextField, Button, FormHelperText } from '@material-ui/core'
+import { Typography, Divider, Grid, TextField, Button, FormHelperText } from '@material-ui/core'
 import { toast } from "react-toastify";
 
 const Response = ({data, newValue}) => {
@@ -116,7 +116,7 @@ const Response = ({data, newValue}) => {
             <Divider variant="middle" />
             <Typography className={classes.title} variant="h6" >Reported Profile: {data.reportedId}</Typography>
             <Typography className={classes.title} variant="h6" >Report Text: {data.reportedText}</Typography>
-            <Typography className={classes.title} variant="body1" >Report Time: {data.reportedAt}</Typography>
+            <Typography className={classes.title} variant="body1" >Report Time: {moment(data.reportedAt).format('YYYY-MM-DD hh:mm A')}</Typography>
             <Typography className={classes.title} variant="body1" >Reported By: {data.reportedBy}</Typography>
             <Divider variant="middle" />
             <Grid className={classes.space} container spacing={3}  > 

@@ -1,6 +1,6 @@
 import React from 'react'
 import Axios from 'axios'
-
+import moment from 'moment'
 import Post from './Post/Post'
 import useStyles from './style'
 import { CircularProgress, Paper, Typography, Divider, Grid, TextField, Button, FormHelperText } from '@material-ui/core'
@@ -132,7 +132,7 @@ const Response = ({data, newValue}) => {
             <Typography className={classes.title} variant="h6" >Reported Post Id: {data.reportedPost}</Typography>
             <Typography className={classes.title} variant="body1" >Post Owner: {data.postOwner}</Typography>
             <Typography className={classes.title} variant="h6" >Report Text: {data.reportedText}</Typography>
-            <Typography className={classes.title} variant="body1" >Report Time: {data.createdAt}</Typography>
+            <Typography className={classes.title} variant="body1" >Report Time: {moment(data.createdAt).format('YYYY-MM-DD hh:mm A')}</Typography>
             <Typography className={classes.title} variant="body1" >Reported By: {data.reportedBy}</Typography>
             <Divider variant="middle" />
             <Grid className={classes.space} container spacing={3}  > 
