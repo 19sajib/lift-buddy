@@ -21,7 +21,7 @@ const getPosts = async (req, res) => {
         const LIMIT = 6;
         const startIndex = (Number(page) - 1) * LIMIT; // get the starting index of every page
     
-        const total = await PostMessage.countDocuments({});
+        const total = await PostMessage.countDocuments({hideAfter: { $gt:Date.now()}});
         const posts =await PostMessage.find({hideAfter: { $gt:Date.now()}}).sort({hideAfter: 1}).limit(LIMIT).skip(startIndex);
 
         res.json({ data: posts, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT)});
@@ -55,7 +55,7 @@ const createPost = async (req, res) => {
     // Creating chatroom
     const user = await User.findById(post.creator);
     console.log(user);
-    const name = `${post.source} to ${post.destination} with ${post.name} at ${moment(post.leavingAt).format('YYYY-MM-DD hh:mm A')}`;
+    const name = `${post.source} to ${post.destination} with ${post.name} at ${moment(post.leavingTime).format('YYYY-MM-DD hh:mm A')}`;
     if (user) {
         const chatroom = new ChatRoom({
             name,user: user._id, userName: user.name, userAvatar: user.avatar, leavingAt: post.leavingTime, createdAt: new Date()

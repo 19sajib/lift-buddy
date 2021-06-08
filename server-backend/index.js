@@ -51,7 +51,7 @@ const server = app.listen(PORT, () => console.log(`Server is up and running on p
 // Connecting to mongoDB
 const CONNECTION_URL = process.env.CONNECTION_URL
 
-mongoose.connect(CONNECTION_URL, {
+mongoose.connect('mongodb://localhost:27017/', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
