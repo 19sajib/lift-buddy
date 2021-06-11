@@ -141,7 +141,7 @@ const signin = async (req, res) => {
         const existingUser = await User.findOne({ email })
 
         if(!existingUser) return res.status(404).json({ message: "User doesn't exist."});
-        if(existingUser.isBanned) return res.status(403).json({ message: "We have banned your account. If you have any question contact us."});
+        if(existingUser?.isBanned) return res.status(403).json({ message: "We have banned your account. If you have any question contact us."});
 
         const isPasswordCorrect = await bcrypt.compare(password, existingUser.password)
 
@@ -197,7 +197,7 @@ const googleSignIn = async (req, res) => {
                               if (err) {
                                 res.status(400).json({ message: 'Something went worng!'})
                               } else {
-                                  if(user.isBanned) return res.status(403).json({ message: "We have banned your account. If you have any question contact us."});
+                                 if(user?.isBanned) return res.status(403).json({ message: "We have banned your account. If you have any question contact us."});
                                     if (user) {
                                       const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, { expiresIn: "1h" })
                                       const { _id, email, name, avatar, isAdmin, isVerified } = user
@@ -244,7 +244,7 @@ const facebookSignIn = async (req, res) => {
     const {email, name, picture} = data
 
     const user = await User.findOne({email})
-    if(user.isBanned) return res.status(403).json({ message: "We have banned your account. If you have any question contact us."});
+    if(user?.isBanned) return res.status(403).json({ message: "We have banned your account. If you have any question contact us."});
     if (user) {
       const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, { expiresIn: "1h" })
       const { _id, email, name, avatar } = user

@@ -157,7 +157,7 @@ const Profile = ({ className, ...rest }) => {
                     <Typography
                         variant="subtitle1"
                     >
-                        contactsajib@gmail.com
+                        contact2sajib@gmail.com
                     </Typography>
             </div> 
 
