@@ -6,8 +6,11 @@ import useStyles from './style'
 import { Typography, Divider, Grid, TextField, Button, FormHelperText } from '@material-ui/core'
 import { toast } from "react-toastify";
 
+import load from '../../images/load2-unscreen.gif';
+
 const Response = ({data, newValue}) => {
     const classes = useStyles();
+    const [isLoading, setIsLoading] = React.useState()
     const [profile, setProfile] = React.useState()
     const [userId2, setUserId2] = React.useState()
     const [userIdError2, setUserIdError2] = React.useState()
@@ -29,10 +32,12 @@ const Response = ({data, newValue}) => {
         if (!userId2) {
             setUserIdError2('Please Enter the user id.')
         } else {
+            setIsLoading(true)
             Axios.post('http://localhost:8080/users/view-profile', { id: userId2 })
         .then(function (response) {
           setProfile(response.data.user);
-          console.log(response.data);
+          setIsLoading(false)
+          //console.log(response.data);
         })
         .catch(function (error) {
           console.log(error);
@@ -132,6 +137,7 @@ const Response = ({data, newValue}) => {
              color="primary" >
                  Fetch Profile
             </Button>
+            { isLoading && <div align="center" > <img height="350px" src={load} alt="Loading"/> </div>}
             {profile && <Prfile profile={profile} />}
             </Grid>
             <Grid item xs={12} sm={6}>

@@ -1,10 +1,12 @@
 import React from 'react'
 import Axios from 'axios'
-import { CircularProgress, Divider, Typography, Grid } from '@material-ui/core'
+import { Divider, Typography, Grid } from '@material-ui/core'
 import {useHistory} from 'react-router-dom'
 
 import Feedback from './Feedback'
 import { isAuthenticated } from '../../auth/auth'
+
+import load from '../../images/load-dot-unscreen.gif';
 
 const Index = () => {
 
@@ -14,15 +16,19 @@ const Index = () => {
   if(!user?.isAdmin) {
     history.push('/')
   }
+
+    const [isLoading, setIsLoading] = React.useState(false)
     const [empty, setEmpty] = React.useState(false)
     const [data, setData] = React.useState()
     const [sortData, setSortData] = React.useState([])
 
     React.useEffect(() => {
+      setIsLoading(true)
       Axios.post('http://localhost:8080/admin/dashboard/feedback-view')
         .then(function (response) {
           setData(response.data.feedback);
-          console.log(response.data.feedback);
+          setIsLoading(false)
+          //console.log(response.data.feedback);
         })
         .catch(function (error) {
           console.log(error);
@@ -49,6 +55,11 @@ const Index = () => {
       setSortData(filterData)
       }
     }  
+
+    if(!isLoading && !data?.length) {
+      return <Typography variant="h4" color="secondary" align="center">No Feedback / Reported Issue Here</Typography> 
+    }
+
     return (
       <div>
           { empty === true ? (<Typography color="secondary" variant="h6" align="center" >Currently No Feedback and Issues Here!</Typography>)
@@ -62,7 +73,7 @@ const Index = () => {
     <Grid  container alignItems="stretch" spacing={3}>
 
           { !sortData.length ?  (
-              !data ? <CircularProgress/>: (
+            isLoading ? <div align="center" > <img src={load} alt="loading"/> </div>: (
                   data.map(data =>  (
                 <Grid key={data._id} item xs={12} sm={12} md={6} lg={6}> 
                <Feedback key={data._id} data={data} newValue={newValue} />

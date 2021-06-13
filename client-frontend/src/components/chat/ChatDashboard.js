@@ -12,14 +12,15 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import Avatar from "@material-ui/core/Avatar";
 import AvatarGroup from '@material-ui/lab/AvatarGroup';
-
+import Load from '../../images/Inbox-load.gif';
 
 import { isAuthenticated } from '../../auth/auth'
+import { Divider } from "@material-ui/core";
 
 
 const useStyles = makeStyles((theme) => ({
   text: {
-    padding: theme.spacing(2, 2, 0)
+    padding: theme.spacing(2, 2, 0),
   },
   paper: {
     paddingBottom: 50
@@ -54,15 +55,18 @@ const ChatDashboard = (props) => {
 
   const classes = useStyles();
 
+  const [loading, setLoading] = React.useState(false);
   const [chatrooms, setChatrooms] = React.useState([]);
   const [chatroomName, setChatroomName] = React.useState("");
 
   const getChatrooms = () => {
+    setLoading(true)
     axios
       .post("http://localhost:8080/chatroom", {
          userId })
       .then((response) => {
         setChatrooms(response.data);
+        setLoading(false);
         console.log(response.data);
       })
       .catch((err) => {
@@ -94,9 +98,11 @@ const ChatDashboard = (props) => {
     <React.Fragment>
       <CssBaseline />
       <Paper square className={classes.paper}>
-        <Typography className={classes.text} variant="h5" gutterBottom>
+        <Typography className={classes.text} align="center" color="primary" variant="h3" gutterBottom>
           Inbox
         </Typography>
+        <Divider variant="middle"/>
+        {loading ? <div align="center"><img height="350px" src={Load} alt="Loading"/> </div>:
         <List className={classes.list}>
           {chatrooms.map((chatroom) => (
             <React.Fragment key={chatroom._id} >
@@ -112,7 +118,7 @@ const ChatDashboard = (props) => {
               </ListItem>
             </React.Fragment>
           ))}
-        </List>
+        </List>}
       </Paper>
     </React.Fragment>
   );

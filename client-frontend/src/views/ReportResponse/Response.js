@@ -5,9 +5,11 @@ import Post from './Post/Post'
 import useStyles from './style'
 import { CircularProgress, Paper, Typography, Divider, Grid, TextField, Button, FormHelperText } from '@material-ui/core'
 import { toast } from "react-toastify";
+import load from '../../images/load2-unscreen.gif';
 
 const Response = ({data, newValue}) => {
     const classes = useStyles();
+    const [isLoading, setIsLoading] = React.useState()
     const [post, setPost] = React.useState()
     const [postId2, setPostId2] = React.useState()
     const [postIdError2, setPostIdError2] = React.useState()
@@ -31,9 +33,11 @@ const Response = ({data, newValue}) => {
         if (!postId2) {
             setPostIdError('Please Enter the post id.')
         } else {
+        setIsLoading(true)
             Axios.post('http://localhost:8080/posts/single-post', { postId2 })
         .then(function (response) {
           setPost(response.data);
+          setIsLoading(false)
           console.log(response.data);
         })
         .catch(function (error) {
@@ -148,6 +152,7 @@ const Response = ({data, newValue}) => {
              color="primary" >
                  Fetch Post
             </Button>
+            { isLoading && <div align="center" > <img height="300px" src={load} alt="Loading"/> </div>}
             {post && <Post post={post} />}
             </Grid>
             <Grid item xs={12} sm={6}>
