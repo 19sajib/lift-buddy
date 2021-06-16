@@ -1,7 +1,16 @@
-import { FETCH_ALL, FETCH_BY_SEARCH, CREATE, UPDATE, DELETE, LIKE, REPORT } from '../constants/actionTypes'
+import { FETCH_ALL, FETCH_BY_SEARCH, CREATE, UPDATE, DELETE, LIKE, REPORT, 
+    START_LOADING, END_LOADING, R_LOADING, RE_LOADING } from '../constants/actionTypes'
 // eslint-disable-next-line
-export default ( state = [], action) => {
+export default ( state = { isLoading: true, rLoading: false, posts: [] }, action) => {
     switch(action.type) {
+        case START_LOADING:
+         return { ...state, isLoading: true };
+        case END_LOADING:
+         return { ...state, isLoading: false };
+        case R_LOADING:
+            return { ...state, rLoading: true };
+        case RE_LOADING:
+            return { ...state, rLoading: false };
         case DELETE:
             return {...state, posts: state.posts.filter((post) => post._id !== action.payload)}
         case UPDATE:

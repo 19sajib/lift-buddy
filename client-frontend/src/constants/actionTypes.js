@@ -47,3 +47,5 @@ export const CREATPOST = 'CREATPOST'
 //Loading Constant
 export const START_LOADING = 'START_LOADING'
 export const END_LOADING = 'END_LOADING'
+export const R_LOADING = 'R_LOADING'
+export const RE_LOADING = 'RE_LOADING'

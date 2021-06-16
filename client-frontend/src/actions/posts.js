@@ -1,5 +1,5 @@
 import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE, REPORT, ERROR, SUCCESS, WARN, INFO,
-         FETCH_BY_SEARCH, CREATPOST } from '../constants/actionTypes'
+         FETCH_BY_SEARCH, CREATPOST, START_LOADING, END_LOADING, R_LOADING, RE_LOADING } from '../constants/actionTypes'
 import * as api from '../api';
 
 
@@ -22,10 +22,11 @@ export const postReport = ({ReportData, history}) => async (dispatch) => {
 
 export const getPosts= (page) => async (dispatch) => {
     try {
+        dispatch({ type: START_LOADING });
         const {data: { data, currentPage, numberOfPages } } = await api.fetchPosts(page);
 
         dispatch({ type: FETCH_ALL, payload: { data, currentPage, numberOfPages }})
-
+        dispatch({ type: END_LOADING });
     } catch (error) {
         console.log(error);
     }
@@ -33,12 +34,12 @@ export const getPosts= (page) => async (dispatch) => {
 
 export const getPostsBySearch = (searchQuery) => async (dispatch) => {
     try {
-       // console.log(searchQuery);
-     // dispatch({ type: START_LOADING });
-      const { data: { data } } = await api.fetchPostsBySearch(searchQuery);
-     //console.log(data);
+         // console.log(searchQuery);
+      dispatch({ type: START_LOADING });
+    const { data: { data } } = await api.fetchPostsBySearch(searchQuery);
+        //console.log(data);
      dispatch({ type: FETCH_BY_SEARCH, payload: { data }  });
-    //   dispatch({ type: END_LOADING });
+     dispatch({ type: END_LOADING });
     } catch (error) {
       console.log(error);
     }
@@ -83,9 +84,11 @@ export const deletePost = (id) => async (dispatch) => {
 
 export const likePost = ({postId, userId}) => async (dispatch) => {
     try {
+        dispatch({ type: R_LOADING });
         const { data } = await api.likePost({postId, userId})
        // console.log(data);
         dispatch({ type: LIKE, payload: data})
+        dispatch({ type: RE_LOADING });
         dispatch({ type: SUCCESS, data})
     } catch (error) {
        // console.log(error);

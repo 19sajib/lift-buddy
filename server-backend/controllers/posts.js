@@ -129,35 +129,35 @@ const likePost = async (req, res) =>{
             const updateChat = await ChatRoom.findOneAndUpdate({ _id: post.chatroomId}, chat, { new: true })
             //console.log(user);
 
-            // const request = mailjet.post("send").request({
-            //     "Messages":[
-            //       {
-            //         "From": {
-            //           "Email": "contact2sajib@gmail.com",
-            //           "Name": "Abu"
-            //         },
-            //         "To": [
-            //           {
-            //             "Email": user.email,
-            //             "Name": user.name
-            //           }
-            //         ],
-            //         "Subject": "Lift-Buddy - Your ride has been confirmed.",
-            //         "TextPart": "Your ride has been confirmed.",
-            //         "HTMLPart": `<h3 align="center" style="color:green;" >You have confirmed a ride with ${post.name}. Your can go ${post.source} to ${post.destination} with ${post.name}.</h3>
-            //                      <br /> <h3 align="center" >Remindar: ${post.name} leaving at: ${moment(post.leavingAt).format('YYYY-MM-DD hh:mm A')}. Make sure you don't miss the ride. 
-            //                      And you are now in a chat group with ${post.name}. You can discuss picking points and so more.</h3>
-            //                      <br />Have a nice journey.
-            //                      <br />Have a nice day!`,
-            //         "CustomID": "AppGettingStartedTest"
-            //       }
-            //     ]
-            //   })
-            //   request.then((result) => { console.log(result.body)})
-            //     .catch((err) => {
-            //       console.log(err.statusCode)
-            //       console.log(err)
-            //     })
+            const request = mailjet.post("send").request({
+                "Messages":[
+                  {
+                    "From": {
+                      "Email": "contact2sajib@gmail.com",
+                      "Name": "Abu"
+                    },
+                    "To": [
+                      {
+                        "Email": user.email,
+                        "Name": user.name
+                      }
+                    ],
+                    "Subject": "Lift-Buddy - Your ride has been confirmed.",
+                    "TextPart": "Your ride has been confirmed.",
+                    "HTMLPart": `<h3 align="center" style="color:green;" >You have confirmed a ride with ${post.name}. Your can go ${post.source} to ${post.destination} with ${post.name}.</h3>
+                                 <br /> <h3 align="center" >Remindar: ${post.name} leaving at: ${moment(post.leavingAt).format('YYYY-MM-DD hh:mm A')}. Make sure you don't miss the ride. 
+                                 And you are now in a chat group with ${post.name}. You can discuss picking points and so more.</h3>
+                                 <br />Have a nice journey.
+                                 <br />Have a nice day!`,
+                    "CustomID": "AppGettingStartedTest"
+                  }
+                ]
+              })
+              request.then((result) => { console.log(result.body)})
+                .catch((err) => {
+                  console.log(err.statusCode)
+                  console.log(err)
+                })
 
 
             res.status(201).json({ updatedPost ,message: "Your ride has been confirmed. For sure please check your email."})
@@ -174,33 +174,33 @@ const likePost = async (req, res) =>{
             const updateUser = await User.findOneAndUpdate({ _id: userId }, user, { new: true })
             const updateChat = await ChatRoom.findOneAndUpdate({ _id: post.chatroomId}, chat, { new: true })
             //console.log(user);
-            // const request = mailjet.post("send").request({
-            //     "Messages":[
-            //       {
-            //         "From": {
-            //           "Email": "contact2sajib@gmail.com",
-            //           "Name": "Abu"
-            //         },
-            //         "To": [
-            //           {
-            //             "Email": user.email,
-            //             "Name": user.name
-            //           }
-            //         ],
-            //         "Subject": "Lift-Buddy - Your ride has been canceled.",
-            //         "TextPart": "Your ride has been canceled.",
-            //         "HTMLPart": `<h3 align="center" style="color:red;" >You have canceled a ride with ${post.name}. </h3>
-            //                      <br /> <h3 align="center" >Hope we will see you soon on another ride.</h3>
-            //                      <br />Have a nice day!`,
-            //         "CustomID": "AppGettingStartedTest"
-            //       }
-            //     ]
-            //   })
-            //   request.then((result) => { console.log(result.body)})
-            //     .catch((err) => {
-            //       console.log(err.statusCode)
-            //       console.log(err)
-            //     })
+            const request = mailjet.post("send").request({
+                "Messages":[
+                  {
+                    "From": {
+                      "Email": "contact2sajib@gmail.com",
+                      "Name": "Abu"
+                    },
+                    "To": [
+                      {
+                        "Email": user.email,
+                        "Name": user.name
+                      }
+                    ],
+                    "Subject": "Lift-Buddy - Your ride has been canceled.",
+                    "TextPart": "Your ride has been canceled.",
+                    "HTMLPart": `<h3 align="center" style="color:red;" >You have canceled a ride with ${post.name}. </h3>
+                                 <br /> <h3 align="center" >Hope we will see you soon on another ride.</h3>
+                                 <br />Have a nice day!`,
+                    "CustomID": "AppGettingStartedTest"
+                  }
+                ]
+              })
+              request.then((result) => { console.log(result.body)})
+                .catch((err) => {
+                  console.log(err.statusCode)
+                  console.log(err)
+                })
 
 
             res.status(201).json({ updatedPost ,message: "Your ride has been canceled. For sure please check your email."})
