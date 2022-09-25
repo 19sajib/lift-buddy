@@ -45,7 +45,7 @@ const signup = async (req, res) => {
     "Messages":[
       {
         "From": {
-          "Email": "contact2sajib@gmail.com",
+          "Email": "pay2sajib@gmail.com",
           "Name": "Abu"
         },
         "To": [

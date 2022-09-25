@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
 import HomeIcon from '@material-ui/icons/Home';
 import MailIcon from '@material-ui/icons/Mail';
 import CallIcon from '@material-ui/icons/Call';
@@ -9,10 +8,8 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
-import Icon from '@material-ui/core/Icon';
-import {Avatar, Box, Button,  CardActions, Dialog, DialogContent, DialogContentText, DialogActions,  
-       DialogTitle, Divider,  Typography,  makeStyles, Grid, CircularProgress, TextField, FormHelperText } from '@material-ui/core';
-import { grey, red, blue, pink } from "@material-ui/core/colors";
+import {Avatar, Box, Divider,  Typography,  makeStyles, Grid, } from '@material-ui/core';
+import { blue, pink } from "@material-ui/core/colors";
 
 import pp from "../../images/pp.jpg"
 

@@ -40,7 +40,7 @@ const Home = () => {
           dispatch(getPostsBySearch({ search}));
           history.push(`/posts/search?searchQuery=${search || 'none'}`);
         } else {
-          history.push('/');
+          history.push('/posts');
         }
       };
     

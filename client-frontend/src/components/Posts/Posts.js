@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Grid } from '@material-ui/core'
+import { Grid, Typography } from '@material-ui/core'
 import load from '../../images/load.gif'
 import loading from '../../images/ll.gif'
 
@@ -35,6 +35,8 @@ const Posts = ({ setCurrentId }) => {
         
     }
 
+
+    if (!posts.length && !isLoading) return <Typography variant="h3" align="center" color="secondary" >No Posts Found</Typography> ;
 
     return (
 

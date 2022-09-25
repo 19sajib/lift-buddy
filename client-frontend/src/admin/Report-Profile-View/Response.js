@@ -128,7 +128,7 @@ const Response = ({data, newValue}) => {
             <Grid item xs={12} sm={6}>
              <TextField 
              className={classes.fileInput} onChange={searchPost}
-             variant="outlined" label="Enter Post Id" />  
+             variant="outlined" label="Enter Profile Id" />  
              <FormHelperText className={classes.error} >{userIdError2}</FormHelperText>
              <Button 
              onClick={fetchProfile}

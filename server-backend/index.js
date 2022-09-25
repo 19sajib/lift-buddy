@@ -67,7 +67,11 @@ mongoose.connect(CONNECTION_URL, {
 // Socket.io setting from here
 
 const jwt = require("jsonwebtoken")
-const io = require("socket.io")(server)
+const io = require("socket.io")(server, {
+  cors: {
+    origin: '*',
+  }
+});
 
 //Bring in the models
 
