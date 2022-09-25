@@ -1,0 +1,163 @@
+.chatroomPage {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    margin: -8px;
+  }
+  
+  .chatroomSection {
+    background-color: #eee;
+    width: 60vw;
+    height: 70vh;
+    margin: auto;
+    border: 1px solid rgb(212, 212, 212);
+    position: relative;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #719ECE;
+  }
+  
+  .chatroomContent {
+    position: absolute;
+    top: 2.5rem;
+    left: 0;
+    right: 0;
+    bottom: 3.5rem;
+    padding: 0.5rem;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .chatroomActions {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0.5rem;
+    display: grid;
+    grid-template-columns: 1fr 72px;
+    grid-gap: 1rem;
+    border-top: 2px solid #eee;
+  }
+  
+  .chatroomActions button {
+    padding: auto;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .message {
+    margin-bottom: 0.25rem;
+  }
+  
+  .otherMessage {
+    color: #0099cc;
+    font-weight: bold;
+    justify-content: flex-start;
+  }
+  
+  .ownMessage {
+    color: #00cc00;
+    font-weight: bold;
+    justify-content: flex-end;
+  }
+
+  .messageBox {
+    background: #F3F3F3;
+    border-radius: 20px;
+    padding: 5px 20px;
+    color: white;
+    display: inline-block;
+    max-width: 80%;
+  }
+  
+  .messageText {
+    width: 100%;
+    letter-spacing: 0;
+    float: left;
+    font-size: 1.1em;
+    word-wrap: break-word;
+  }
+  
+  .messageText img {
+    vertical-align: middle;
+  }
+  
+  .messageContainer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 5%;
+    margin-top: 3px;
+  }
+  
+  .sentText {
+    display: flex;
+    align-items: center;
+    font-family: Helvetica;
+    color: #828282;
+    letter-spacing: 0.3px;
+  }
+  
+  .pl-10 {
+    padding-left: 10px;
+  }
+  
+  .pr-10 {
+    padding-right: 10px;
+  }
+  
+  .justifyStart {
+    justify-content: flex-start;
+  }
+  
+  .justifyEnd {
+    justify-content: flex-end;
+  }
+  
+  .colorWhite {
+    color: white;
+  }
+  
+  .colorDark {
+    color: #0c0c0c;
+  }
+  
+  .backgroundBlue {
+    background: #2979FF;
+  }
+  
+  .backgroundLight {
+    background: #38c2b6;
+  }
+
+  .form {
+    display: flex;
+    border-top: 2px solid #D3D3D3;
+  }
+  
+  .input {
+    padding: 4px;
+    border: 1px solid #D3D3D3;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 1.5em;
+  }
+  
+  input:focus, textarea:focus, select:focus{
+    outline: none;
+    box-shadow: 0 0 10px #719ECE;
+  }
+  
+  .sendButton {
+    color: #fff !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: #2979FF;
+    padding: 4px;
+    display: inline-block;
+    border: none;
+    width: 20%;
+  }
+  

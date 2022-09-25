@@ -3,39 +3,46 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import { Container } from '@material-ui/core'
 import io from 'socket.io-client'
 
+
+                //  --> Components <--
 // import Navbar from './components/Navbar/Navbar'
 // import NavbarNew from './components/Navbar/NavbarNew'
+import Footer from './components/Footer/Index'
+import NewNavbar from './components/Navbar/NewNavBar'
+
+
+                //  --> Pages <--
 import Auth from './pages/Auth/Auth'
-import Home from './components/Home/Home'
-import proHome from './components/Home/proPostHome/Home'
+import Home from './pages/Home/Home'
+import Main from './pages/Main/Index'
 import Account from './pages/Profile/Index'
+import ChatRoom from './pages/Chat/ChatRoom'
+import proHome from './pages/Home/proPostHome/Home'
+import ChatDashboard from './pages/Chat/ChatDashboard'
 import AccountActivation from './pages/Auth/ActiveAccount'
 import ForgetPassword from './pages/Auth/ForgetPassword'
 import ResetPassword from './pages/Auth/ResetPassword'
-import ChatDashboard from './components/chat/ChatDashboard'
-import ChatRoom from './components/chat/ChatRoom'
-import Shoutbox from './pages/Shoutbox/Shoutbox'
-import Report from './components/Report/Report'
 import Verify from './pages/Verification/ImageUpload'
-import ContactUs from './pages/Contact-Us/Index'
-import ContactUsHelp from './admin/ContactHelp/Index'
-import Terms from './legal/terms'
-import Privacy from './legal/privacy'
-import AdminPanel from './admin/Admin/Index'
-import UserVerification from './admin/UserVerification/Index'
-import ReportResponse from './admin/ReportResponse/Index'
-import Trafic from './admin/Trafic/Index'
-import Main from './pages/Main/Index'
-import Footer from './components/Footer/Index'
+import Shoutbox from './pages/Shoutbox/Shoutbox'
+import Terms from './pages/Legal/terms'
+import Report from './pages/Report/Report'
+import Privacy from './pages/Legal/privacy'
+import AboutMe from './pages/About-Me/Index'
 import Feedback from './pages/Feedback/Index'
+import ContactUs from './pages/Contact-Us/Index'
+
+                //  --> Admin <--
+import Trafic from './admin/Trafic/Index'
+import AdminPanel from './admin/Admin/Index'
 import FeedbackView from './admin/Feedback/Index'
 import ViewProfile from './admin/ProfileView/View'
+import ContactUsHelp from './admin/ContactHelp/Index'
+import ReportResponse from './admin/ReportResponse/Index'
+import UserVerification from './admin/UserVerification/Index'
 import ReportProfileView from './admin/Report-Profile-View/Index'
-import AboutMe from './pages/About-Me/Index'
  
 
 import { isAuthenticated } from './auth/auth'
-import NewNavbar from './components/Navbar/NewNavBar'
 
 import { Bounce, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
