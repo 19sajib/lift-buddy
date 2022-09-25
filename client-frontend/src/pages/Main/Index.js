@@ -1,10 +1,10 @@
 import React from 'react'
-import about from '../../images/aa.jpg'
-import help from '../../images/help.png'
-import verify from '../../images/verify.png'
-import confirm from '../../images/confirm.png'
-import chat from '../../images/chat.png'
-import im from '../../images/ride.jpg'
+import about from '../../assests/images/aa.jpg'
+import help from '../../assests/images/help.png'
+import verify from '../../assests/images/verify.png'
+import confirm from '../../assests/images/confirm.png'
+import chat from '../../assests/images/chat.png'
+import im from '../../assests/images/ride.jpg'
 
 import './index.css'
 

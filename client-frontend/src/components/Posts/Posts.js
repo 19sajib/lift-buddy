@@ -1,8 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Grid, Typography } from '@material-ui/core'
-import load from '../../images/load.gif'
-import loading from '../../images/ll.gif'
+import load from '../../assests/images/load.gif'
+import loading from '../../assests/images/ll.gif'
 
 import Post from './Post/Post'
 import useStyles from './styles'

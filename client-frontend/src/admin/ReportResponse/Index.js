@@ -5,7 +5,7 @@ import Response from './Response'
 import { CircularProgress, Divider, Typography } from '@material-ui/core'
 
 import { isAuthenticated } from '../../auth/auth'
-import load from '../../images/load-dot-unscreen.gif';
+import load from '../../assests/images/load-dot-unscreen.gif';
 
 
 

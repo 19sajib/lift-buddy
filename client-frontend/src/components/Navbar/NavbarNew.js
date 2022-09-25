@@ -11,7 +11,7 @@ import decode from 'jwt-decode'
 import { Link, useHistory, useLocation } from 'react-router-dom'
 
 
-import logo from '../../images/name.png'
+import logo from '../../assests/images/name.png'
 import { isAuthenticated, logout } from '../../auth/auth'
 
 const useStyles = makeStyles((theme) => ({

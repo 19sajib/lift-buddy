@@ -11,7 +11,7 @@ import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import {Avatar, Box, Divider,  Typography,  makeStyles, Grid, } from '@material-ui/core';
 import { blue, pink } from "@material-ui/core/colors";
 
-import pp from "../../images/pp.jpg"
+import pp from "../../assests/images/pp.jpg"
 
 
 const useStyles = makeStyles((theme) => ({

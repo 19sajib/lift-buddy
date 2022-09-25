@@ -12,7 +12,7 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import Avatar from "@material-ui/core/Avatar";
 import AvatarGroup from '@material-ui/lab/AvatarGroup';
-import Load from '../../images/Inbox-load.gif';
+import Load from '../../assests/images/Inbox-load.gif';
 
 import { isAuthenticated } from '../../auth/auth'
 import { Divider } from "@material-ui/core";

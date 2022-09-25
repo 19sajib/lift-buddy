@@ -1,5 +1,5 @@
 import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE, REPORT, ERROR, SUCCESS, WARN, INFO,
-         FETCH_BY_SEARCH, CREATPOST, START_LOADING, END_LOADING, R_LOADING, RE_LOADING } from '../constants/actionTypes'
+         FETCH_BY_SEARCH, CREATPOST, START_LOADING, END_LOADING, R_LOADING, RE_LOADING } from '../assets/constants/actionTypes'
 import * as api from '../api';
 
 

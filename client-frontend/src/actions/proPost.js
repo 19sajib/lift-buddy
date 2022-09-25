@@ -1,4 +1,4 @@
-import { CREATE_PRO_POST, DELETE_PRO_POST, READ_PRO_POST  } from '../constants/actionTypes'
+import { CREATE_PRO_POST, DELETE_PRO_POST, READ_PRO_POST  } from '../assets/constants/actionTypes'
 
 import * as api from '../api';
 

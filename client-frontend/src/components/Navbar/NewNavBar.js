@@ -20,9 +20,9 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import LiveHelpIcon from '@material-ui/icons/LiveHelp';
 
 
-import logo from '../../images/logo.png'
+import logo from '../../assests/images/logo.png'
 import { isAuthenticated, logout } from '../../auth/auth'
-import { LOGOUTALRET } from '../../constants/actionTypes'
+import { LOGOUTALRET } from '../../assets/constants/actionTypes'
 
 const useStyles = makeStyles((theme) => ({
   grow: {

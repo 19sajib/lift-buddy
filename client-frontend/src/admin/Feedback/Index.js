@@ -6,7 +6,7 @@ import {useHistory} from 'react-router-dom'
 import Feedback from './Feedback'
 import { isAuthenticated } from '../../auth/auth'
 
-import load from '../../images/load-dot-unscreen.gif';
+import load from '../../assests/images/load-dot-unscreen.gif';
 
 const Index = () => {
 

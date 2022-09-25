@@ -1,5 +1,5 @@
 import {  AUTH, FORGET_PASSWORD, RESET_PASSWORD, VERIFY_PROFILE,
-          LOGIN, GOOGLE_LOGIN, FACEBOOK_LOGIN, GET_PROFILE, UPDATE_PROFILE, SUCCESS, ERROR } from '../constants/actionTypes'
+          LOGIN, GOOGLE_LOGIN, FACEBOOK_LOGIN, GET_PROFILE, UPDATE_PROFILE, SUCCESS, ERROR } from '../assets/constants/actionTypes'
 import * as api from '../api';
 
 export const signin = (formData, history) => async (dispatch) => {

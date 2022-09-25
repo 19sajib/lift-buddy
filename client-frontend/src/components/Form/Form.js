@@ -14,7 +14,7 @@ import SourcePlaceAuto from './SourcePlaceAuto'
 import useStyles from './styles'
 import { createPost, updatePost } from '../../actions/posts'
 import { isAuthenticated } from '../../auth/auth'
-import location from '../../json/bd-postcodes.json'
+import location from '../../assests/json/bd-postcodes.json'
 // GET THE ID FOR EDIT
 
 

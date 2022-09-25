@@ -5,7 +5,7 @@ import Post from './Post/Post'
 import useStyles from './style'
 import { CircularProgress, Paper, Typography, Divider, Grid, TextField, Button, FormHelperText } from '@material-ui/core'
 import { toast } from "react-toastify";
-import load from '../../images/load2-unscreen.gif';
+import load from '../../assests/images/load2-unscreen.gif';
 
 const Response = ({data, newValue}) => {
     const classes = useStyles();

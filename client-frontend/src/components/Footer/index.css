@@ -264,7 +264,7 @@
 }
 
 .child_testimonial h3{
-  background: url(../../images/testimonial_bg.png);
+  background: url(../../assests/images/testimonial_bg.png);
   background-repeat: no-repeat;
   padding: 10px 0 10px 65px;
   color: #989898;
@@ -338,7 +338,7 @@
   font-size: 14px;
   text-decoration: none;
   padding: 10px 0;
-  background: url(../../images/ulli.png);
+  background: url(../../assests/images/ulli.png);
   background-repeat: no-repeat;
   padding-left: 18px;
   background-position: center left;
