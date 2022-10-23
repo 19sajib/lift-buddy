@@ -19,7 +19,7 @@
     "google-auth-library": "^7.0.2",
     "jsonwebtoken": "^8.5.1",
     "mailjet-sendemail": "^1.1.4",
-    "moment": "^2.29.1",
+    "moment": "^2.29.4",
     "mongoose": "^5.13.15",
     "node-fetch": "^3.0.0-beta.9",
     "node-mailjet": "^3.4.1",
