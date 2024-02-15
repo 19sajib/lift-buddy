@@ -20,7 +20,7 @@
     "jsonwebtoken": "^9.0.0",
     "mailjet-sendemail": "^1.1.4",
     "moment": "^2.29.4",
-    "mongoose": "^5.13.15",
+    "mongoose": "^5.13.20",
     "node-fetch": "^3.0.0-beta.9",
     "node-mailjet": "^3.4.1",
     "socket.io": "^4.6.1"
